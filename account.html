@@ -1,0 +1,2460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltix - My Account</title>
+    <meta name="description"
+        content="Manage your Voltix account - view orders, wishlist, saved addresses, points and notifications.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .account-page {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
+            margin: 2rem 0 5rem;
+            min-height: 80vh;
+        }
+
+        .account-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-profile-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: var(--font-heading);
+        }
+
+        .sidebar-name {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .sidebar-email {
+            font-size: 0.78rem;
+            opacity: 0.75;
+            text-align: center;
+        }
+
+        .sidebar-nav {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 0.75rem;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .sidebar-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .sidebar-nav-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+            opacity: 0.7;
+        }
+
+        .sidebar-nav-item:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .sidebar-nav-item.active {
+            background: rgba(15, 98, 254, 0.08);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .sidebar-nav-badge {
+            margin-left: auto;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border-light);
+            margin: 0.25rem 0;
+        }
+
+        .sidebar-nav-item.danger {
+            color: #ef4444;
+        }
+
+        .sidebar-refer-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #bae6fd;
+            border-radius: 14px;
+            padding: 1.2rem 1.25rem;
+            margin-top: 0.25rem;
+        }
+
+        .refer-card-title {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .refer-card-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .btn-refer {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 0.55rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-refer:hover {
+            background: #0050d8;
+        }
+
+        .account-main {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(120deg, var(--primary) 0%, #4f46e5 50%, #7c3aed 100%);
+            border-radius: 18px;
+            padding: 2rem 2.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: 180px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            right: 80px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .welcome-text-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .welcome-greeting {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .welcome-name {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .welcome-sub {
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+
+        .welcome-banner-img {
+            position: absolute;
+            right: 2rem;
+            bottom: 0;
+            height: 100%;
+            max-height: 140px;
+            object-fit: contain;
+            opacity: 0.9;
+            z-index: 1;
+            mix-blend-mode: luminosity;
+        }
+
+        .stats-cards-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+        }
+
+        .stat-icon-wrap {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-icon-wrap svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .stat-icon-wrap.blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .stat-icon-wrap.green {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .stat-icon-wrap.purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .stat-icon-wrap.orange {
+            background: #ffedd5;
+            color: #ea580c;
+        }
+
+        .stat-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .stat-card-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .stat-card-value {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .stat-card-link {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 0.1rem;
+        }
+
+        .dashboard-cols {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 1.5rem;
+        }
+
+        .section-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .section-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-card-title {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .section-card-link {
+            font-size: 0.82rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .order-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.875rem;
+            border-radius: 12px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+        }
+
+        .order-thumb {
+            width: 46px;
+            height: 46px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: white;
+            padding: 4px;
+            flex-shrink: 0;
+            mix-blend-mode: multiply;
+        }
+
+        .order-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .order-id {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .order-product {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .order-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .order-status-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.35rem;
+        }
+
+        .order-status-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .status-delivered {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-shipped {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .status-processing {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .order-track-btn {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: none;
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            padding: 0.25rem 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .order-track-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .addresses-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .address-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .address-type-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(15, 98, 254, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .address-type-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .address-info {
+            flex: 1;
+        }
+
+        .address-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .address-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .address-line {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .address-phone {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .address-menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 0.25rem;
+            border-radius: 6px;
+        }
+
+        .add-address-btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 10px;
+            border: 1.5px dashed var(--border-light);
+            background: transparent;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+            font-family: var(--font-body);
+        }
+
+        .add-address-btn:hover {
+            border-color: var(--primary);
+            background: rgba(15, 98, 254, 0.04);
+        }
+
+        .notifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .notif-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 10px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+        }
+
+        .notif-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .notif-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .notif-icon.green {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .notif-icon.blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .notif-icon.purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .notif-icon.orange {
+            background: #ffedd5;
+            color: #ea580c;
+        }
+
+        .notif-body {
+            flex: 1;
+        }
+
+        .notif-text {
+            font-size: 0.82rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .notif-time {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }
+
+        .mini-wishlist-row {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .mini-wishlist-row::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .mini-wishlist-row::-webkit-scrollbar-track {
+            background: var(--bg-light);
+            border-radius: 4px;
+        }
+
+        .mini-wishlist-row::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 4px;
+        }
+
+        .mini-wish-card {
+            min-width: 130px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 0.875rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .mini-wish-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        .mini-wish-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .mini-wish-price {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .mini-wish-cart-btn {
+            width: 100%;
+            padding: 0.4rem 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: var(--font-body);
+        }
+
+        .mini-wish-cart-btn:hover {
+            background: #0050d8;
+        }
+
+        .bottom-full-row {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 1.5rem;
+        }
+
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem 0;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-item-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .settings-item-label svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .settings-chevron {
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        @media (max-width:1024px) {
+            .account-page {
+                grid-template-columns: 1fr;
+            }
+
+            .account-sidebar {
+                display: none;
+            }
+
+            .dashboard-cols,
+            .bottom-full-row {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-cards-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width:480px) {
+            .stats-cards-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Dynamic Tab Views & Layout Modifications ───────────────────────── */
+        .account-sidebar {
+            position: sticky;
+            top: 2rem;
+            align-self: start;
+        }
+
+        .tab-view {
+            display: none;
+            animation: tabFadeIn 0.3s ease-in-out;
+        }
+
+        .tab-view.active-view {
+            display: block;
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Forms in Account settings and Address manager */
+        .account-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .form-group-full {
+            grid-column: span 2;
+        }
+
+        .account-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-card);
+            color: var(--text);
+            font-size: 0.9rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .account-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.15);
+        }
+
+        .btn-account-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-account-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .address-card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-address-delete {
+            background: rgba(239, 68, 68, 0.08);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-address-delete:hover {
+            background: #ef4444;
+            color: white;
+            border-color: #ef4444;
+        }
+
+        /* Order dynamic styling */
+        .order-items-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            padding-left: 1rem;
+            border-left: 2px solid var(--border);
+        }
+
+        .order-item-detail-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .order-item-detail-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        .order-item-detail-info {
+            flex: 1;
+            font-size: 0.85rem;
+        }
+
+        .order-item-detail-price {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .order-expanded-summary {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .order-summary-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .order-summary-label {
+            color: var(--text-light);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .order-summary-value {
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Promo Bar -->
+    <div class="promo-bar">
+        <button class="promo-nav-btn promo-prev" aria-label="Previous Promo"><svg viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6" />
+            </svg></button>
+        <div class="promo-content"><span>Free Shipping on orders over &#x20B9;4,999!</span><a href="shop.html">Shop
+                Now</a></div>
+        <button class="promo-nav-btn promo-next" aria-label="Next Promo"><svg viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" />
+            </svg></button>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <nav class="nav-bar">
+                <a href="index.html" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none">
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0f62fe" />
+                                <stop offset="100%" stop-color="#a855f7" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)" />
+                    </svg>
+                    <span>Voltix</span>
+                </a>
+
+                <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+
+                <ul class="nav-links">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="shop.html" class="nav-link"><span>Shop</span><svg viewBox="0 0 24 24">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg></a></li>
+                    <li class="nav-item"><a href="categories.html" class="nav-link"><span>Categories</span><svg
+                                viewBox="0 0 24 24">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg></a></li>
+                    <li class="nav-item" style="position:relative;"><a href="index.html#flash-sale"
+                            class="nav-link">Deals</a><span class="badge-hot">Hot</span></li>
+                    <li class="nav-item"><a href="index.html#new-arrivals" class="nav-link">New Arrivals</a></li>
+                    <li class="nav-item"><a href="support.html" class="nav-link">Support</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <label for="nav-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu">
+                        <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                        <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </label>
+
+                    <button class="action-btn" id="btn-search" aria-label="Search"><svg viewBox="0 0 24 24"
+                            stroke="currentColor" fill="none">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg></button>
+                    <button class="action-btn" id="btn-nav-fav" aria-label="Favorites"
+                        onclick="location.href='wishlist.html'">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                        <span class="wishlist-count" id="wishlist-counter-badge">0</span>
+                    </button>
+                    <div class="divider"></div>
+                    <button class="action-btn" id="btn-cart" aria-label="Cart" onclick="location.href='cart.html'">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                            <circle cx="9" cy="21" r="1" />
+                            <circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                        </svg>
+                        <span class="cart-count" id="cart-counter-badge">0</span>
+                    </button>
+                    <button class="action-btn" id="btn-profile" aria-label="Profile" style="color:var(--primary);"
+                        onclick="location.href='account.html'">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Account Dashboard Grid -->
+        <div class="account-page">
+
+            <!-- SIDEBAR -->
+            <aside class="account-sidebar">
+                <div class="sidebar-profile-card">
+                    <div class="sidebar-avatar" id="sidebar-avatar">?</div>
+                    <span class="sidebar-name" id="sidebar-name">Loading...</span>
+                    <span class="sidebar-email" id="sidebar-email"></span>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#dashboard" class="sidebar-nav-item active">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="7" height="7" rx="1" />
+                            <rect x="14" y="3" width="7" height="7" rx="1" />
+                            <rect x="14" y="14" width="7" height="7" rx="1" />
+                            <rect x="3" y="14" width="7" height="7" rx="1" />
+                        </svg>
+                        Dashboard
+                    </a>
+                    <a href="#orders" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" />
+                        </svg>
+                        My Orders
+                    </a>
+                    <a href="#addresses" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        Saved Addresses
+                    </a>
+                    <a href="wishlist.html" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                        Wishlist
+                        <span class="sidebar-nav-badge" id="sidebar-wishlist-count">0</span>
+                    </a>
+                    <a href="#notifications" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                        </svg>
+                        Notifications
+                        <span class="sidebar-nav-badge">3</span>
+                    </a>
+                    <div class="sidebar-divider"></div>
+                    <a href="#settings" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                        Account Settings
+                    </a>
+                    <a href="#payment" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="1" y="4" width="22" height="16" rx="2" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                        </svg>
+                        Payment Methods
+                    </a>
+                    <a href="#reviews" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        </svg>
+                        My Reviews
+                    </a>
+                    <a href="#refer" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                            <polyline points="16 6 12 2 8 6" />
+                            <line x1="12" y1="2" x2="12" y2="15" />
+                        </svg>
+                        Refer &amp; Earn
+                    </a>
+                    <a href="#support" class="sidebar-nav-item">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                        Support Center
+                    </a>
+                    <div class="sidebar-divider"></div>
+                    <a href="#" onclick="voltixLogout();return false;" class="sidebar-nav-item danger">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        Log Out
+                    </a>
+                </nav>
+                <div class="sidebar-refer-card">
+                    <div class="refer-card-title">
+                        <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:var(--primary);">
+                            <path
+                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        </svg>
+                        Refer &amp; Earn
+                    </div>
+                    <p class="refer-card-desc">Invite your friends and earn up to &#x20B9;500 per referral!</p>
+                    <a href="#" class="btn-refer" onclick="showToast('Referral link copied!');return false;">Invite
+                        Now</a>
+                </div>
+            </aside>
+
+            <!-- MAIN CO                <!-- Dashboard Landing View -->
+                <div id="dashboard" class="tab-view active-view">
+                    <!-- Welcome Banner -->
+                    <div class="welcome-banner">
+                        <div class="welcome-text-wrap">
+                            <span class="welcome-greeting">Welcome back,</span>
+                            <div class="welcome-name" id="welcome-user-name">Loading...</div>
+                            <span class="welcome-sub">Here's what's happening with your account today.</span>
+                        </div>
+                        <img src="assets/smartphone.png" alt="" class="welcome-banner-img">
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-cards-row">
+                        <a href="#orders" class="stat-card">
+                            <div class="stat-icon-wrap blue">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" />
+                                </svg>
+                            </div>
+                            <div class="stat-card-info">
+                                <span class="stat-card-label">Total Orders</span>
+                                <span class="stat-card-value" id="stats-orders-count">0</span>
+                                <span class="stat-card-link">View all orders &rarr;</span>
+                            </div>
+                        </a>
+                        <a href="wishlist.html" class="stat-card">
+                            <div class="stat-icon-wrap green">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                </svg>
+                            </div>
+                            <div class="stat-card-info">
+                                <span class="stat-card-label">Wishlist Items</span>
+                                <span class="stat-card-value" id="stats-wish-count">0</span>
+                                <span class="stat-card-link">View wishlist &rarr;</span>
+                            </div>
+                        </a>
+                        <a href="#addresses" class="stat-card">
+                            <div class="stat-icon-wrap purple">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                            </div>
+                            <div class="stat-card-info">
+                                <span class="stat-card-label">Saved Addresses</span>
+                                <span class="stat-card-value" id="stats-addresses-count">0</span>
+                                <span class="stat-card-link">View addresses &rarr;</span>
+                            </div>
+                        </a>
+                        <a href="#rewards" class="stat-card">
+                            <div class="stat-icon-wrap orange">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <div class="stat-card-info">
+                                <span class="stat-card-label">Voltix Points</span>
+                                <span class="stat-card-value" id="user-points">0</span>
+                                <span class="stat-card-link">View rewards &rarr;</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Two-col section -->
+                    <div class="dashboard-cols">
+
+                        <!-- My Orders Summary -->
+                        <div class="section-card">
+                            <div class="section-card-header">
+                                <span class="section-card-title">Recent Orders</span>
+                                <a href="#orders" class="section-card-link">View All</a>
+                            </div>
+                            <div class="orders-list" id="mini-orders-list">
+                                <!-- Dynamically loaded from localStorage -->
+                            </div>
+                        </div>
+
+                        <!-- Right: Addresses Summary + Notifications Summary -->
+                        <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+                            <!-- Saved Addresses Summary -->
+                            <div class="section-card">
+                                <div class="section-card-header">
+                                    <span class="section-card-title">Saved Addresses</span>
+                                    <a href="#addresses" class="section-card-link">Manage</a>
+                                </div>
+                                <div class="addresses-list" id="mini-addresses-list">
+                                    <!-- Dynamically loaded from localStorage -->
+                                </div>
+                            </div>
+
+                            <!-- Notifications Summary -->
+                            <div class="section-card">
+                                <div class="section-card-header">
+                                    <span class="section-card-title">Recent Notifications</span>
+                                    <a href="#notifications" class="section-card-link">View All</a>
+                                </div>
+                                <div class="notifications-list" id="mini-notifications-list">
+                                    <!-- Dynamically loaded -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- end dashboard-cols -->
+
+                    <!-- Bottom Row: Wishlist Preview -->
+                    <div class="bottom-full-row">
+
+                        <!-- Mini Wishlist -->
+                        <div class="section-card" style="width: 100%;">
+                            <div class="section-card-header">
+                                <span class="section-card-title">Your Wishlist</span>
+                                <a href="wishlist.html" class="section-card-link">View Wishlist &rarr;</a>
+                            </div>
+                            <div class="mini-wishlist-row" id="mini-wishlist-row"></div>
+                        </div>
+
+                    </div><!-- end bottom-full-row -->
+                </div>
+
+                <!-- My Orders Tab View -->
+                <div id="orders" class="tab-view">
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <span class="section-card-title">My Orders</span>
+                            <input type="text" id="order-search-input" placeholder="Search order ID..." oninput="filterOrders()" style="padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; width: 220px; outline: none; background: var(--bg-card); color: var(--text);">
+                        </div>
+                        <div class="orders-list" id="full-orders-list">
+                            <!-- Dynamic orders loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Addresses Tab View -->
+                <div id="addresses" class="tab-view">
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <span class="section-card-title">Saved Addresses</span>
+                        </div>
+                        <div class="addresses-list" id="full-addresses-list">
+                            <!-- Dynamic addresses loaded here -->
+                        </div>
+                        
+                        <div class="section-card-header" style="margin-top:2rem; border-top:1px solid var(--border); padding-top:1.5rem;">
+                            <span class="section-card-title" style="font-size:1.1rem;">Add New Address</span>
+                        </div>
+                        <form id="add-address-form" onsubmit="handleAddAddress(event)" class="account-form-grid">
+                            <div>
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Label (e.g. Home, Work)</label>
+                                <input type="text" id="addr-label" required placeholder="Home" class="account-input">
+                            </div>
+                            <div>
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Recipient Name</label>
+                                <input type="text" id="addr-name" required placeholder="John Doe" class="account-input">
+                            </div>
+                            <div class="form-group-full">
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Address Line</label>
+                                <input type="text" id="addr-line" required placeholder="123 Wellness Ave, New Delhi, Delhi 110001" class="account-input">
+                            </div>
+                            <div>
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Phone Number</label>
+                                <input type="text" id="addr-phone" required placeholder="+91 98765 43210" class="account-input">
+                            </div>
+                            <div style="display:flex; align-items:flex-end;">
+                                <button type="submit" class="btn-account-submit" style="width:100%;">Save Address</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Notifications Tab View -->
+                <div id="notifications" class="tab-view">
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <span class="section-card-title">All Notifications</span>
+                            <button onclick="clearNotifications()" style="background:none; border:none; color:var(--primary); font-weight:600; cursor:pointer; font-size:0.85rem;">Clear All</button>
+                        </div>
+                        <div class="notifications-list" id="full-notifications-list">
+                            <!-- Dynamic notifications loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Settings Tab View -->
+                <div id="settings" class="tab-view">
+                    <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                        <div class="section-card">
+                            <div class="section-card-header">
+                                <span class="section-card-title">Personal Information</span>
+                            </div>
+                            <form id="edit-profile-form" onsubmit="handleUpdateProfile(event)" style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem; max-width:500px;">
+                                <div>
+                                    <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Full Name</label>
+                                    <input type="text" id="profile-name" required class="account-input">
+                                </div>
+                                <div>
+                                    <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Email Address</label>
+                                    <input type="email" id="profile-email" required class="account-input">
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn-account-submit">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="section-card">
+                            <div class="section-card-header">
+                                <span class="section-card-title">Change Password</span>
+                            </div>
+                            <form id="change-password-form" onsubmit="handleChangePassword(event)" style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem; max-width:500px;">
+                                <div>
+                                    <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Current Password</label>
+                                    <input type="password" id="pw-current" required class="account-input">
+                                </div>
+                                <div>
+                                    <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">New Password</label>
+                                    <input type="password" id="pw-new" required class="account-input">
+                                </div>
+                                <div>
+                                    <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Confirm New Password</label>
+                                    <input type="password" id="pw-confirm" required class="account-input">
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn-account-submit">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Methods Tab View -->
+                <div id="payment" class="tab-view">
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <span class="section-card-title">Saved Payment Methods</span>
+                        </div>
+                        <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;" id="payment-methods-list">
+                            <!-- Dynamic card listings -->
+                        </div>
+
+                        <div class="section-card-header" style="margin-top:2rem; border-top:1px solid var(--border); padding-top:1.5rem;">
+                            <span class="section-card-title" style="font-size:1.1rem;">Add New Card</span>
+                        </div>
+                        <form id="add-payment-form" onsubmit="handleAddPayment(event)" class="account-form-grid" style="max-width:500px;">
+                            <div class="form-group-full">
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Card Number</label>
+                                <input type="text" id="card-number" required placeholder="XXXX XXXX XXXX XXXX" class="account-input">
+                            </div>
+                            <div>
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Expiry Date</label>
+                                <input type="text" id="card-expiry" required placeholder="MM/YY" class="account-input">
+                            </div>
+                            <div>
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">CVV</label>
+                                <input type="password" id="card-cvv" required placeholder="***" maxLength="3" class="account-input">
+                            </div>
+                            <div class="form-group-full">
+                                <button type="submit" class="btn-account-submit" style="width:100%;">Add Card</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- My Reviews Tab View -->
+                <div id="reviews" class="tab-view">
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <span class="section-card-title">My Product Reviews</span>
+                        </div>
+                        <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;" id="reviews-list">
+                            <!-- Dynamic reviews list -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refer & Earn Tab View -->
+                <div id="refer" class="tab-view">
+                    <div class="section-card" style="text-align: center; padding: 3rem 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background-color: rgba(124, 58, 237, 0.08); color: var(--primary); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.1);">
+                            <svg viewBox="0 0 24 24" style="width: 40px; height: 40px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <h2 style="margin: 0; font-size: 1.75rem;">Refer your Friends &amp; Earn!</h2>
+                        <p style="max-width: 480px; line-height: 1.6; color: var(--text-muted);">
+                            Share your unique referral code with your friends. Once they make their first purchase, both of you will receive ₹500 in Voltix Points!
+                        </p>
+                        <div style="display: flex; gap: 0.5rem; width: 100%; max-width: 400px; margin-top: 1rem;">
+                            <input type="text" id="referral-link-input" readonly value="https://voltix.com/refer?code=VOLTIX-JD984" style="flex: 1; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-weight: 700; background: var(--bg-card); color: var(--text); outline: none; text-align: center;">
+                            <button onclick="copyReferralLink()" class="btn-account-submit">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Center Tab View -->
+                <div id="support" class="tab-view">
+                    <div class="section-card">
+                        <div class="section-card-header">
+                            <span class="section-card-title">Support Center</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Have a question or facing an issue? Send us a message and our support team will get back to you within 24 hours.</p>
+                        <form id="support-form" onsubmit="handleSupportSubmit(event)" style="display:flex; flex-direction:column; gap:1rem; max-width:600px;">
+                            <div>
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Subject / Issue Topic</label>
+                                <input type="text" id="support-subject" required placeholder="e.g. Order Delivery Status, Refund Request" class="account-input">
+                            </div>
+                            <div>
+                                <label style="font-size:0.8rem; font-weight:600; margin-bottom:0.25rem; display:block;">Description</label>
+                                <textarea id="support-desc" required placeholder="Please describe your issue in detail..." class="account-input" style="height:150px; font-family:inherit; resize:vertical;"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn-account-submit">Submit Ticket</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div><!-- end account-page -->
+    </div><!-- end app-container -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="app-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)" />
+                        </svg>
+                        <span>Voltix</span>
+                    </a>
+                    <p class="footer-desc">Your one-stop destination for premium electronics, smart devices, and
+                        high-fidelity gadgets.</p>
+                    <ul class="social-links">
+                        <li><a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C9.24.5 7.5 3.44 7.5 7v3.5H4.5v4h3v9H12v-9h3.5l.5-4z" />
+                                </svg></a></li>
+                        <li><a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                                </svg></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-col-title">Shop</h3>
+                    <ul class="footer-menu">
+                        <li><a href="shop.html" class="footer-link">Smartphones</a></li>
+                        <li><a href="shop.html" class="footer-link">Laptops</a></li>
+                        <li><a href="shop.html" class="footer-link">Audio</a></li>
+                        <li><a href="shop.html" class="footer-link">Smart Watches</a></li>
+                        <li><a href="shop.html" class="footer-link">Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-col-title">Company</h3>
+                    <ul class="footer-menu">
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="#" class="footer-link">Blog</a></li>
+                        <li><a href="#" class="footer-link">Press</a></li>
+                        <li><a href="#" class="footer-link">Affiliates</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-col-title">Customer Care</h3>
+                    <ul class="footer-menu">
+                        <li><a href="support.html" class="footer-link">Contact Us</a></li>
+                        <li><a href="#" class="footer-link">Shipping Policy</a></li>
+                        <li><a href="#" class="footer-link">Return Policy</a></li>
+                        <li><a href="#" class="footer-link">Warranty</a></li>
+                        <li><a href="support.html" class="footer-link">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-col-title">Support</h3>
+                    <ul class="footer-menu">
+                        <li><a href="account.html" class="footer-link">My Account</a></li>
+                        <li><a href="support.html" class="footer-link">Track Order</a></li>
+                        <li><a href="wishlist.html" class="footer-link">Wishlist</a></li>
+                        <li><a href="support.html" class="footer-link">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-apps">
+                    <h3 class="footer-col-title">Download App</h3>
+                    <a href="#" class="app-download-btn"><svg viewBox="0 0 135 40" style="width:135px;height:40px;">
+                            <rect width="135" height="40" rx="6" fill="#000" /><text x="38" y="18" fill="#fff"
+                                font-family="sans-serif" font-size="8">Download on the</text><text x="38" y="30"
+                                fill="#fff" font-family="sans-serif" font-weight="700" font-size="12">App Store</text>
+                        </svg></a>
+                    <a href="#" class="app-download-btn"><svg viewBox="0 0 135 40" style="width:135px;height:40px;">
+                            <rect width="135" height="40" rx="6" fill="#000" /><text x="38" y="18" fill="#fff"
+                                font-family="sans-serif" font-size="8">GET IT ON</text><text x="38" y="30" fill="#fff"
+                                font-family="sans-serif" font-weight="700" font-size="12">Google Play</text>
+                        </svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Voltix. All Rights Reserved.</span>
+                <ul class="payment-icons">
+                    <li class="payment-icon"><svg viewBox="0 0 38 24">
+                            <rect width="38" height="24" rx="3" fill="#1434CB" /><text x="6" y="16" fill="#fff"
+                                font-family="sans-serif" font-weight="bold" font-style="italic"
+                                font-size="11">VISA</text>
+                        </svg></li>
+                    <li class="payment-icon"><svg viewBox="0 0 38 24">
+                            <rect width="38" height="24" rx="3" fill="#fff" />
+                            <circle cx="15" cy="12" r="6" fill="#EB001B" opacity="0.9" />
+                            <circle cx="23" cy="12" r="6" fill="#F79E1B" opacity="0.9" />
+                        </svg></li>
+                    <li class="payment-icon"><svg viewBox="0 0 38 24">
+                            <rect width="38" height="24" rx="3" fill="#003087" /><text x="5" y="16" fill="#0079C1"
+                                font-family="sans-serif" font-weight="bold" font-size="11">Pay</text><text x="21" y="16"
+                                fill="#00457C" font-family="sans-serif" font-weight="bold" font-size="11">Pal</text>
+                        </svg></li>
+                    <li class="payment-icon"><svg viewBox="0 0 38 24">
+                            <rect width="38" height="24" rx="3" fill="#000" /><text x="4" y="16" fill="#fff"
+                                font-family="sans-serif" font-weight="bold" font-size="10">Pay</text>
+                        </svg></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast
+    <div id="toast-notify" class="toast">
+        <span class="toast-icon"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+            </svg></span>
+        <span id="toast-message">Done!</span>
+    </div> -->
+
+    <script>
+        // ── Voltix Auth Utilities ──────────────────────────────────────────────
+        function voltixGetCurrentUser() {
+            try { return JSON.parse(localStorage.getItem('voltix_current_user') || 'null'); } catch(e) { return null; }
+        }
+        function voltixSetCurrentUser(user) {
+            localStorage.setItem('voltix_current_user', JSON.stringify(user));
+        }
+        function voltixLogout() {
+            localStorage.removeItem('voltix_current_user');
+            window.location.href = 'login.html';
+        }
+
+        // ── Auth Guard: redirect to login if not logged in ─────────────────────
+        const currentUser = voltixGetCurrentUser();
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+
+        const userId = currentUser ? currentUser.id : 'guest';
+
+        // ── Populate UI with real user data ────────────────────────────────────
+        function populateUserData() {
+            if (!currentUser) return;
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+
+            // Sidebar
+            const sidebarAvatar = document.getElementById('sidebar-avatar');
+            const sidebarName   = document.getElementById('sidebar-name');
+            const sidebarEmail  = document.getElementById('sidebar-email');
+            if (sidebarAvatar) sidebarAvatar.textContent = initials;
+            if (sidebarName)   sidebarName.textContent   = currentUser.name;
+            if (sidebarEmail)  sidebarEmail.textContent  = currentUser.email;
+
+            // Welcome banner
+            const welcomeName = document.getElementById('welcome-user-name');
+            if (welcomeName) welcomeName.textContent = currentUser.name + '! 👋';
+
+            // Nav profile button — show initials pill
+            const profileBtn = document.getElementById('btn-profile');
+            if (profileBtn) {
+                profileBtn.innerHTML = '<span style="width:28px;height:28px;border-radius:50%;background:var(--primary);color:white;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;font-family:var(--font-heading);">' + initials + '</span>';
+            }
+
+            // Voltix points
+            const pointsEl = document.getElementById('user-points');
+            if (pointsEl) pointsEl.textContent = (currentUser.points || 0).toLocaleString('en-IN');
+
+            // Member since
+            const sinceEl = document.getElementById('member-since');
+            if (sinceEl && currentUser.createdAt) {
+                const d = new Date(currentUser.createdAt);
+                sinceEl.textContent = 'Member since ' + d.toLocaleString('en-IN', { month: 'long', year: 'numeric' });
+            }
+        }
+
+        // ── Seeding Mock Data if Empty ─────────────────────────────────────────
+        function seedDefaultData() {
+            if (!currentUser) return;
+            
+            // 1. Seed addresses
+            const addrKey = `voltix_addresses_${userId}`;
+            if (!localStorage.getItem(addrKey)) {
+                const defaultAddresses = [
+                    {
+                        id: 'addr_1',
+                        label: '🏠 Home',
+                        name: currentUser.name,
+                        line: '123, Wellness Avenue, Near City Center Mall, New Delhi, Delhi 110001',
+                        phone: '+91 98765 43210'
+                    },
+                    {
+                        id: 'addr_2',
+                        label: '💼 Work',
+                        name: currentUser.name,
+                        line: 'Tech Park, Tower B, Sector 62, Noida, Uttar Pradesh 201301',
+                        phone: '+91 98765 43210'
+                    }
+                ];
+                localStorage.setItem(addrKey, JSON.stringify(defaultAddresses));
+            }
+
+            // 2. Seed mock orders
+            const ordersKey = `voltix_orders_${userId}`;
+            if (!localStorage.getItem(ordersKey)) {
+                const defaultOrders = [
+                    {
+                        id: 'VT-78451',
+                        date: 'May 12, 2024',
+                        expectedDate: 'May 15, 2024',
+                        status: 'Delivered',
+                        subtotal: 119900,
+                        discount: 0,
+                        shipping: 0,
+                        tax: 10791,
+                        total: 130691,
+                        address: {
+                            name: currentUser.name,
+                            phone: '+91 98765 43210',
+                            line: '123, Wellness Avenue, Near City Center Mall, New Delhi, Delhi 110001'
+                        },
+                        items: [
+                            {
+                                id: 'dellultrasharp',
+                                name: 'Dell XPS 13 Plus',
+                                price: 119900,
+                                img: 'assets/laptop.png',
+                                qty: 1,
+                                desc: '16GB, 512GB SSD'
+                            }
+                        ]
+                    },
+                    {
+                        id: 'VT-78452',
+                        date: 'May 10, 2024',
+                        expectedDate: 'May 16, 2024',
+                        status: 'Shipped',
+                        subtotal: 29990,
+                        discount: 2999,
+                        shipping: 299,
+                        tax: 2429,
+                        total: 29720,
+                        address: {
+                            name: currentUser.name,
+                            phone: '+91 98765 43210',
+                            line: 'Tech Park, Tower B, Sector 62, Noida, Uttar Pradesh 201301'
+                        },
+                        items: [
+                            {
+                                id: 'sonywh1000xm5',
+                                name: 'Sony WH-1000XM5',
+                                price: 29990,
+                                img: 'assets/headphones.png',
+                                qty: 1,
+                                desc: 'Wireless NC'
+                            }
+                        ]
+                    },
+                    {
+                        id: 'VT-78453',
+                        date: 'May 05, 2024',
+                        expectedDate: 'May 12, 2024',
+                        status: 'Processing',
+                        subtotal: 41900,
+                        discount: 0,
+                        shipping: 0,
+                        tax: 3771,
+                        total: 45671,
+                        address: {
+                            name: currentUser.name,
+                            phone: '+91 98765 43210',
+                            line: '123, Wellness Avenue, Near City Center Mall, New Delhi, Delhi 110001'
+                        },
+                        items: [
+                            {
+                                id: 'applewatch9',
+                                name: 'Apple Watch Series 9',
+                                price: 41900,
+                                img: 'assets/smartwatch.png',
+                                qty: 1,
+                                desc: 'GPS, 45mm'
+                            }
+                        ]
+                    }
+                ];
+                localStorage.setItem(ordersKey, JSON.stringify(defaultOrders));
+            }
+
+            // 3. Seed mock notifications
+            const notifKey = `voltix_notifications_${userId}`;
+            if (!localStorage.getItem(notifKey)) {
+                const defaultNotifs = [
+                    {
+                        id: 'n_1',
+                        type: 'green',
+                        text: 'Your order <strong>#VT-78451</strong> has been delivered successfully.',
+                        time: '2m ago'
+                    },
+                    {
+                        id: 'n_2',
+                        type: 'purple',
+                        text: 'Get 20% OFF on your next purchase. Use code: <strong>VOLTIX20</strong>',
+                        time: '1h ago'
+                    },
+                    {
+                        id: 'n_3',
+                        type: 'blue',
+                        text: 'Your order <strong>#VT-78452</strong> is out for delivery.',
+                        time: '3h ago'
+                    },
+                    {
+                        id: 'n_4',
+                        type: 'orange',
+                        text: 'Price drop! Items in your wishlist are now available at lower prices.',
+                        time: '1d ago'
+                    }
+                ];
+                localStorage.setItem(notifKey, JSON.stringify(defaultNotifs));
+            }
+
+            // 4. Seed mock payment methods
+            const cardsKey = `voltix_cards_${userId}`;
+            if (!localStorage.getItem(cardsKey)) {
+                const defaultCards = [
+                    { id: 'card_1', number: '•••• •••• •••• 3456', expiry: '12/28', type: 'Visa' },
+                    { id: 'card_2', number: '•••• •••• •••• 9876', expiry: '09/27', type: 'Mastercard' }
+                ];
+                localStorage.setItem(cardsKey, JSON.stringify(defaultCards));
+            }
+
+            // 5. Seed mock reviews
+            const reviewsKey = `voltix_reviews_${userId}`;
+            if (!localStorage.getItem(reviewsKey)) {
+                const defaultReviews = [
+                    { id: 'rev_1', productId: 'macbookairm2', productName: 'Apple MacBook Air M2', rating: 5, comment: 'Incredible battery life and performance. Midnight color looks amazing!', date: 'May 01, 2024' },
+                    { id: 'rev_2', productId: 'sonywh1000xm5', productName: 'Sony WH-1000XM5', rating: 4, comment: 'Active noise cancellation is top-notch. Build quality feels a bit plastic-y.', date: 'April 20, 2024' }
+                ];
+                localStorage.setItem(reviewsKey, JSON.stringify(defaultReviews));
+            }
+        }
+
+        // ── Products DB ────────────────────────────────────────────────────────
+        const productsDB = {
+            'macbookairm2':     { name: 'Apple MacBook Air M2', desc: '256GB, Midnight', price: 89999, img: 'assets/laptop.png' },
+            'sonywh1000xm5':    { name: 'Sony WH-1000XM5', desc: 'Wireless NC', price: 29990, img: 'assets/headphones.png' },
+            'applewatch9':      { name: 'Apple Watch Series 9', desc: 'GPS, 45mm', price: 41900, img: 'assets/smartwatch.png' },
+            'airpodspro2':      { name: 'Apple AirPods Pro 2', desc: '2nd Generation', price: 24900, img: 'assets/earbuds.png' },
+            'jblcharge5':       { name: 'JBL Charge 5', desc: 'Bluetooth Speaker', price: 12999, img: 'assets/controller.png' },
+            'iphone14':         { name: 'Apple iPhone 14', desc: '128GB, Midnight', price: 59900, img: 'assets/smartphone.png' },
+            'dellultrasharp':   { name: 'Dell XPS 13 Plus', desc: '16GB, 512GB SSD', price: 119900, img: 'assets/laptop.png' },
+            'logitechgprowireless': { name: 'Logitech G502 HERO', desc: 'Gaming Mouse', price: 5999, img: 'assets/controller.png' },
+            'galaxys24ultra':   { name: 'Samsung Galaxy S24 Ultra', desc: '256GB Titanium', price: 124900, img: 'assets/smartphone.png' },
+            'canoneosr50':      { name: 'Canon EOS R50', desc: '24.2MP Mirrorless', price: 62320, img: 'assets/camera.png' },
+            'asusrogstrix':     { name: 'ASUS ROG Strix G16', desc: 'Gaming Laptop', price: 103920, img: 'assets/laptop.png' },
+            'googlepixel8pro':  { name: 'Google Pixel 8 Pro', desc: '128GB Obsidian', price: 63920, img: 'assets/smartphone.png' },
+            'boseqcultra':      { name: 'Bose QuietComfort Ultra', desc: 'Wireless HP', price: 30320, img: 'assets/headphones.png' },
+            'airpods3':         { name: 'Apple AirPods 3rd Gen', desc: 'Wireless Earbuds', price: 13520, img: 'assets/earbuds.png' },
+            'lgultragear34':    { name: 'LG UltraGear 34" Curved', desc: 'Gaming Monitor', price: 71920, img: 'assets/monitor.png' },
+            'sonyalpha7iv':     { name: 'Sony Alpha 7 IV', desc: 'Full-Frame', price: 199920, img: 'assets/camera.png' },
+            'macbookpro14':     { name: 'MacBook Pro 14" M3', desc: 'M3 Pro Laptop', price: 169900, img: 'assets/laptop.png' },
+            'goprohero12':      { name: 'GoPro HERO12 Black', desc: 'Action Camera', price: 37900, img: 'assets/camera.png' }
+        };
+
+        function getLocalWishlist() {
+            try { return JSON.parse(localStorage.getItem('voltix_wishlist') || '[]'); } catch(e) { return []; }
+        }
+
+        function getLocalCart() {
+            try { return JSON.parse(localStorage.getItem('voltix_cart') || '[]'); } catch(e) { return []; }
+        }
+
+        function saveLocalCart(cart) {
+            localStorage.setItem('voltix_cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+
+        function triggerBadgeBounce(badgeId) {
+            const badge = document.getElementById(badgeId);
+            if (!badge) return;
+            badge.classList.remove('badge-pulse');
+            void badge.offsetWidth; // trigger reflow
+            badge.classList.add('badge-pulse');
+        }
+
+        function updateCartBadge() {
+            const cart = getLocalCart();
+            const total = cart.reduce((a, i) => a + i.qty, 0);
+            const b = document.getElementById('cart-counter-badge');
+            if (b) {
+                b.textContent = total;
+                triggerBadgeBounce('cart-counter-badge');
+            }
+        }
+
+        function updateWishlistBadge() {
+            const wl = getLocalWishlist();
+            ['wishlist-counter-badge', 'sidebar-wishlist-count', 'stats-wish-count'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = wl.length;
+            });
+            triggerBadgeBounce('wishlist-counter-badge');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast-notify');
+            const m = document.getElementById('toast-message');
+            if (t && m) { m.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+        }
+
+        function miniAddToCart(id) {
+            const p = productsDB[id];
+            if (!p) return;
+            const cart = getLocalCart();
+            const ex = cart.find(i => i.id === id);
+            if (ex) { ex.qty++; } else { cart.push({ id, name: p.name, price: p.price, img: p.img, desc: p.desc, qty: 1 }); }
+            saveLocalCart(cart);
+            showToast('Added ' + p.name + ' to cart!');
+        }
+
+        function renderMiniWishlist() {
+            const wl = getLocalWishlist();
+            const c = document.getElementById('mini-wishlist-row');
+            if (!c) return;
+            if (wl.length === 0) {
+                c.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;padding:1rem 0; width:100%;">No items in wishlist yet. <a href="shop.html" style="color:var(--primary);font-weight:600;">Browse the store &rarr;</a></div>';
+                return;
+            }
+            c.innerHTML = '';
+            wl.slice(0, 6).forEach(id => {
+                const p = productsDB[id] || { name: 'Product', desc: '', price: 0, img: 'assets/controller.png' };
+                const n = p.name.length > 22 ? p.name.slice(0, 22) + '\u2026' : p.name;
+                const pr = '\u20B9' + p.price.toLocaleString('en-IN');
+                c.innerHTML += '<div class="mini-wish-card staggered-item"><img src="' + p.img + '" alt="' + p.name + '" class="mini-wish-img"><span class="mini-wish-name">' + n + '</span><span class="mini-wish-price">' + pr + '</span><button class="mini-wish-cart-btn" onclick="miniAddToCart(\'' + id + '\')">Add to Cart</button></div>';
+            });
+            c.querySelectorAll('.mini-wish-img').forEach(img => { img.style.mixBlendMode = 'multiply'; });
+        }
+
+        // ── Single-Page Tab Switching Routing ──────────────────────────────────
+        function switchTab(tabId) {
+            // Hide all views
+            document.querySelectorAll('.tab-view').forEach(view => {
+                view.classList.remove('active-view');
+            });
+            
+            // Deactivate all sidebar items
+            document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show requested view
+            const targetView = document.getElementById(tabId === 'dashboard' ? 'dashboard' : tabId);
+            if (targetView) {
+                targetView.classList.add('active-view');
+            } else {
+                // Fallback to dashboard
+                const dash = document.getElementById('dashboard');
+                if (dash) dash.classList.add('active-view');
+            }
+            
+            // Set active class on corresponding sidebar link
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav-item');
+            sidebarLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === `#${tabId}` || (tabId === 'dashboard' && href === '#dashboard')) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleHashChange() {
+            let hash = window.location.hash || '#dashboard';
+            let tabId = hash.replace('#', '');
+            
+            // If the hash is wishlist.html or points to another page, let browser handle normal navigation
+            if (tabId.indexOf('.html') > -1) return;
+            
+            switchTab(tabId);
+        }
+
+        // ── Orders Rendering & Filter ──────────────────────────────────────────
+        function getOrders() {
+            return JSON.parse(localStorage.getItem(`voltix_orders_${userId}`) || '[]');
+        }
+
+        function renderOrders() {
+            const orders = getOrders();
+            const miniList = document.getElementById('mini-orders-list');
+            const fullList = document.getElementById('full-orders-list');
+            
+            const ordersBadge = document.getElementById('stats-orders-count');
+            if (ordersBadge) ordersBadge.textContent = orders.length;
+
+            if (miniList) {
+                if (orders.length === 0) {
+                    miniList.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;padding:1rem 0;">No orders yet. <a href="shop.html" style="color:var(--primary);font-weight:600;">Shop now &rarr;</a></div>';
+                } else {
+                    miniList.innerHTML = '';
+                    orders.slice(0, 3).forEach(order => {
+                        const statusClass = `status-${order.status.toLowerCase()}`;
+                        const firstItem = order.items[0] || { name: 'Voltix Product', img: 'assets/controller.png' };
+                        
+                        miniList.innerHTML += `
+                            <div class="order-row staggered-item">
+                                <img src="${firstItem.img}" alt="${firstItem.name}" class="order-thumb">
+                                <div class="order-info">
+                                    <span class="order-id">Order #${order.id}</span>
+                                    <div class="order-product">${firstItem.name}${order.items.length > 1 ? ` + ${order.items.length - 1} more` : ''}</div>
+                                    <div class="order-date">${order.date} &middot; Total: ₹${order.total.toLocaleString('en-IN')}</div>
+                                </div>
+                                <div class="order-status-wrap">
+                                    <span class="order-status-badge ${statusClass}">${order.status}</span>
+                                    <button class="order-track-btn" onclick="showToast('Tracking order #${order.id}...')">Track</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            if (fullList) {
+                if (orders.length === 0) {
+                    fullList.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:3rem 1rem;">No orders placed yet.<br><br><a href="shop.html" class="btn-account-submit" style="display:inline-block;text-decoration:none;">Go Shopping</a></div>';
+                } else {
+                    renderFullOrdersList(orders);
+                }
+            }
+        }
+
+        function renderFullOrdersList(orders) {
+            const fullList = document.getElementById('full-orders-list');
+            fullList.innerHTML = '';
+            orders.forEach(order => {
+                const statusClass = `status-${order.status.toLowerCase()}`;
+                
+                let itemsHtml = '';
+                order.items.forEach(item => {
+                    itemsHtml += `
+                        <div class="order-item-detail-row">
+                            <img src="${item.img}" alt="${item.name}" class="order-item-detail-img">
+                            <div class="order-item-detail-info">
+                                <div style="font-weight:600;">${item.name}</div>
+                                <div style="color:var(--text-light); font-size:0.75rem;">${item.desc || 'Standard Configuration'}</div>
+                                <div style="color:var(--text-light); font-size:0.75rem;">Qty: ${item.qty}</div>
+                            </div>
+                            <span class="order-item-detail-price">₹${item.price.toLocaleString('en-IN')}</span>
+                        </div>
+                    `;
+                });
+
+                fullList.innerHTML += `
+                    <div class="order-row staggered-item" style="flex-direction:column; align-items:stretch; gap:1rem; padding:1.5rem; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; width:100%;">
+                            <div>
+                                <span class="order-id" style="font-size:1.1rem;">Order #${order.id}</span>
+                                <div class="order-date" style="margin-top:0.25rem;">Placed on: <strong>${order.date}</strong></div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:0.75rem;">
+                                <span class="order-status-badge ${statusClass}">${order.status}</span>
+                                <button class="btn-address-delete" style="border-color:var(--primary); color:var(--primary); background:none; font-size:0.75rem; padding:0.4rem 0.8rem; border-radius:6px; cursor:pointer;" onclick="showToast('Invoice downloaded for #${order.id}')">Invoice</button>
+                                <button class="order-track-btn" style="margin:0;" onclick="showToast('Tracking order #${order.id} - status: ${order.status}')">Track Status</button>
+                            </div>
+                        </div>
+                        
+                        <div class="order-items-detail">
+                            ${itemsHtml}
+                        </div>
+
+                        <div class="order-expanded-summary">
+                            <div class="order-summary-block">
+                                <span class="order-summary-label">Shipping Address</span>
+                                <span class="order-summary-value" style="font-weight:normal; line-height:1.4;">
+                                    <strong>${order.address.name}</strong><br>
+                                    ${order.address.line}<br>
+                                    Phone: ${order.address.phone}
+                                </span>
+                            </div>
+                            <div class="order-summary-block">
+                                <span class="order-summary-label">Payment Information</span>
+                                <span class="order-summary-value" style="font-weight:normal;">
+                                    Method: Online Payment<br>
+                                    Tax Rate: 9.0% GST
+                                </span>
+                            </div>
+                            <div class="order-summary-block" style="text-align:right; align-items:flex-end;">
+                                <span class="order-summary-label">Total Summary</span>
+                                <span class="order-summary-value">
+                                    Subtotal: ₹${order.subtotal.toLocaleString('en-IN')}<br>
+                                    Discount: -₹${(order.discount || 0).toLocaleString('en-IN')}<br>
+                                    Shipping: ${order.shipping === 0 ? 'FREE' : `₹${order.shipping.toLocaleString('en-IN')}`}<br>
+                                    <strong style="font-size:1.1rem; color:var(--primary); display:block; margin-top:0.5rem;">Total: ₹${order.total.toLocaleString('en-IN')}</strong>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterOrders() {
+            const query = document.getElementById('order-search-input').value.trim().toLowerCase();
+            const orders = getOrders();
+            if (!query) {
+                renderFullOrdersList(orders);
+                return;
+            }
+            const filtered = orders.filter(o => o.id.toLowerCase().includes(query) || o.items.some(i => i.name.toLowerCase().includes(query)));
+            renderFullOrdersList(filtered);
+        }
+
+        // ── Address Rendering & Management ─────────────────────────────────────
+        function getAddresses() {
+            return JSON.parse(localStorage.getItem(`voltix_addresses_${userId}`) || '[]');
+        }
+
+        function saveAddresses(addresses) {
+            localStorage.setItem(`voltix_addresses_${userId}`, JSON.stringify(addresses));
+            renderAddresses();
+        }
+
+        function renderAddresses() {
+            const addresses = getAddresses();
+            const miniList = document.getElementById('mini-addresses-list');
+            const fullList = document.getElementById('full-addresses-list');
+            
+            const countEl = document.getElementById('stats-addresses-count');
+            if (countEl) countEl.textContent = addresses.length;
+
+            if (miniList) {
+                if (addresses.length === 0) {
+                    miniList.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;padding:1rem 0;">No saved addresses.</div>';
+                } else {
+                    miniList.innerHTML = '';
+                    addresses.slice(0, 2).forEach(addr => {
+                        miniList.innerHTML += `
+                            <div class="address-card staggered-item" style="margin-bottom:0.5rem;">
+                                <div class="address-type-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+                                <div class="address-info">
+                                    <div class="address-label">${addr.label}</div>
+                                    <div class="address-name">${addr.name}</div>
+                                    <div class="address-line">${addr.line}</div>
+                                    <div class="address-phone">${addr.phone}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            if (fullList) {
+                if (addresses.length === 0) {
+                    fullList.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:2rem 0;">No saved addresses. Add one below!</div>';
+                } else {
+                    fullList.innerHTML = '';
+                    addresses.forEach(addr => {
+                        fullList.innerHTML += `
+                            <div class="address-card staggered-item" style="margin-bottom:1rem; align-items: flex-start;">
+                                <div class="address-type-icon" style="margin-top:0.25rem;"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                                <div class="address-info" style="flex:1;">
+                                    <div class="address-label">${addr.label}</div>
+                                    <div class="address-name">${addr.name}</div>
+                                    <div class="address-line">${addr.line}</div>
+                                    <div class="address-phone">Phone: ${addr.phone}</div>
+                                    <div class="address-card-actions">
+                                        <button class="btn-address-delete" onclick="deleteAddress('${addr.id}')">Delete Address</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+        }
+
+        function handleAddAddress(e) {
+            e.preventDefault();
+            const label = document.getElementById('addr-label').value.trim();
+            const name = document.getElementById('addr-name').value.trim();
+            const line = document.getElementById('addr-line').value.trim();
+            const phone = document.getElementById('addr-phone').value.trim();
+
+            if (!label || !name || !line || !phone) return;
+
+            const addresses = getAddresses();
+            const newAddr = {
+                id: 'addr_' + Date.now(),
+                label,
+                name,
+                line,
+                phone
+            };
+            addresses.push(newAddr);
+            saveAddresses(addresses);
+            
+            document.getElementById('add-address-form').reset();
+            showToast('New address saved successfully!');
+        }
+
+        function deleteAddress(id) {
+            let addresses = getAddresses();
+            addresses = addresses.filter(a => a.id !== id);
+            saveAddresses(addresses);
+            showToast('Address deleted.');
+        }
+
+        // ── Notifications Rendering & Clear ─────────────────────────────────────
+        function getNotifications() {
+            return JSON.parse(localStorage.getItem(`voltix_notifications_${userId}`) || '[]');
+        }
+
+        function renderNotifications() {
+            const notifs = getNotifications();
+            const miniList = document.getElementById('mini-notifications-list');
+            const fullList = document.getElementById('full-notifications-list');
+
+            if (miniList) {
+                if (notifs.length === 0) {
+                    miniList.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;padding:1rem 0;">No new notifications.</div>';
+                } else {
+                    miniList.innerHTML = '';
+                    notifs.slice(0, 3).forEach(n => {
+                        miniList.innerHTML += `
+                            <div class="notif-item" style="padding:0.75rem 0;">
+                                <div class="notif-icon ${n.type}"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                <div class="notif-body">
+                                    <div class="notif-text" style="font-size:0.8rem;">${n.text}</div>
+                                    <div class="notif-time" style="font-size:0.7rem;">${n.time}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            if (fullList) {
+                if (notifs.length === 0) {
+                    fullList.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:3rem 1rem;">No notifications found.</div>';
+                } else {
+                    fullList.innerHTML = '';
+                    notifs.forEach(n => {
+                        fullList.innerHTML += `
+                            <div class="notif-item" style="padding:1rem; border-bottom: 1px solid var(--border);">
+                                <div class="notif-icon ${n.type}"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
+                                <div class="notif-body">
+                                    <div class="notif-text">${n.text}</div>
+                                    <div class="notif-time" style="margin-top:0.25rem;">${n.time}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+        }
+
+        function clearNotifications() {
+            localStorage.setItem(`voltix_notifications_${userId}`, JSON.stringify([]));
+            renderNotifications();
+            showToast('All notifications cleared.');
+        }
+
+        // ── Profile Settings Form ──────────────────────────────────────────────
+        function initSettingsForm() {
+            if (!currentUser) return;
+            const nameInput = document.getElementById('profile-name');
+            const emailInput = document.getElementById('profile-email');
+            if (nameInput) nameInput.value = currentUser.name;
+            if (emailInput) emailInput.value = currentUser.email;
+        }
+
+        function handleUpdateProfile(e) {
+            e.preventDefault();
+            const name = document.getElementById('profile-name').value.trim();
+            const email = document.getElementById('profile-email').value.trim().toLowerCase();
+
+            if (!name || !email) {
+                showToast('Please enter a name and email.');
+                return;
+            }
+
+            currentUser.name = name;
+            currentUser.email = email;
+            voltixSetCurrentUser(currentUser);
+
+            const users = JSON.parse(localStorage.getItem('voltix_users') || '[]');
+            const idx = users.findIndex(u => u.id === currentUser.id);
+            if (idx > -1) {
+                users[idx].name = name;
+                users[idx].email = email;
+                localStorage.setItem('voltix_users', JSON.stringify(users));
+            }
+
+            populateUserData();
+            initSettingsForm();
+            showToast('Profile updated successfully!');
+        }
+
+        function handleChangePassword(e) {
+            e.preventDefault();
+            const current = document.getElementById('pw-current').value;
+            const newPw = document.getElementById('pw-new').value;
+            const confirmPw = document.getElementById('pw-confirm').value;
+
+            if (current !== currentUser.password) {
+                showToast('Current password does not match.');
+                return;
+            }
+
+            if (newPw.length < 6) {
+                showToast('New password must be at least 6 characters.');
+                return;
+            }
+
+            if (newPw !== confirmPw) {
+                showToast('New passwords do not match.');
+                return;
+            }
+
+            currentUser.password = newPw;
+            voltixSetCurrentUser(currentUser);
+
+            const users = JSON.parse(localStorage.getItem('voltix_users') || '[]');
+            const idx = users.findIndex(u => u.id === currentUser.id);
+            if (idx > -1) {
+                users[idx].password = newPw;
+                localStorage.setItem('voltix_users', JSON.stringify(users));
+            }
+
+            document.getElementById('change-password-form').reset();
+            showToast('Password changed successfully!');
+        }
+
+        // ── Card Management ─────────────────────────────────────────────────────
+        function getCards() {
+            return JSON.parse(localStorage.getItem(`voltix_cards_${userId}`) || '[]');
+        }
+
+        function renderCards() {
+            const cards = getCards();
+            const container = document.getElementById('payment-methods-list');
+            if (!container) return;
+
+            if (cards.length === 0) {
+                container.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;padding:1rem 0;">No saved payment cards.</div>';
+                return;
+            }
+
+            container.innerHTML = '';
+            cards.forEach(card => {
+                const cardTypeGrad = card.type === 'Visa' ? 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)' : 'linear-gradient(135deg, #f46b45 0%, #eea849 100%)';
+                
+                container.innerHTML += `
+                    <div style="background:${cardTypeGrad}; color:white; padding:1.5rem; border-radius:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 10px rgba(0,0,0,0.15); max-width:400px; position:relative; overflow:hidden;">
+                        <div style="display:flex; flex-direction:column; gap:0.5rem; z-index:2;">
+                            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; opacity:0.8;">${card.type} Card</span>
+                            <span style="font-size:1.2rem; font-weight:700; letter-spacing:0.15em;">${card.number}</span>
+                            <div style="display:flex; gap:2rem; margin-top:0.5rem;">
+                                <div style="display:flex; flex-direction:column;">
+                                    <span style="font-size:0.6rem; text-transform:uppercase; opacity:0.7;">Expires</span>
+                                    <span style="font-size:0.85rem; font-weight:600;">${card.expiry}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="deleteCard('${card.id}')" style="background:rgba(255,255,255,0.15); border:none; color:white; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-weight:bold; z-index:2;" title="Delete card">×</button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleAddPayment(e) {
+            e.preventDefault();
+            const num = document.getElementById('card-number').value.trim();
+            const expiry = document.getElementById('card-expiry').value.trim();
+            const cvv = document.getElementById('card-cvv').value.trim();
+
+            if (!num || !expiry || !cvv) return;
+
+            const cleanNum = num.replace(/\s+/g, '');
+            if (cleanNum.length < 12) {
+                showToast('Please enter a valid card number.');
+                return;
+            }
+            const lastFour = cleanNum.slice(-4);
+            const formatted = `•••• •••• •••• ${lastFour}`;
+            
+            const type = cleanNum.startsWith('4') ? 'Visa' : 'Mastercard';
+
+            const cards = getCards();
+            cards.push({
+                id: 'card_' + Date.now(),
+                number: formatted,
+                expiry,
+                type
+            });
+            localStorage.setItem(`voltix_cards_${userId}`, JSON.stringify(cards));
+            renderCards();
+
+            document.getElementById('add-payment-form').reset();
+            showToast('Payment card added successfully!');
+        }
+
+        function deleteCard(id) {
+            let cards = getCards();
+            cards = cards.filter(c => c.id !== id);
+            localStorage.setItem(`voltix_cards_${userId}`, JSON.stringify(cards));
+            renderCards();
+            showToast('Card removed.');
+        }
+
+        // ── Reviews & Support Forms ──────────────────────────────────────────────
+        function getReviews() {
+            return JSON.parse(localStorage.getItem(`voltix_reviews_${userId}`) || '[]');
+        }
+
+        function renderReviews() {
+            const reviews = getReviews();
+            const container = document.getElementById('reviews-list');
+            if (!container) return;
+
+            if (reviews.length === 0) {
+                container.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;padding:1rem 0;">You have not written any product reviews yet.</div>';
+                return;
+            }
+
+            container.innerHTML = '';
+            reviews.forEach(rev => {
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    stars += `<span style="color:${i <= rev.rating ? '#F79E1B' : 'var(--border)'}; font-size:1.1rem;">★</span>`;
+                }
+
+                container.innerHTML += `
+                    <div style="border: 1px solid var(--border); border-radius:10px; padding:1.2rem; background:var(--bg-card); display:flex; flex-direction:column; gap:0.5rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; width:100%;">
+                            <span style="font-weight:700; font-size:0.95rem;">${rev.productName}</span>
+                            <span style="font-size:0.75rem; color:var(--text-light);">${rev.date}</span>
+                        </div>
+                        <div>${stars}</div>
+                        <p style="margin:0.25rem 0 0; font-size:0.85rem; line-height:1.5; color:var(--text);">${rev.comment}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function handleSupportSubmit(e) {
+            e.preventDefault();
+            const subject = document.getElementById('support-subject').value.trim();
+            const desc = document.getElementById('support-desc').value.trim();
+
+            if (!subject || !desc) return;
+
+            document.getElementById('support-form').reset();
+            showToast('Support ticket submitted successfully! Ticket ID: #TK-' + Math.floor(1000 + Math.random() * 9000));
+        }
+
+        function copyReferralLink() {
+            const input = document.getElementById('referral-link-input');
+            if (input) {
+                input.select();
+                document.execCommand('copy');
+                showToast('Referral link copied to clipboard!');
+            }
+        }
+
+        // ── Main Page Orchestration ────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            populateUserData();
+            seedDefaultData();
+            
+            // Sub-modules rendering
+            updateWishlistBadge();
+            updateCartBadge();
+            renderMiniWishlist();
+            renderOrders();
+            renderAddresses();
+            renderNotifications();
+            renderCards();
+            renderReviews();
+            initSettingsForm();
+
+            // Handle routing on load
+            handleHashChange();
+        });
+    </script>
+</body>
+
+</html>

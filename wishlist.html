@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voltix - My Wishlist</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Manage your favorite Voltix products on your wishlist. Save items for later, share your wishlist, or move them directly to your shopping cart.">
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Wishlist Custom Page Layout */
+    .wishlist-container {
+      margin-top: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .wishlist-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .wishlist-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .wishlist-title {
+      font-family: var(--font-heading);
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .wishlist-title svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--primary);
+      stroke: var(--primary);
+    }
+
+    .wishlist-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .wishlist-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-wishlist-action {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-share-wishlist {
+      background: var(--white);
+      color: var(--text-dark);
+      border: 1.5px solid var(--border-light);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .btn-share-wishlist:hover {
+      border-color: var(--text-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-move-all-cart {
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      box-shadow: 0 4px 15px rgba(15, 98, 254, 0.2);
+    }
+
+    .btn-move-all-cart:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(15, 98, 254, 0.3);
+    }
+
+    .btn-wishlist-action svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+
+    /* Wishlist Grid & Cards matching Mockup */
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .wishlist-card {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      padding: 1.5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+    }
+
+    .wishlist-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .wishlist-card-fav-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      color: var(--primary);
+      z-index: 5;
+    }
+
+    .wishlist-card-fav-btn:hover {
+      transform: scale(1.1);
+      background: #f1f5f9;
+    }
+
+    .wishlist-card-fav-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--primary);
+      stroke: var(--primary);
+    }
+
+    .wishlist-card-img-wrap {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      position: relative;
+      background: #f8fafc;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .wishlist-card-img {
+      max-height: 140px;
+      max-width: 80%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      transition: transform var(--transition-normal);
+    }
+
+    .wishlist-card:hover .wishlist-card-img {
+      transform: scale(1.06);
+    }
+
+    .wishlist-card-info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 0.35rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .wishlist-card-name {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .wishlist-card-name:hover {
+      color: var(--primary);
+    }
+
+    .wishlist-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      min-height: 2.2em;
+    }
+
+    .wishlist-card-price {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 0.25rem;
+    }
+
+    .wishlist-card-stock {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.775rem;
+      font-weight: 700;
+      color: #10b981;
+      margin-top: 0.5rem;
+    }
+
+    .wishlist-card-stock::before {
+      content: '●';
+      font-size: 0.85rem;
+    }
+
+    .wishlist-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .wishlist-btn-add-cart {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.7rem;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+    }
+
+    .wishlist-btn-add-cart:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .wishlist-btn-add-cart svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+
+    .wishlist-btn-icon-outline {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-dark);
+      transition: all var(--transition-fast);
+    }
+
+    .wishlist-btn-icon-outline:hover {
+      border-color: var(--text-light);
+      background-color: #f8fafc;
+      color: var(--primary);
+    }
+
+    .wishlist-btn-icon-outline.btn-delete:hover {
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.2);
+      background-color: rgba(239, 68, 68, 0.05);
+    }
+
+    .wishlist-btn-icon-outline svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.25;
+    }
+
+    /* Empty State View */
+    .empty-wishlist-view {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      background: var(--white);
+      border: 1.5px dashed var(--text-light);
+      border-radius: 24px;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .empty-wishlist-icon-wrapper {
+      width: 100px;
+      height: 100px;
+      background: rgba(15, 98, 254, 0.05);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-wishlist-icon-wrapper svg {
+      width: 48px;
+      height: 48px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+    }
+
+    .empty-wishlist-title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .empty-wishlist-desc {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      max-width: 380px;
+      line-height: 1.5;
+    }
+
+    .btn-shop-now {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 0.8rem 2rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(15, 98, 254, 0.2);
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-shop-now:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Trust Badges matching Mockup */
+    .trust-badges-card {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 24px;
+      padding: 2.25rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 5rem;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.015);
+    }
+
+    .trust-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .trust-icon-wrap {
+      width: 48px;
+      height: 48px;
+      background: rgba(15, 98, 254, 0.07);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .trust-icon-wrap svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .trust-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .trust-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .trust-desc {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    /* Toast Notification Styles */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0b0f19;
+      color: var(--white);
+      padding: 1rem 1.75rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .toast-icon {
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .toast-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .wishlist-grid { grid-template-columns: repeat(3, 1fr); }
+      .trust-badges-card { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      .wishlist-grid { grid-template-columns: repeat(2, 1fr); }
+      .wishlist-header-row { flex-direction: column; align-items: flex-start; }
+      .wishlist-actions { width: 100%; justify-content: space-between; }
+      .btn-wishlist-action { flex-grow: 1; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .wishlist-grid { grid-template-columns: 1fr; }
+      .trust-badges-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; }
+      .wishlist-actions { flex-direction: column; }
+      .btn-wishlist-action { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="promo-bar">
+    <div class="promo-content">
+      <span>Free Shipping on orders over ₹4,999! <a href="shop.html" style="color: inherit; text-decoration: underline;">Shop Now</a></span>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#track" style="color: inherit; text-decoration: none;">Track Order</a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="#help" style="color: inherit; text-decoration: none;">Help Center</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Header / Navigation Bar -->
+    <header class="header">
+      <nav class="nav-bar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f62fe" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+            <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)"/>
+          </svg>
+          <span>Voltix</span>
+        </a>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+
+        <!-- Links -->
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="shop.html" class="nav-link">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a href="categories.html" class="nav-link">Categories</a>
+          </li>
+          <li class="nav-item" style="position: relative;">
+            <a href="index.html#flash-sale" class="nav-link">Deals</a>
+            <span class="badge-hot">Hot</span>
+          </li>
+          <li class="nav-item">
+            <a href="index.html#new-arrivals" class="nav-link">New Arrivals</a>
+          </li>
+          <li class="nav-item">
+            <a href="support.html" class="nav-link">Support</a>
+          </li>
+        </ul>
+
+        <!-- Actions -->
+        <div class="nav-actions">
+          <label for="nav-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </label>
+
+          <button class="action-btn" aria-label="Search" onclick="location.href='shop.html?focus=search'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          
+          <button class="action-btn" id="btn-nav-fav" aria-label="Favorites" onclick="location.href='wishlist.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span class="wishlist-count" id="wishlist-counter-badge">0</span>
+          </button>
+          
+          <div class="divider"></div>
+          
+          <button class="action-btn" aria-label="Cart" onclick="location.href='cart.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <span class="cart-count" id="cart-counter-badge">0</span>
+          </button>
+          
+          <button class="action-btn" aria-label="Profile" onclick="location.href='account.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs" style="margin-top: 1.5rem; display: flex; gap: 0.5rem; font-size: 0.825rem; font-weight: 600;">
+      <a href="index.html" style="color: var(--text-light); text-decoration: none;">Home</a>
+      <span class="breadcrumb-sep" style="color: var(--text-light);">&gt;</span>
+      <span class="current" style="color: var(--text-dark);">Wishlist</span>
+    </div>
+
+    <!-- Wishlist Page Content -->
+    <div class="wishlist-container">
+      
+      <div class="wishlist-header-row" id="wishlist-header">
+        <div class="wishlist-title-wrap">
+          <h1 class="wishlist-title" id="wishlist-main-title">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span>My Wishlist</span> <span id="wishlist-count-badge" style="color: var(--text-light); font-weight: 500;">(8)</span>
+          </h1>
+          <span class="wishlist-desc">Your favorite products, saved for later</span>
+        </div>
+        
+        <div class="wishlist-actions">
+          <button class="btn-wishlist-action btn-share-wishlist" onclick="shareWishlist()">
+            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <span>Share Wishlist</span>
+          </button>
+          <button class="btn-wishlist-action btn-move-all-cart" onclick="moveAllToCart()">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <span>Move All to Cart</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Wishlist Grid -->
+      <div class="wishlist-grid" id="wishlist-grid-container">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-wishlist-view" id="empty-wishlist-view">
+        <div class="empty-wishlist-icon-wrapper">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h2 class="empty-wishlist-title">Your Wishlist is Empty</h2>
+        <p class="empty-wishlist-desc">Explore our catalog and add items you love to your personal wishlist!</p>
+        <a href="shop.html" class="btn-shop-now">Start Shopping</a>
+      </div>
+
+      <!-- Trust Badges Section -->
+      <div class="trust-badges-card">
+        <div class="trust-badge-item">
+          <div class="trust-icon-wrap">
+            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div class="trust-info">
+            <span class="trust-title">Free Shipping</span>
+            <span class="trust-desc">On orders above ₹4,999</span>
+          </div>
+        </div>
+
+        <div class="trust-badge-item">
+          <div class="trust-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <div class="trust-info">
+            <span class="trust-title">24/7 Support</span>
+            <span class="trust-desc">Friendly 24/7 support</span>
+          </div>
+        </div>
+
+        <div class="trust-badge-item">
+          <div class="trust-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          </div>
+          <div class="trust-info">
+            <span class="trust-title">Easy Returns</span>
+            <span class="trust-desc">30-day return policy</span>
+          </div>
+        </div>
+
+        <div class="trust-badge-item">
+          <div class="trust-icon-wrap">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="trust-info">
+            <span class="trust-title">Secure Payments</span>
+            <span class="trust-desc">100% secure checkout</span>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- Close wishlist-container -->
+  </div> <!-- Close app-container -->
+
+  <!-- 13. Complete Footer -->
+  <footer class="footer">
+    <div class="app-container">
+      
+      <div class="footer-top">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)"/>
+            </svg>
+            <span>Voltix</span>
+          </a>
+          <p class="footer-desc">Your one-stop destination for premium electronics, smart devices, and high-fidelity gadgets.</p>
+          <ul class="social-links">
+            <li><a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C9.24.5 7.5 3.44 7.5 7v3.5H4.5v4h3v9H12v-9h3.5l.5-4z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23.95 4.57a10 10 0 0 1-2.82.77 4.96 4.96 0 0 0 2.16-2.72c-.95.55-2 .95-3.12 1.18a4.92 4.92 0 0 0-8.38 4.48 13.98 13.98 0 0 1-10.15-5.15 4.92 4.92 0 0 0 1.52 6.57 4.9 4.9 0 0 1-2.23-.62v.06a4.92 4.92 0 0 0 3.95 4.83 4.9 4.9 0 0 1-2.22.08 4.92 4.92 0 0 0 4.6 3.42A9.9 9.9 0 0 1 0 19.54a13.94 13.94 0 0 0 7.55 2.21c9.14 0 14.3-7.72 14.07-14.88a10 10 0 0 0 2.33-2.3z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></li>
+          </ul>
+        </div>
+
+        <!-- Shop Links -->
+        <div>
+          <h3 class="footer-col-title">Shop</h3>
+          <ul class="footer-menu">
+            <li><a href="#shop?cat=smartphones" class="footer-link">Smartphones</a></li>
+            <li><a href="#shop?cat=laptops" class="footer-link">Laptops</a></li>
+            <li><a href="#shop?cat=audio" class="footer-link">Audio</a></li>
+            <li><a href="#shop?cat=smartwatches" class="footer-link">Smart Watches</a></li>
+            <li><a href="#shop?cat=accessories" class="footer-link">Accessories</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div>
+          <h3 class="footer-col-title">Company</h3>
+          <ul class="footer-menu">
+            <li><a href="#about" class="footer-link">About Us</a></li>
+            <li><a href="#careers" class="footer-link">Careers</a></li>
+            <li><a href="#blog" class="footer-link">Blog</a></li>
+            <li><a href="#press" class="footer-link">Press</a></li>
+            <li><a href="#affiliate" class="footer-link">Affiliates</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer Care Links -->
+        <div>
+          <h3 class="footer-col-title">Customer Care</h3>
+          <ul class="footer-menu">
+            <li><a href="support.html" class="footer-link">Contact Us</a></li>
+            <li><a href="#shipping" class="footer-link">Shipping Policy</a></li>
+            <li><a href="#returns" class="footer-link">Return Policy</a></li>
+            <li><a href="#warranty" class="footer-link">Warranty</a></li>
+            <li><a href="support.html" class="footer-link">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Support Links -->
+        <div>
+          <h3 class="footer-col-title">Support</h3>
+          <ul class="footer-menu">
+            <li><a href="account.html" class="footer-link">My Account</a></li>
+            <li><a href="support.html" class="footer-link">Track Order</a></li>
+            <li><a href="wishlist.html" class="footer-link">Wishlist</a></li>
+            <li><a href="#compare" class="footer-link">Compare</a></li>
+            <li><a href="support.html" class="footer-link">Help Center</a></li>
+          </ul>
+        </div>
+
+        <!-- Apps Info -->
+        <div class="footer-apps">
+          <h3 class="footer-col-title">Download App</h3>
+          <a href="#" class="app-download-btn">
+            <!-- Vector App Store Button -->
+            <svg viewBox="0 0 135 40" style="width: 135px; height: 40px;"><rect width="135" height="40" rx="6" fill="#000"/><text x="38" y="18" fill="#fff" font-family="var(--font-body)" font-size="8">Download on the</text><text x="38" y="30" fill="#fff" font-family="var(--font-heading)" font-weight="700" font-size="12">App Store</text><path d="M22 13.5c-.8.8-1.7.8-2 .5s-.8-1.2-.5-2.2c.3-.9.9-1.5 1.7-1.5s1.2.6 1.2 1.3c0 .8-.6 1.1-1.1 1.3m2.7 7.7c-.5.8-1 1.7-1.8 1.7-.8.1-1-.4-2-.4s-1.2.4-2 .4c-.7 0-1.4-.9-1.9-1.8C16 19.3 15 16 16 14.3c.5-.9 1.4-1.4 2.3-1.4s1.7.6 2.2.6c.5 0 1.5-.7 2.6-.6.4 0 1.8.2 2.6 1.3-.1.1-1.5.9-1.5 2.6 0 2 1.7 2.7 1.8 2.7-.1.4-.7 1.6-1.3 2.7" fill="#fff"/></svg>
+          </a>
+          <a href="#" class="app-download-btn">
+            <!-- Vector Google Play Button -->
+            <svg viewBox="0 0 135 40" style="width: 135px; height: 40px;"><rect width="135" height="40" rx="6" fill="#000"/><text x="38" y="18" fill="#fff" font-family="var(--font-body)" font-size="8">GET IT ON</text><text x="38" y="30" fill="#fff" font-family="var(--font-heading)" font-weight="700" font-size="12">Google Play</text><path d="M16 10l8.5 7.5L16 25V10z" fill="#4caf50"/><path d="M24.5 17.5L16 25l-2.5-2.5 8.5-5z" fill="#ffeb3b"/><path d="M16 10l8.5 7.5-8.5 5-2.5-2.5z" fill="#2196f3"/><path d="M16 10v15l-2.5-2.5V12.5z" fill="#f44336"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Voltix. All Rights Reserved.</span>
+        
+        <!-- Payment Icons -->
+        <ul class="payment-icons">
+          <li class="payment-icon">
+            <!-- Visa SVG -->
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#1434CB"/><text x="6" y="16" fill="#fff" font-family="sans-serif" font-weight="bold" font-style="italic" font-size="11">VISA</text></svg>
+          </li>
+          <li class="payment-icon">
+            <!-- Mastercard SVG -->
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#fff"/><circle cx="15" cy="12" r="6" fill="#EB001B" opacity="0.9"/><circle cx="23" cy="12" r="6" fill="#F79E1B" opacity="0.9"/></svg>
+          </li>
+          <li class="payment-icon">
+            <!-- Paypal SVG -->
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#003087"/><text x="5" y="16" fill="#0079C1" font-family="sans-serif" font-weight="bold" font-size="11">Pay</text><text x="21" y="16" fill="#00457C" font-family="sans-serif" font-weight="bold" font-size="11">Pal</text></svg>
+          </li>
+          <li class="payment-icon">
+            <!-- Apple Pay SVG -->
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#000"/><text x="4" y="16" fill="#fff" font-family="sans-serif" font-weight="bold" font-size="10">Pay</text></svg>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toast-notify" class="toast">
+    <span class="toast-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>
+    <span id="toast-message">Item added successfully!</span>
+  </div>
+
+  <script>
+    // Product mock database (with reasonable INR prices matching the catalog)
+    const productsDB = {
+      // Mock wishlist items
+      'macbookairm2': { name: 'Apple MacBook Air M2 Chip', desc: '256GB SSD, Midnight', price: 89999.00, img: 'assets/laptop.png' },
+      'sonywh1000xm5': { name: 'Sony WH-1000XM5', desc: 'Wireless Noise Cancelling', price: 29990.00, img: 'assets/headphones.png' },
+      'applewatch9': { name: 'Apple Watch Series 9', desc: 'GPS, 45mm, Midnight', price: 41900.00, img: 'assets/smartwatch.png' },
+      'airpodspro2': { name: 'Apple AirPods Pro 2', desc: '(2nd Generation)', price: 24900.00, img: 'assets/earbuds.png' },
+      'jblcharge5': { name: 'JBL Charge 5', desc: 'Portable Bluetooth Speaker', price: 12999.00, img: 'assets/controller.png' },
+      'iphone14': { name: 'Apple iPhone 14', desc: '128GB, Midnight', price: 59900.00, img: 'assets/smartphone.png' },
+      'dellultrasharp': { name: 'Dell XPS 13 Plus', desc: '13th Gen i7, 16GB RAM, 512GB SSD', price: 119900.00, img: 'assets/laptop.png' },
+      'logitechgprowireless': { name: 'Logitech G502 HERO', desc: 'Gaming Mouse', price: 5999.00, img: 'assets/controller.png' },
+
+      // All other products in catalog
+      'iphone15promax': { name: 'Apple iPhone 15 Pro Max 256GB - Blue Titanium', desc: 'Premium Smartphone', price: 139900.00, img: 'assets/smartphone.png' },
+      'canoneosr50': { name: 'Canon EOS R50 24.2MP Mirrorless Camera', desc: 'Mirrorless Camera', price: 62320.00, img: 'assets/camera.png' },
+      'asusrogstrix': { name: 'ASUS ROG Strix G16 Gaming Laptop', desc: 'Gaming Laptop', price: 103920.00, img: 'assets/laptop.png' },
+      'galaxys24ultra': { name: 'Samsung Galaxy S24 Ultra 5G, 256GB - Titanium Gray', desc: 'Premium Smartphone', price: 124900.00, img: 'assets/smartphone.png' },
+      'ipadair5': { name: 'Apple iPad Air 5th Gen 10.9-inch, 64GB', desc: 'Premium Tablet', price: 54900.00, img: 'assets/controller.png' },
+      'ankerpowercore': { name: 'Anker PowerCore 20K 20000mAh Power Bank', desc: 'Power Bank', price: 2999.00, img: 'assets/controller.png' },
+      'googlepixel8pro': { name: 'Google Pixel 8 Pro 128GB - Obsidian', desc: 'Premium Smartphone', price: 63920.00, img: 'assets/smartphone.png' },
+      'oneplus12': { name: 'OnePlus 12 5G 256GB - Silky Black', desc: 'Premium Smartphone', price: 55920.00, img: 'assets/smartphone.png' },
+      'dellxps13': { name: 'Dell XPS 13 Evo Laptop Intel Core Ultra 7', desc: 'Evo Laptop', price: 95920.00, img: 'assets/laptop.png' },
+      'hpspectrex360': { name: 'HP Spectre x360 2-in-1 14" Laptop', desc: '2-in-1 Laptop', price: 111920.00, img: 'assets/laptop.png' },
+      'galaxywatch6': { name: 'Samsung Galaxy Watch 6 Classic 43mm', desc: 'Smart Watch', price: 26320.00, img: 'assets/smartwatch.png' },
+      'boseqcultra': { name: 'Bose QuietComfort Ultra Wireless Headphones', desc: 'Wireless Headphones', price: 30320.00, img: 'assets/headphones.png' },
+      'airpods3': { name: 'Apple AirPods (3rd Generation)', desc: 'Wireless Earbuds', price: 13520.00, img: 'assets/earbuds.png' },
+      'lgultragear34': { name: 'LG UltraGear 34" Curved Gaming Monitor', desc: 'Gaming Monitor', price: 71920.00, img: 'assets/monitor.png' },
+      'samsungodysseyg9': { name: 'Samsung Odyssey Neo G9 49" Curved Monitor', desc: 'Curved Monitor', price: 135920.00, img: 'assets/monitor.png' },
+      'sonyalpha7iv': { name: 'Sony Alpha 7 IV Full-Frame Mirrorless Camera', desc: 'Mirrorless Camera', price: 199920.00, img: 'assets/camera.png' },
+      'logitechmxmaster3s': { name: 'Logitech MX Master 3S Wireless Performance Mouse', desc: 'Performance Mouse', price: 7999.20, img: 'assets/controller.png' },
+      'keychronk2': { name: 'Keychron K2 Wireless Mechanical Keyboard', desc: 'Mechanical Keyboard', price: 6399.20, img: 'assets/controller.png' },
+      'samsung990pro': { name: 'Samsung 990 Pro 1TB SSD', desc: 'Internal SSD', price: 11999.00, img: 'assets/controller.png' },
+      'sonywhch720n': { name: 'Sony WH-CH720N Headphones', desc: 'Wireless Headphones', price: 9999.00, img: 'assets/headphones.png' },
+      'macbookpro14': { name: 'MacBook Pro 14" M3 Chip', desc: 'M3 Pro Laptop', price: 169900.00, img: 'assets/laptop.png' },
+      'goprohero12': { name: 'GoPro HERO12 Black', desc: 'Action Camera', price: 37900.00, img: 'assets/camera.png' }
+    };
+
+    // Favorites / Wishlist Local Storage handlers
+    function getLocalWishlist() {
+      const wishJson = localStorage.getItem('voltix_wishlist');
+      if (!wishJson) {
+        const defaultWish = ['macbookairm2', 'sonywh1000xm5', 'applewatch9', 'airpodspro2', 'jblcharge5', 'iphone14', 'dellultrasharp', 'logitechgprowireless'];
+        localStorage.setItem('voltix_wishlist', JSON.stringify(defaultWish));
+        return defaultWish;
+      }
+      try {
+        return JSON.parse(wishJson);
+      } catch(e) {
+        return [];
+      }
+    }
+
+    function saveLocalWishlist(wishlist) {
+      localStorage.setItem('voltix_wishlist', JSON.stringify(wishlist));
+      updateWishlistBadge();
+    }
+
+    function updateWishlistBadge() {
+      const wishlist = getLocalWishlist();
+      const badge = document.getElementById('wishlist-counter-badge');
+      if (badge) badge.textContent = wishlist.length;
+      const titleBadge = document.getElementById('wishlist-count-badge');
+      if (titleBadge) titleBadge.textContent = `(${wishlist.length})`;
+    }
+
+    // Cart Local Storage handlers
+    function getLocalCart() {
+      const cartJson = localStorage.getItem('voltix_cart');
+      if (!cartJson) {
+        localStorage.setItem('voltix_cart', JSON.stringify([]));
+        return [];
+      }
+      try {
+        return JSON.parse(cartJson);
+      } catch(e) {
+        return [];
+      }
+    }
+
+    function saveLocalCart(cart) {
+      localStorage.setItem('voltix_cart', JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const cart = getLocalCart();
+      const totalCount = cart.reduce((acc, curr) => acc + curr.qty, 0);
+      const badge = document.getElementById('cart-counter-badge');
+      if (badge) badge.textContent = totalCount;
+    }
+
+    // Dynamic Image Transparency mix-blend-mode multiplier
+    function processImageTransparency(img) {
+      if (img) {
+        img.style.mixBlendMode = 'multiply';
+      }
+    }
+
+    // Toast Notification helper
+    function showToast(message) {
+      const toast = document.getElementById('toast-notify');
+      const msgSpan = document.getElementById('toast-message');
+      if (toast && msgSpan) {
+        msgSpan.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+    }
+
+    // Render Wishlist Grid List
+    function renderWishlist() {
+      const wishlist = getLocalWishlist();
+      const grid = document.getElementById('wishlist-grid-container');
+      const headerRow = document.getElementById('wishlist-header');
+      const emptyView = document.getElementById('empty-wishlist-view');
+
+      if (wishlist.length === 0) {
+        grid.style.display = 'none';
+        headerRow.style.display = 'none';
+        emptyView.style.display = 'flex';
+        return;
+      }
+
+      grid.style.display = 'grid';
+      headerRow.style.display = 'flex';
+      emptyView.style.display = 'none';
+
+      grid.innerHTML = '';
+      wishlist.forEach(id => {
+        const p = productsDB[id] || { name: 'Unknown Product', desc: 'No description available', price: 0.00, img: 'assets/controller.png' };
+        
+        grid.innerHTML += `
+          <div class="wishlist-card" id="wishlist-item-${id}">
+            <button class="wishlist-card-fav-btn" onclick="removeFromWishlist('${id}', '${p.name}')" aria-label="Favorites">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+            <div class="wishlist-card-img-wrap">
+              <img class="wishlist-card-img" src="${p.img}" alt="${p.name}">
+            </div>
+            <div class="wishlist-card-info">
+              <a href="product.html?id=${id}" class="wishlist-card-name">${p.name}</a>
+              <span class="wishlist-card-desc">${p.desc}</span>
+              <span class="wishlist-card-price">₹${p.price.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span class="wishlist-card-stock">In Stock</span>
+            </div>
+            <div class="wishlist-card-actions">
+              <button class="wishlist-btn-add-cart" onclick="addToCart('${id}', '${p.name}')">
+                <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <span>Add to Cart</span>
+              </button>
+              <button class="wishlist-btn-icon-outline" onclick="shareProduct('${id}', '${p.name}')" aria-label="Share">
+                <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              </button>
+              <button class="wishlist-btn-icon-outline btn-delete" onclick="removeFromWishlist('${id}', '${p.name}')" aria-label="Delete">
+                <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      // Apply image multipliers for transparency
+      document.querySelectorAll('.wishlist-card-img').forEach(img => {
+        processImageTransparency(img);
+      });
+    }
+
+    // Add specific item to cart
+    function addToCart(id, name) {
+      const p = productsDB[id];
+      if (!p) return;
+
+      const cart = getLocalCart();
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          id: id,
+          name: p.name,
+          price: p.price,
+          img: p.img,
+          desc: p.desc,
+          qty: 1
+        });
+      }
+
+      saveLocalCart(cart);
+      showToast(`Added ${name} to cart!`);
+    }
+
+    // Remove single item from wishlist
+    function removeFromWishlist(id, name) {
+      let wishlist = getLocalWishlist();
+      wishlist = wishlist.filter(item => item !== id);
+      saveLocalWishlist(wishlist);
+      renderWishlist();
+      showToast(`Removed ${name} from wishlist`);
+    }
+
+    // Move all items in wishlist to shopping cart
+    function moveAllToCart() {
+      const wishlist = getLocalWishlist();
+      if (wishlist.length === 0) return;
+
+      const cart = getLocalCart();
+      wishlist.forEach(id => {
+        const p = productsDB[id];
+        if (p) {
+          const existing = cart.find(item => item.id === id);
+          if (existing) {
+            existing.qty += 1;
+          } else {
+            cart.push({
+              id: id,
+              name: p.name,
+              price: p.price,
+              img: p.img,
+              desc: p.desc,
+              qty: 1
+            });
+          }
+        }
+      });
+
+      saveLocalCart(cart);
+      localStorage.setItem('voltix_wishlist', JSON.stringify([]));
+      updateWishlistBadge();
+      renderWishlist();
+      showToast("Moved all items to cart!");
+    }
+
+    // Share wishlist action
+    function shareWishlist() {
+      const dummyUrl = window.location.href;
+      navigator.clipboard.writeText(dummyUrl).then(() => {
+        showToast("Wishlist link copied to clipboard!");
+      }).catch(() => {
+        showToast("Failed to copy link.");
+      });
+    }
+
+    // Share specific product action
+    function shareProduct(id, name) {
+      const productUrl = `${window.location.origin}/product.html?id=${id}`;
+      navigator.clipboard.writeText(productUrl).then(() => {
+        showToast(`Copied share link for ${name}!`);
+      }).catch(() => {
+        showToast("Failed to copy link.");
+      });
+    }
+
+    // Initializer
+    document.addEventListener("DOMContentLoaded", () => {
+      updateWishlistBadge();
+      updateCartBadge();
+      renderWishlist();
+    });
+  </script>
+
+  <script>
+    // ── Sync nav profile button with logged-in user ─────────────────────
+    (function() {
+      try {
+        const user = JSON.parse(localStorage.getItem('voltix_current_user') || 'null');
+        const btn = document.getElementById('btn-profile');
+        if (!btn) return;
+        if (user) {
+          const initials = user.name.split(' ').map(function(n){ return n[0]; }).join('').toUpperCase().slice(0,2);
+          btn.innerHTML = '<span style="width:28px;height:28px;border-radius:50%;background:var(--primary);color:white;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;font-family:var(--font-heading);">' + initials + '</span>';
+          btn.onclick = function(){ location.href='account.html'; };
+        } else {
+          btn.onclick = function(){ location.href='login.html'; };
+        }
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>

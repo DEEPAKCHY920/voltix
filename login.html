@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voltix - Login</title>
+  <meta name="description" content="Login to your Voltix account and continue your premium shopping experience.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* =============================================
+   Voltix Auth Pages — Login & Signup
+   ============================================= */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #eef2f7;
+}
+
+.auth-page::before,
+.auth-page::after {
+  display: none;
+}
+
+.auth-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 680px;
+  background: var(--white);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+/* ---- Left Panel ---- */
+.auth-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2.75rem;
+  overflow: hidden;
+}
+
+.auth-hero--login {
+  background: linear-gradient(160deg, #001a4d 0%, #002b7a 50%, #001540 100%);
+}
+
+.auth-hero--signup {
+  background: linear-gradient(160deg, #001a4d 0%, #002b7a 50%, #001540 100%);
+}
+
+.auth-hero::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  background-image: radial-gradient(circle, rgba(15, 98, 254, 0.15) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+  pointer-events: none;
+}
+
+.auth-hero--signup::before {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+}
+
+.auth-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 98, 254, 0.08);
+  pointer-events: none;
+}
+
+.auth-hero--signup::after {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.auth-hero-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  position: relative;
+  z-index: 2;
+}
+
+.auth-hero-logo svg {
+  width: 32px;
+  height: 32px;
+}
+
+.auth-hero-logo span {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.auth-hero--signup .auth-hero-logo span {
+  color: var(--white);
+}
+
+.auth-hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  margin-top: 1.5rem;
+}
+
+.auth-hero-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--white);
+  margin-bottom: 0.85rem;
+}
+
+.auth-hero--signup .auth-hero-title {
+  color: var(--white);
+}
+
+.auth-hero-title .highlight {
+  color: #60a5fa;
+}
+
+.auth-hero--signup .auth-hero-title .highlight {
+  color: #60a5fa;
+}
+
+.auth-hero-desc {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 320px;
+  margin-bottom: 1.75rem;
+}
+
+.auth-hero--signup .auth-hero-desc {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.auth-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.auth-feature-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.auth-hero--signup .auth-feature-icon {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.auth-feature-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: #60a5fa;
+  fill: none;
+  stroke-width: 2;
+}
+
+.auth-hero--signup .auth-feature-icon svg {
+  stroke: #60a5fa;
+}
+
+.auth-feature-text strong {
+  display: block;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.1rem;
+}
+
+.auth-hero--signup .auth-feature-text strong {
+  color: var(--white);
+}
+
+.auth-feature-text span {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.4;
+}
+
+.auth-hero--signup .auth-feature-text span {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Hero Illustration */
+.auth-illustration {
+  position: relative;
+  height: 200px;
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.auth-illustration-glow {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15, 98, 254, 0.12) 0%, transparent 70%);
+}
+
+.auth-hero--signup .auth-illustration-glow {
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
+  box-shadow: 0 0 80px rgba(96, 165, 250, 0.15);
+}
+
+.auth-illustration-scene {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.auth-phone {
+  width: 110px;
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 6px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: rotate(-5deg);
+}
+
+.auth-phone-screen {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 8px;
+}
+
+.auth-phone-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.auth-phone-logo-mini {
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 800;
+  color: white;
+}
+
+.auth-phone-search {
+  flex: 1;
+  height: 14px;
+  background: #f1f5f9;
+  border-radius: 7px;
+}
+
+.auth-phone-banner {
+  background: linear-gradient(135deg, var(--primary), #6366f1);
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  color: white;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.auth-phone-cats {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.auth-phone-cat {
+  width: 28px;
+  height: 28px;
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+
+.auth-phone-products {
+  display: flex;
+  gap: 4px;
+}
+
+.auth-phone-product {
+  flex: 1;
+  height: 36px;
+  background: #f8fafc;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.auth-bag {
+  width: 48px;
+  height: 56px;
+  background: var(--primary);
+  border-radius: 8px 8px 4px 4px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(15, 98, 254, 0.3);
+  transform: translateY(-10px);
+}
+
+.auth-bag::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 10px;
+  border: 3px solid var(--primary);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.auth-bag-v {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: white;
+}
+
+.auth-cart {
+  width: 52px;
+  transform: translateY(-5px);
+}
+
+.auth-cart-body {
+  width: 100%;
+  height: 40px;
+  background: var(--primary);
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(15, 98, 254, 0.25);
+}
+
+.auth-cart-body::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.auth-cart-wheels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 6px;
+  margin-top: 2px;
+}
+
+.auth-cart-wheel {
+  width: 8px;
+  height: 8px;
+  background: #1e293b;
+  border-radius: 50%;
+}
+
+.auth-plant {
+  width: 32px;
+  transform: translateY(-8px);
+}
+
+.auth-plant-pot {
+  width: 24px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: 0 0 6px 6px;
+  margin: 0 auto;
+}
+
+.auth-plant-leaves {
+  width: 32px;
+  height: 28px;
+  background: var(--primary);
+  border-radius: 50% 50% 0 0;
+  opacity: 0.85;
+  margin-bottom: -4px;
+}
+
+.auth-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.auth-hero--signup .auth-trust-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-trust-badge svg {
+  width: 14px;
+  height: 14px;
+  stroke: #60a5fa;
+  fill: none;
+  stroke-width: 2;
+}
+
+.auth-hero--signup .auth-trust-badge svg {
+  stroke: #60a5fa;
+}
+
+/* ---- Right Panel (Form) ---- */
+.auth-form-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 3rem;
+  background: var(--white);
+  overflow-y: auto;
+}
+
+.auth-form-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.auth-switch-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1.1rem;
+  border: 1.5px solid var(--primary);
+  border-radius: 100px;
+  color: var(--primary);
+  font-size: 0.825rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.auth-switch-link:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.auth-form-header {
+  margin-bottom: 2rem;
+}
+
+.auth-form-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 0.4rem;
+}
+
+.auth-form-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  flex: 1;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.auth-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-field label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.auth-forgot {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.auth-forgot:hover {
+  opacity: 0.75;
+}
+
+.auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-wrap svg.input-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-light);
+  fill: none;
+  stroke-width: 2;
+  pointer-events: none;
+}
+
+.auth-input-wrap input {
+  width: 100%;
+  padding: 0.75rem 2.75rem 0.75rem 2.75rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-dark);
+  background: var(--white);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.auth-input-wrap input::placeholder {
+  color: var(--text-light);
+}
+
+.auth-input-wrap input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.1);
+}
+
+.auth-toggle-pw {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  transition: color var(--transition-fast);
+}
+
+.auth-toggle-pw:hover {
+  color: var(--text-muted);
+}
+
+.auth-toggle-pw svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.auth-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -0.25rem;
+}
+
+.auth-checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.auth-checkbox-wrap input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.auth-checkbox-wrap span {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+.auth-checkbox-wrap .terms-text {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.auth-checkbox-wrap .terms-text a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-checkbox-wrap .terms-text a:hover {
+  text-decoration: underline;
+}
+
+.auth-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.925rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 8px 20px rgba(15, 98, 254, 0.3);
+  margin-top: 0.25rem;
+}
+
+.auth-submit:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(15, 98, 254, 0.35);
+}
+
+.auth-submit svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+  transition: transform var(--transition-fast);
+}
+
+.auth-submit:hover svg {
+  transform: translateX(3px);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.auth-divider span {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.auth-social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.auth-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.auth-social-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.auth-social-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.auth-ssl-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  font-size: 0.725rem;
+  color: var(--text-light);
+}
+
+.auth-ssl-note svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--text-light);
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .auth-card {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .auth-hero {
+    display: none;
+  }
+
+  .auth-form-panel {
+    padding: 2rem 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .auth-card {
+    border-radius: 0;
+    min-height: 100vh;
+    box-shadow: none;
+  }
+
+  .auth-social-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.auth-mobile-logo {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.auth-mobile-logo svg {
+  width: 32px;
+  height: 32px;
+}
+
+.auth-mobile-logo span {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+@media (max-width: 900px) {
+  .auth-mobile-logo {
+    display: inline-flex;
+  }
+}
+
+  </style>
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+
+    <!-- Left: Promotional Hero -->
+    <aside class="auth-hero auth-hero--login">
+
+      <!-- Decorative rings -->
+      <div style="position:absolute;border-radius:50%;border:1px solid rgba(96,165,250,0.15);width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+      <div style="position:absolute;border-radius:50%;border:1px solid rgba(96,165,250,0.08);width:450px;height:450px;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+
+      <a href="index.html" class="auth-hero-logo">
+        <svg viewBox="0 0 24 24" fill="none">
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0f62fe"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+          </defs>
+          <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)"/>
+        </svg>
+        <span>Voltix</span>
+      </a>
+
+      <div class="auth-hero-content">
+        <h1 class="auth-hero-title">Shop Smarter.<br>Live <span class="highlight">Better.</span></h1>
+        <p class="auth-hero-desc">Create an account and unlock exclusive deals, faster checkout and personalized shopping experience.</p>
+
+        <ul class="auth-features">
+          <li class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            </div>
+            <div class="auth-feature-text">
+              <strong>Exclusive Deals</strong>
+              <span>Get access to member-only discounts and offers.</span>
+            </div>
+          </li>
+          <li class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </div>
+            <div class="auth-feature-text">
+              <strong>Fast &amp; Reliable Delivery</strong>
+              <span>Quick delivery right at your doorstep.</span>
+            </div>
+          </li>
+          <li class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="auth-feature-text">
+              <strong>Secure Shopping</strong>
+              <span>Your data is 100% safe with us.</span>
+            </div>
+          </li>
+          <li class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="auth-feature-text">
+              <strong>24/7 Support</strong>
+              <span>We're here to help you anytime.</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Phone Mockup Illustration -->
+        <div class="auth-illustration">
+          <div class="auth-illustration-glow"></div>
+          <div class="auth-illustration-scene">
+            <div class="auth-phone">
+              <div class="auth-phone-screen">
+                <div class="auth-phone-header">
+                  <div class="auth-phone-logo-mini">V</div>
+                  <div class="auth-phone-search"></div>
+                </div>
+                <div class="auth-phone-banner">Big Deals — Up to 50% Off</div>
+                <div style="display:flex;gap:4px;margin-bottom:5px;">
+                  <div style="font-size:6px;font-weight:700;color:#334155;">Categories</div>
+                  <div style="font-size:6px;color:#0f62fe;margin-left:auto;">See All</div>
+                </div>
+                <div class="auth-phone-cats">
+                  <div class="auth-phone-cat"></div>
+                  <div class="auth-phone-cat"></div>
+                  <div class="auth-phone-cat"></div>
+                  <div class="auth-phone-cat"></div>
+                </div>
+                <div style="display:flex;gap:4px;margin-bottom:4px;margin-top:3px;">
+                  <div style="font-size:6px;font-weight:700;color:#334155;">Best Selling</div>
+                  <div style="font-size:6px;color:#0f62fe;margin-left:auto;">See All</div>
+                </div>
+                <div class="auth-phone-products">
+                  <div class="auth-phone-product"></div>
+                  <div class="auth-phone-product"></div>
+                </div>
+              </div>
+            </div>
+            <div class="auth-bag"><span class="auth-bag-v">V</span></div>
+            <div class="auth-plant">
+              <div class="auth-plant-leaves"></div>
+              <div class="auth-plant-pot"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-trust-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Trusted by millions of customers worldwide
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Right: Login Form -->
+    <section class="auth-form-panel">
+      <div class="auth-form-top">
+        <span>New here?</span>
+        <a href="signup.html" class="auth-switch-link">Create Account</a>
+      </div>
+
+      <div class="auth-form-header">
+        <a href="index.html" class="auth-mobile-logo">
+          <svg viewBox="0 0 24 24" fill="none">
+            <defs>
+              <linearGradient id="logo-grad-mobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f62fe"/>
+                <stop offset="100%" stop-color="#a855f7"/>
+              </linearGradient>
+            </defs>
+            <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad-mobile)"/>
+          </svg>
+          <span>Voltix</span>
+        </a>
+        <h2 class="auth-form-title">Welcome Back! 👋</h2>
+        <p class="auth-form-subtitle">Login to continue to your account</p>
+      </div>
+
+      <form class="auth-form" id="login-form" novalidate>
+        <div class="auth-field">
+          <label for="email">Email Address</label>
+          <div class="auth-input-wrap">
+            <svg class="input-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input type="email" id="email" name="email" placeholder="youremail@example.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <div class="auth-field-header">
+            <label for="password">Password</label>
+            <a href="#" class="auth-forgot">Forgot Password?</a>
+          </div>
+          <div class="auth-input-wrap">
+            <svg class="input-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+            <button type="button" class="auth-toggle-pw" aria-label="Toggle password visibility" data-target="password">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-options">
+          <label class="auth-checkbox-wrap">
+            <input type="checkbox" name="remember" checked>
+            <span>Remember me</span>
+          </label>
+          <span style="font-size:0.825rem;color:var(--text-muted);">Keep me signed in</span>
+        </div>
+
+        <button type="submit" class="auth-submit">
+          Login
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+
+        <div class="auth-divider"><span>or continue with</span></div>
+
+        <div class="auth-social-grid">
+          <button type="button" class="auth-social-btn">
+            <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Google
+          </button>
+          <button type="button" class="auth-social-btn">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>
+            Facebook
+          </button>
+          <button type="button" class="auth-social-btn">
+            <svg viewBox="0 0 24 24"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09z" fill="#000"/><path d="M15.53 3.83c.843 1.012 1.4 2.427 1.245 3.83-1.175-.048-2.629-.784-3.494-1.846-.78-.896-1.456-2.338-1.273-3.714 1.338.104 2.715.688 3.522 1.73z" fill="#000"/></svg>
+            Apple
+          </button>
+          <button type="button" class="auth-social-btn">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="#000"/></svg>
+            Twitter
+          </button>
+        </div>
+      </form>
+
+      <p class="auth-ssl-note">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Your data is protected with 256-bit SSL encryption
+      </p>
+    </section>
+
+  </div>
+
+  <script>
+  // ── Voltix Auth Utilities ──────────────────────────────────────────────
+  function voltixGetUsers() {
+    try { return JSON.parse(localStorage.getItem('voltix_users') || '[]'); } catch(e) { return []; }
+  }
+  function voltixSaveUsers(users) {
+    localStorage.setItem('voltix_users', JSON.stringify(users));
+  }
+  function voltixGetCurrentUser() {
+    try { return JSON.parse(localStorage.getItem('voltix_current_user') || 'null'); } catch(e) { return null; }
+  }
+  function voltixSetCurrentUser(user) {
+    localStorage.setItem('voltix_current_user', JSON.stringify(user));
+  }
+  function voltixLogout() {
+    localStorage.removeItem('voltix_current_user');
+    window.location.href = 'login.html';
+  }
+  function voltixRequireAuth() {
+    if (!voltixGetCurrentUser()) { window.location.href = 'login.html'; return false; }
+    return true;
+  }
+  function voltixUpdateNavProfileBtn() {
+    const user = voltixGetCurrentUser();
+    const btn = document.getElementById('btn-profile');
+    if (!btn) return;
+    if (user) {
+      const initials = user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+      btn.innerHTML = '<span style="width:28px;height:28px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;font-family:var(--font-heading);">' + initials + '</span>';
+      btn.onclick = function(){ location.href='account.html'; };
+    } else {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+      btn.onclick = function(){ location.href='login.html'; };
+    }
+  }
+
+    // Redirect if already logged in
+    if (voltixGetCurrentUser()) { window.location.href = 'account.html'; }
+
+    document.querySelectorAll('.auth-toggle-pw').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const input = document.getElementById(btn.dataset.target);
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        btn.innerHTML = isPassword
+          ? '<svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+          : '<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+      });
+    });
+
+    function showFormError(msg) {
+      let err = document.getElementById('login-error');
+      if (!err) {
+        err = document.createElement('div');
+        err.id = 'login-error';
+        err.style.cssText = 'background:#fee2e2;color:#b91c1c;border-radius:10px;padding:0.75rem 1rem;font-size:0.85rem;font-weight:600;text-align:center;margin-bottom:0.5rem;';
+        document.getElementById('login-form').prepend(err);
+      }
+      err.textContent = msg;
+    }
+
+    function clearFormError() {
+      const err = document.getElementById('login-error');
+      if (err) err.remove();
+    }
+
+    document.getElementById('login-form').addEventListener('submit', e => {
+      e.preventDefault();
+      clearFormError();
+
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const pw = document.getElementById('password').value;
+
+      if (!email || !pw) { showFormError('Please enter your email and password.'); return; }
+
+      const users = voltixGetUsers();
+      const user = users.find(u => u.email === email && u.password === pw);
+
+      if (!user) {
+        showFormError('Invalid email or password. Please try again.');
+        document.getElementById('password').value = '';
+        return;
+      }
+
+      // Login successful
+      voltixSetCurrentUser(user);
+      window.location.href = 'account.html';
+    });
+  </script>
+
+</body>
+</html>

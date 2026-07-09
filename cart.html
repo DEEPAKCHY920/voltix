@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voltix - Shopping Cart</title>
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Global Stylesheet Reference -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* PAGE SPECIFIC OVERRIDES & STYLES */
+    .app-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Breadcrumbs styling */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-light);
+      margin: 2rem 0 1rem;
+    }
+
+    .breadcrumbs a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--primary);
+    }
+
+    .breadcrumbs .breadcrumb-sep {
+      color: var(--text-light);
+      user-select: none;
+    }
+
+    .breadcrumbs .current {
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    /* Page Header */
+    .cart-header-title {
+      font-family: var(--font-heading);
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.75px;
+      margin-bottom: 0.35rem;
+    }
+
+    .cart-header-desc {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Cart Layout Grid */
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4.5rem;
+    }
+
+    /* Left: Cart Items List */
+    .cart-items-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-table-header {
+      display: grid;
+      grid-template-columns: 4fr 1.2fr 1.5fr 1.2fr 0.3fr;
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--border-light);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+    }
+
+    .cart-items-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 4fr 1.2fr 1.5fr 1.2fr 0.3fr;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      border-bottom: 1px solid var(--border-light);
+      transition: background-color var(--transition-fast);
+    }
+
+    .cart-item:hover {
+      background-color: rgba(15, 98, 254, 0.005);
+    }
+
+    .cart-item-product {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .cart-item-img-wrapper {
+      width: 75px;
+      height: 75px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .cart-item-img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+
+    .cart-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding-right: 1rem;
+    }
+
+    .cart-item-name {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-decoration: none;
+      line-height: 1.3;
+      transition: color var(--transition-fast);
+    }
+
+    .cart-item-name:hover {
+      color: var(--primary);
+    }
+
+    .cart-item-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .cart-item-price {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* Qty Picker in Table Row */
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      background: var(--white);
+      overflow: hidden;
+      width: fit-content;
+    }
+
+    .qty-btn {
+      border: none;
+      background: none;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+      color: var(--text-dark);
+    }
+
+    .qty-btn:hover {
+      background-color: var(--border-light);
+    }
+
+    .qty-val {
+      width: 32px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .cart-item-total {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .btn-remove-item {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--transition-fast);
+    }
+
+    .btn-remove-item:hover {
+      color: #ef4444;
+    }
+
+    .btn-remove-item svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Bottom Cart Actions */
+    .cart-actions-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .btn-continue-shopping {
+      background-color: var(--white);
+      color: var(--text-dark);
+      border: 1.5px solid var(--border-light);
+      border-radius: 100px;
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-continue-shopping:hover {
+      border-color: var(--text-dark);
+      transform: translateX(-2px);
+    }
+
+    .btn-continue-shopping svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.25;
+    }
+
+    .btn-clear-cart-text {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color var(--transition-fast);
+    }
+
+    .btn-clear-cart-text:hover {
+      color: #ef4444;
+    }
+
+    .btn-clear-cart-text svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Right Column: Order Summary Card */
+    .summary-card {
+      background: var(--white);
+      border: 1.5px solid rgba(0, 0, 0, 0.04);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.005);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      height: fit-content;
+    }
+
+    .summary-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      border-bottom: 1.5px solid var(--border-light);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .summary-row.discount {
+      color: #10b981;
+    }
+
+    .summary-row.shipping {
+      color: #10b981;
+    }
+
+    .summary-row.total-row {
+      border-top: 1.5px solid var(--border-light);
+      padding-top: 1.25rem;
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--text-dark);
+    }
+
+    .summary-row.total-row .total-val {
+      color: var(--primary);
+    }
+
+    .savings-alert {
+      background-color: rgba(16, 185, 129, 0.06);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .savings-alert svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+
+    .promo-field-wrap {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .promo-input {
+      flex: 1;
+      border: 1.5px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      color: var(--text-dark);
+      transition: border-color var(--transition-fast);
+    }
+
+    .promo-input:focus {
+      border-color: var(--primary);
+    }
+
+    .btn-promo-apply {
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      padding: 0 1.25rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+    }
+
+    .btn-promo-apply:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .shipping-eligibility-bar {
+      background-color: rgba(15, 98, 254, 0.03);
+      border: 1px solid rgba(15, 98, 254, 0.08);
+      border-radius: 14px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .shipping-eligibility-text {
+      font-size: 0.775rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .shipping-bar-bg {
+      width: 100%;
+      height: 6px;
+      background-color: var(--border-light);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .shipping-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, #10b981 100%);
+      border-radius: 100px;
+      width: 100%; /* Free shipping initially */
+      transition: width var(--transition-normal);
+    }
+
+    .delivery-eta-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      border-top: 1.5px solid var(--border-light);
+      padding-top: 1.25rem;
+    }
+
+    .eta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .eta-row svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.25;
+    }
+
+    .eta-date {
+      color: #10b981;
+      font-weight: 800;
+    }
+
+    .location-dropdown-trigger {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.775rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0;
+      margin-left: 1.45rem;
+      transition: color var(--transition-fast);
+    }
+
+    .location-dropdown-trigger:hover {
+      color: var(--primary-hover);
+    }
+
+    .location-dropdown-trigger svg {
+      width: 10px;
+      height: 10px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .btn-checkout-lock {
+      width: 100%;
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 100px;
+      padding: 0.85rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+      box-shadow: 0 4px 15px rgba(15, 98, 254, 0.2);
+    }
+
+    .btn-checkout-lock:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-checkout-lock svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+
+    .checkout-trust-text {
+      font-size: 0.725rem;
+      color: var(--text-light);
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .checkout-trust-text svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.5;
+      color: #10b981;
+    }
+
+    /* Trust Badges Card Row */
+    .trust-badges-card {
+      background: var(--white);
+      border: 1.5px solid rgba(0, 0, 0, 0.04);
+      border-radius: 24px;
+      padding: 1.5rem 2.25rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.005);
+      margin-bottom: 4.5rem;
+      border-top: 1.5px dashed rgba(0, 0, 0, 0.06);
+      padding-top: 3.5rem;
+    }
+
+    .trust-badge-col {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .trust-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(15, 98, 254, 0.05);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .trust-icon-box svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .trust-text-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .trust-badge-title {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .trust-badge-desc {
+      font-size: 0.725rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* You may also like Section */
+    .you-like-section {
+      margin-bottom: 5rem;
+      border-top: 1.5px dashed rgba(0, 0, 0, 0.06);
+      padding-top: 3.5rem;
+      position: relative;
+    }
+
+    .you-like-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.75rem;
+    }
+
+    .slider-nav-btn {
+      position: absolute;
+      top: 55px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      cursor: pointer;
+      z-index: 10;
+      transition: all var(--transition-fast);
+    }
+
+    .slider-nav-btn:hover {
+      background-color: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    .slider-nav-btn.prev { right: 48px; }
+    .slider-nav-btn.next { right: 8px; }
+
+    .slider-nav-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+
+    /* Product card item styling in slider */
+    .recent-card {
+      background-color: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all var(--transition-normal);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .recent-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+      border-color: rgba(15,98,254,0.08);
+    }
+
+    .recent-img-wrap {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .recent-img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+
+    .recent-title {
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.35;
+      margin-bottom: 0.35rem;
+    }
+
+    .recent-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .recent-price {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .btn-add-recent-cart {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 0, 0, 0.05);
+      background-color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-add-recent-cart:hover {
+      background-color: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    .btn-add-recent-cart svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.25;
+    }
+
+    /* Empty Cart styling */
+    .empty-cart-view {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 6rem 1.5rem;
+      text-align: center;
+    }
+
+    .empty-cart-view svg {
+      width: 70px;
+      height: 70px;
+      stroke: var(--text-light);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .empty-cart-title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .empty-cart-desc {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      max-width: 380px;
+      line-height: 1.5;
+    }
+
+    .btn-shop-now {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 0.8rem 2rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(15, 98, 254, 0.2);
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-shop-now:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0b0f19;
+      color: var(--white);
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.08);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .toast svg {
+      width: 20px;
+      height: 20px;
+      stroke: #10b981;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    /* RESPONSIVENESS OVERRIDES */
+    @media (max-width: 1200px) {
+      .cart-layout { gap: 2.5rem; }
+      .trust-badges-card { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+
+    @media (max-width: 991px) {
+      .cart-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .you-like-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .cart-table-header { display: none; }
+      .cart-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+        padding: 1.5rem;
+        position: relative;
+      }
+      .cart-item-product { flex-direction: column; text-align: center; }
+      .qty-selector { margin: 0 auto; }
+      .btn-remove-item {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+      }
+      .you-like-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .cart-header-title { font-size: 1.85rem; }
+      .trust-badges-card { grid-template-columns: 1fr; padding: 1.5rem; }
+      .you-like-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="promo-bar">
+    <div class="promo-content">
+      <span>Free Shipping on orders over ₹4,999! <a href="shop.html" style="color: inherit; text-decoration: underline;">Shop Now</a></span>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#track" style="color: inherit; text-decoration: none;">Track Order</a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="#help" style="color: inherit; text-decoration: none;">Help Center</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Header / Navigation Bar -->
+    <header class="header">
+      <nav class="nav-bar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f62fe" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+            <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)"/>
+          </svg>
+          <span>Voltix</span>
+        </a>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+
+        <!-- Links -->
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="shop.html" class="nav-link">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a href="categories.html" class="nav-link">Categories</a>
+          </li>
+          <li class="nav-item" style="position: relative;">
+            <a href="index.html#flash-sale" class="nav-link">Deals</a>
+            <span class="badge-hot">Hot</span>
+          </li>
+          <li class="nav-item">
+            <a href="index.html#new-arrivals" class="nav-link">New Arrivals</a>
+          </li>
+          <li class="nav-item">
+            <a href="support.html" class="nav-link">Support</a>
+          </li>
+        </ul>
+
+        <!-- Actions -->
+        <div class="nav-actions">
+          <label for="nav-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </label>
+
+          <button class="action-btn" aria-label="Search" onclick="location.href='shop.html?focus=search'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          
+          <button class="action-btn" id="btn-nav-fav" aria-label="Favorites" onclick="location.href='wishlist.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span class="wishlist-count" id="wishlist-counter-badge">0</span>
+          </button>
+          
+          <div class="divider"></div>
+          
+          <button class="action-btn" aria-label="Cart">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <span class="cart-count" id="cart-counter-badge">4</span>
+          </button>
+          
+          <button class="action-btn" aria-label="Profile" onclick="location.href='account.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">&gt;</span>
+      <span class="current">Cart</span>
+    </div>
+
+    <!-- Page Title Header -->
+    <h1 class="cart-header-title" id="cart-title">Shopping Cart (4)</h1>
+    <p class="cart-header-desc">Review your items and proceed to checkout</p>
+
+    <!-- Empty Cart Fallback -->
+    <div class="empty-cart-view" id="empty-cart-view">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <h2 class="empty-cart-title">Your Cart is Empty</h2>
+      <p class="empty-cart-desc">Looks like you haven't added any products to your cart yet. Visit our shop to find the best tech deals!</p>
+      <a href="shop.html" class="btn-shop-now">Shop Now</a>
+    </div>
+
+    <!-- Cart Layout Grid -->
+    <div class="cart-layout" id="cart-layout-container">
+      
+      <!-- Left Column: Items List -->
+      <div class="cart-items-wrap">
+        <div class="cart-table-header">
+          <span>Product</span>
+          <span>Price</span>
+          <span>Quantity</span>
+          <span>Total</span>
+          <span></span>
+        </div>
+        <div class="cart-items-list" id="cart-items-list">
+          <!-- Cart items loaded dynamically -->
+        </div>
+
+        <div class="cart-actions-row">
+          <a href="shop.html" class="btn-continue-shopping">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Continue Shopping
+          </a>
+          <button class="btn-clear-cart-text" onclick="clearCart()">
+            <svg viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></svg>
+            Clear Cart
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Order Summary -->
+      <div class="summary-card">
+        <h2 class="summary-title">Order Summary</h2>
+        
+        <div class="summary-row">
+          <span id="summary-qty-label">Subtotal (4 items)</span>
+          <span id="subtotal-val">₹0.00</span>
+        </div>
+        
+        <div class="summary-row discount">
+          <span>Discount</span>
+          <span id="discount-val">-₹0.00</span>
+        </div>
+
+        <div class="summary-row shipping">
+          <span>Shipping <span style="cursor: help;" title="Free Shipping on orders above ₹4,999">ⓘ</span></span>
+          <span id="shipping-val">FREE</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Estimated Tax</span>
+          <span id="tax-val">₹0.00</span>
+        </div>
+
+        <div class="summary-row total-row">
+          <span>Total</span>
+          <span class="total-val" id="total-val">₹0.00</span>
+        </div>
+
+        <!-- Savings alert -->
+        <div class="savings-alert" id="savings-alert">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          <span>You saved <span id="savings-val">₹0.00</span> on this order</span>
+        </div>
+
+        <!-- Promo code field -->
+        <div class="promo-field-wrap">
+          <input type="text" class="promo-input" id="promo-input" placeholder="Enter promo code">
+          <button class="btn-promo-apply" onclick="applyPromo()">Apply</button>
+        </div>
+
+        <!-- Shipping eligibility progress bar -->
+        <div class="shipping-eligibility-bar">
+          <span class="shipping-eligibility-text" id="shipping-progress-text">You are eligible for FREE Shipping! Add ₹0.00 more to get free shipping.</span>
+          <div class="shipping-bar-bg">
+            <div class="shipping-bar-fill" id="shipping-progress-bar"></div>
+          </div>
+        </div>
+
+        <!-- Estimated Delivery -->
+        <div class="delivery-eta-box">
+          <div class="eta-row">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Estimated Delivery: <span class="eta-date">May 16 – May 20, 2026</span></span>
+          </div>
+          <button class="location-dropdown-trigger" onclick="showToast('Change location coming soon')">
+            Delivery to: New Delhi, 110001
+            <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+
+        <!-- Checkout Trigger -->
+        <button class="btn-checkout-lock" onclick="checkoutTrigger()">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Proceed to Checkout
+        </button>
+
+        <span class="checkout-trust-text">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Secure checkout powered by Voltix
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Trust Badges Row -->
+    <div class="trust-badges-card">
+      <div class="trust-badge-col">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="trust-text-box">
+          <span class="trust-badge-title">Free Shipping</span>
+          <span class="trust-badge-desc">On orders above ₹4,999</span>
+        </div>
+      </div>
+
+      <div class="trust-badge-col">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="trust-text-box">
+          <span class="trust-badge-title">24/7 Support</span>
+          <span class="trust-badge-desc">Friendly customer support</span>
+        </div>
+      </div>
+
+      <div class="trust-badge-col">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="trust-text-box">
+          <span class="trust-badge-title">Secure Payment</span>
+          <span class="trust-badge-desc">100% secure payments</span>
+        </div>
+      </div>
+
+      <div class="trust-badge-col">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        </div>
+        <div class="trust-text-box">
+          <span class="trust-badge-title">Easy Returns</span>
+          <span class="trust-badge-desc">30-day return policy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- You may also like Slider -->
+    <section class="you-like-section">
+      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--text-dark); letter-spacing: -0.5px;">You may also like</h2>
+      <div style="position: relative;">
+        <button class="slider-nav-btn prev" aria-label="Previous recommended items" onclick="showToast('Showing previous suggestions')">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="slider-nav-btn next" aria-label="Next recommended items" onclick="showToast('Showing next suggestions')">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="you-like-grid" id="you-like-grid">
+          <!-- Recommended cards drawn dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+      <div class="newsletter-box">
+        <div class="newsletter-left-group">
+          <div class="newsletter-graphic">
+            <img class="newsletter-envelope-img" src="assets/newsletter_envelope.png" alt="Newsletter Envelope">
+          </div>
+          <div class="newsletter-text">
+            <h2 class="newsletter-title">Stay Updated with Latest Tech & Deals!</h2>
+            <p class="newsletter-desc">Subscribe to get exclusive offers, new arrivals and updates straight to your inbox.</p>
+          </div>
+        </div>
+        <div class="newsletter-form-wrap">
+          <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Subscribed successfully!');">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- End App Container -->
+
+  <!-- Complete Footer -->
+  <footer class="footer">
+    <div class="app-container">
+      
+      <div class="footer-top">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)"/>
+            </svg>
+            <span>Voltix</span>
+          </a>
+          <p class="footer-desc">Your one-stop destination for premium electronics, smart devices, and high-fidelity gadgets.</p>
+          <ul class="social-links">
+            <li><a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C9.24.5 7.5 3.44 7.5 7v3.5H4.5v4h3v9H12v-9h3.5l.5-4z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23.95 4.57a10 10 0 0 1-2.82.77 4.96 4.96 0 0 0 2.16-2.72c-.95.55-2 .95-3.12 1.18a4.92 4.92 0 0 0-8.38 4.48 13.98 13.98 0 0 1-10.15-5.15 4.92 4.92 0 0 0 1.52 6.57 4.9 4.9 0 0 1-2.23-.62v.06a4.92 4.92 0 0 0 3.95 4.83 4.9 4.9 0 0 1-2.22.08 4.92 4.92 0 0 0 4.6 3.42A9.9 9.9 0 0 1 0 19.54a13.94 13.94 0 0 0 7.55 2.21c9.14 0 14.3-7.72 14.07-14.88a10 10 0 0 0 2.33-2.3z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></li>
+          </ul>
+        </div>
+
+        <!-- Shop Links -->
+        <div>
+          <h3 class="footer-col-title">Shop</h3>
+          <ul class="footer-menu">
+            <li><a href="shop.html?cat=smartphones" class="footer-link">Smartphones</a></li>
+            <li><a href="shop.html?cat=laptops" class="footer-link">Laptops</a></li>
+            <li><a href="shop.html?cat=audio" class="footer-link">Audio Devices</a></li>
+            <li><a href="shop.html?cat=smartwatches" class="footer-link">Smart Watches</a></li>
+            <li><a href="shop.html?cat=cameras" class="footer-link">Cameras</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div>
+          <h3 class="footer-col-title">Company</h3>
+          <ul class="footer-menu">
+            <li><a href="#about" class="footer-link">About Us</a></li>
+            <li><a href="#careers" class="footer-link">Careers</a></li>
+            <li><a href="#blog" class="footer-link">Blog</a></li>
+            <li><a href="#press" class="footer-link">Press</a></li>
+            <li><a href="#affiliate" class="footer-link">Affiliates</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer Care Links -->
+        <div>
+          <h3 class="footer-col-title">Customer Care</h3>
+          <ul class="footer-menu">
+            <li><a href="support.html" class="footer-link">Contact Us</a></li>
+            <li><a href="#shipping" class="footer-link">Shipping Policy</a></li>
+            <li><a href="#returns" class="footer-link">Return Policy</a></li>
+            <li><a href="#warranty" class="footer-link">Warranty</a></li>
+            <li><a href="support.html" class="footer-link">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Support Links -->
+        <div>
+          <h3 class="footer-col-title">Support</h3>
+          <ul class="footer-menu">
+            <li><a href="account.html" class="footer-link">My Account</a></li>
+            <li><a href="support.html" class="footer-link">Track Order</a></li>
+            <li><a href="wishlist.html" class="footer-link">Wishlist</a></li>
+            <li><a href="#compare" class="footer-link">Compare</a></li>
+            <li><a href="support.html" class="footer-link">Help Center</a></li>
+          </ul>
+        </div>
+
+        <!-- Apps Info -->
+        <div class="footer-apps">
+          <h3 class="footer-col-title">Download App</h3>
+          <a href="#" class="app-download-btn">
+            <svg viewBox="0 0 135 40"><rect width="135" height="40" rx="6" fill="#000"/><text x="38" y="18" fill="#fff" font-family="var(--font-body)" font-size="8">Download on the</text><text x="38" y="30" fill="#fff" font-family="var(--font-heading)" font-weight="700" font-size="12">App Store</text><path d="M22 13.5c-.8.8-1.7.8-2 .5s-.8-1.2-.5-2.2c.3-.9.9-1.5 1.7-1.5s1.2.6 1.2 1.3c0 .8-.6 1.1-1.1 1.3m2.7 7.7c-.5.8-1 1.7-1.8 1.7-.8.1-1-.4-2-.4s-1.2.4-2 .4c-.7 0-1.4-.9-1.9-1.8C16 19.3 15 16 16 14.3c.5-.9 1.4-1.4 2.3-1.4s1.7.6 2.2.6c.5 0 1.5-.7 2.6-.6.4 0 1.8.2 2.6 1.3-.1.1-1.5.9-1.5 2.6 0 2 1.7 2.7 1.8 2.7-.1.4-.7 1.6-1.3 2.7" fill="#fff"/></svg>
+          </a>
+          <a href="#" class="app-download-btn">
+            <svg viewBox="0 0 135 40"><rect width="135" height="40" rx="6" fill="#000"/><text x="38" y="18" fill="#fff" font-family="var(--font-body)" font-size="8">GET IT ON</text><text x="38" y="30" fill="#fff" font-family="var(--font-heading)" font-weight="700" font-size="12">Google Play</text><path d="M16 10l8.5 7.5L16 25V10z" fill="#4caf50"/><path d="M24.5 17.5L16 25l-2.5-2.5 8.5-5z" fill="#ffeb3b"/><path d="M16 10l8.5 7.5-8.5 5-2.5-2.5z" fill="#2196f3"/><path d="M16 10v15l-2.5-2.5V12.5z" fill="#f44336"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Voltix. All Rights Reserved.</span>
+        
+        <!-- Payment Icons -->
+        <ul class="payment-icons">
+          <li class="payment-icon">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#1434CB"/><text x="6" y="16" fill="#fff" font-family="sans-serif" font-weight="bold" font-style="italic" font-size="11">VISA</text></svg>
+          </li>
+          <li class="payment-icon">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#fff"/><circle cx="15" cy="12" r="6" fill="#EB001B" opacity="0.9"/><circle cx="23" cy="12" r="6" fill="#F79E1B" opacity="0.9"/></svg>
+          </li>
+          <li class="payment-icon">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#003087"/><text x="5" y="16" fill="#0079C1" font-family="sans-serif" font-weight="bold" font-size="11">Pay</text><text x="21" y="16" fill="#00457C" font-family="sans-serif" font-weight="bold" font-size="11">Pal</text></svg>
+          </li>
+          <li class="payment-icon">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#000"/><text x="4" y="16" fill="#fff" font-family="sans-serif" font-weight="bold" font-size="10">Pay</text></svg>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+    <span id="toast-text">Added item to cart!</span>
+  </div>
+
+  <script>
+    // Mock database for recommended "You may also like" items
+    const products = [
+      { id: 'jblcharge5', name: 'JBL Charge 5 Portable Bluetooth Speaker', price: 12999.00, img: 'assets/headphones.png', brand: 'JBL', rating: 5, reviews: 685 },
+      { id: 'dellultrasharp', name: 'Dell UltraSharp 27" 4K USB-C Monitor', price: 39999.00, img: 'assets/monitor.png', brand: 'Dell', rating: 5, reviews: 442 },
+      { id: 'iphone15magsafe', name: 'iPhone 15 Pro Max MagSafe Clear Case', price: 3999.00, img: 'assets/smartphone.png', brand: 'Apple', rating: 4, reviews: 126 },
+      { id: 'ankerpowercore', name: 'Anker PowerCore 20K 20000mAh Power Bank', price: 2999.00, img: 'assets/controller.png', brand: 'Anker', rating: 5, reviews: 368 }
+    ];
+
+    const defaultCartItems = [];
+
+    
+    // Wishlist Shared Helpers
+    function getLocalWishlist() {
+      // No default seeding - users start with empty wishlist after signup
+      try { return JSON.parse(localStorage.getItem('voltix_wishlist') || '[]'); } catch(e) { return []; }
+    }
+    
+    function saveLocalWishlist(wishlist) {
+      localStorage.setItem('voltix_wishlist', JSON.stringify(wishlist));
+      updateWishlistBadge();
+    }
+    
+    function updateWishlistBadge() {
+      const wishlist = getLocalWishlist();
+      const badge = document.getElementById('wishlist-counter-badge');
+      if (badge) badge.textContent = wishlist.length;
+    }
+        
+    function getLocalCart() {
+      // One-time reset to empty cart for the new INR upgrade
+      if (!localStorage.getItem('voltix_cart_reset_inr')) {
+        localStorage.setItem('voltix_cart', JSON.stringify([]));
+        localStorage.setItem('voltix_cart_reset_inr', 'true');
+        return [];
+      }
+      const cartJson = localStorage.getItem('voltix_cart');
+      if (!cartJson) {
+        localStorage.setItem('voltix_cart', JSON.stringify([]));
+        return [];
+      }
+      try {
+        return JSON.parse(cartJson);
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveLocalCart(cart) {
+      localStorage.setItem('voltix_cart', JSON.stringify(cart));
+      updateCartBadge();
+      updateWishlistBadge();
+    }
+
+    function updateCartBadge() {
+      const cart = getLocalCart();
+      const totalCount = cart.reduce((acc, curr) => acc + curr.qty, 0);
+      const badge = document.getElementById('cart-counter-badge');
+      if (badge) badge.textContent = totalCount;
+      document.querySelectorAll('.cart-count').forEach(el => el.textContent = totalCount);
+    }
+
+    let cartItems = [];
+    let promoCodeApplied = false;
+    let promoDiscountPct = 10; // Default 10% discount
+
+    document.addEventListener("DOMContentLoaded", () => {
+      cartItems = getLocalCart();
+      renderCart();
+      renderYouMayLike();
+      updateCartBadge();
+      updateWishlistBadge();
+      
+      const envImg = document.querySelector('.newsletter-envelope-img');
+      if (envImg) {
+        processImageTransparency(envImg);
+      }
+    });
+
+    // Render cart items lists and totals
+    function renderCart() {
+      const listContainer = document.getElementById('cart-items-list');
+      const cartLayout = document.getElementById('cart-layout-container');
+      const emptyView = document.getElementById('empty-cart-view');
+      const cartTitle = document.getElementById('cart-title');
+
+      if (cartItems.length === 0) {
+        cartLayout.style.display = 'none';
+        emptyView.style.display = 'flex';
+        cartTitle.textContent = 'Shopping Cart (0)';
+        document.getElementById('cart-counter-badge').textContent = '0';
+        return;
+      }
+
+      cartLayout.style.display = 'grid';
+      emptyView.style.display = 'none';
+
+      // Update title quantity count
+      const totalCount = cartItems.reduce((acc, curr) => acc + curr.qty, 0);
+      cartTitle.textContent = `Shopping Cart (${totalCount})`;
+      document.getElementById('cart-counter-badge').textContent = totalCount;
+
+      listContainer.innerHTML = '';
+      cartItems.forEach(item => {
+        let metaHtml = '';
+        if (item.color) {
+          metaHtml += `<span>Color: <strong>${item.color}</strong></span>`;
+        }
+        if (item.storage) {
+          metaHtml += `<span>Storage: <strong>${item.storage}</strong></span>`;
+        }
+
+        const totalRowVal = item.price * item.qty;
+
+        listContainer.innerHTML += `
+          <div class="cart-item">
+            <div class="cart-item-product">
+              <div class="cart-item-img-wrapper">
+                <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+              </div>
+              <div class="cart-item-info">
+                <a href="product.html?id=${item.id}" class="cart-item-name">${item.name}</a>
+                <span style="font-size: 0.775rem; color: var(--text-muted); font-weight: 500;">${item.desc}</span>
+                <div class="cart-item-meta">
+                  ${metaHtml}
+                </div>
+              </div>
+            </div>
+            <div class="cart-item-price">₹${item.price.toFixed(2)}</div>
+            <div>
+              <div class="qty-selector">
+                <button class="qty-btn" onclick="changeItemQty('${item.id}', -1)">-</button>
+                <span class="qty-val">${item.qty}</span>
+                <button class="qty-btn" onclick="changeItemQty('${item.id}', 1)">+</button>
+              </div>
+            </div>
+            <div class="cart-item-total">₹${totalRowVal.toFixed(2)}</div>
+            <div>
+              <button class="btn-remove-item" onclick="removeItem('${item.id}')" aria-label="Remove item">
+                <svg viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      // Remove backgrounds on images
+      document.querySelectorAll('.cart-item-img').forEach(img => {
+        processImageTransparency(img);
+      });
+
+      // Update Summary metrics
+      updateSummary();
+    }
+
+    // Update order summary calculations
+    function updateSummary() {
+      const subtotal = cartItems.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+      const discount = promoCodeApplied ? (subtotal * (promoDiscountPct / 100)) : (subtotal * 0.1); // default 10% discount from screenshot
+      const shipping = subtotal >= 4999 ? 0.00 : 149.00;
+      const tax = (subtotal - discount) * 0.1; // 10% estimated tax
+      const total = subtotal - discount + shipping + tax;
+      const totalItemsCount = cartItems.reduce((acc, curr) => acc + curr.qty, 0);
+
+      document.getElementById('summary-qty-label').textContent = `Subtotal (${totalItemsCount} items)`;
+      document.getElementById('subtotal-val').textContent = `₹${subtotal.toFixed(2)}`;
+      document.getElementById('discount-val').textContent = `-₹${discount.toFixed(2)}`;
+      document.getElementById('shipping-val').textContent = shipping === 0 ? 'FREE' : `₹${shipping.toFixed(2)}`;
+      document.getElementById('tax-val').textContent = `₹${tax.toFixed(2)}`;
+      document.getElementById('total-val').textContent = `₹${total.toFixed(2)}`;
+      
+      // Savings label
+      document.getElementById('savings-val').textContent = `₹${discount.toFixed(2)}`;
+      document.getElementById('savings-alert').style.display = discount > 0 ? 'flex' : 'none';
+
+      // Shipping progress updates
+      const progressText = document.getElementById('shipping-progress-text');
+      const progressBar = document.getElementById('shipping-progress-bar');
+      if (subtotal >= 4999) {
+        progressText.innerHTML = `You are eligible for <strong>FREE Shipping!</strong> Add ₹0.00 more to get free shipping.`;
+        progressBar.style.width = '100%';
+      } else {
+        const remaining = 4999 - subtotal;
+        progressText.innerHTML = `Add <strong>₹${remaining.toFixed(2)}</strong> more to get <strong>FREE Shipping!</strong>`;
+        const pct = (subtotal / 4999) * 100;
+        progressBar.style.width = `${pct}%`;
+      }
+    }
+
+    // Change qty of cart item
+    function changeItemQty(id, diff) {
+      const item = cartItems.find(i => i.id === id);
+      if (item) {
+        item.qty += diff;
+        if (item.qty < 1) item.qty = 1;
+        saveLocalCart(cartItems);
+        renderCart();
+      }
+    }
+
+    // Remove item from cart list
+    function removeItem(id) {
+      const item = cartItems.find(i => i.id === id);
+      cartItems = cartItems.filter(i => i.id !== id);
+      saveLocalCart(cartItems);
+      renderCart();
+      if (item) {
+        showToast(`Removed ${item.name} from cart`);
+      }
+    }
+
+    // Clear whole cart
+    function clearCart() {
+      cartItems = [];
+      saveLocalCart(cartItems);
+      renderCart();
+      showToast('Cleared all items from cart');
+    }
+
+    // Apply promo code logic
+    function applyPromo() {
+      const input = document.getElementById('promo-input').value.toUpperCase().trim();
+      if (input === 'VOLTIX20') {
+        promoCodeApplied = true;
+        promoDiscountPct = 20;
+        updateSummary();
+        showToast('Promo code VOLTIX20 applied! 20% discount');
+      } else if (input === 'WELCOME10') {
+        promoCodeApplied = true;
+        promoDiscountPct = 10;
+        updateSummary();
+        showToast('Promo code WELCOME10 applied! 10% discount');
+      } else if (input === '') {
+        showToast('Please enter a promo code');
+      } else {
+        showToast('Invalid promo code');
+      }
+    }
+
+    // Checkout Proceed trigger
+    function checkoutTrigger() {
+      showToast('Proceeding to checkout...');
+      setTimeout(() => {
+        location.href = 'checkout.html';
+      }, 1000);
+    }
+
+    // Show dynamic toast notifications
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.textContent = msg;
+      toast.classList.add('active');
+      
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3000);
+    }
+
+    // Render "You may also like" items
+    function renderYouMayLike() {
+      const grid = document.getElementById('you-like-grid');
+      grid.innerHTML = '';
+
+      products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'recent-card';
+        card.innerHTML = `
+          <div class="recent-img-wrap">
+            <img class="recent-img" src="${p.img}" alt="${p.name}">
+          </div>
+          <span class="recent-title">${p.name.split(' - ')[0]}</span>
+          <div class="recent-price-row">
+            <span class="recent-price">₹${p.price.toFixed(2)}</span>
+            <button class="btn-add-recent-cart" onclick="addSuggestedToCart('${p.id}', '${p.name}', ${p.price}, '${p.img}')" aria-label="Add to cart">
+              <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+        processImageTransparency(card.querySelector('.recent-img'));
+      });
+    }
+
+    // Add suggested items dynamically to the cart list
+    function addSuggestedToCart(id, name, price, img) {
+      const existing = cartItems.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cartItems.push({
+          id: id,
+          name: name,
+          desc: 'Accessories Option Pack',
+          color: 'Standard',
+          storage: null,
+          price: price,
+          qty: 1,
+          img: img
+        });
+      }
+      saveLocalCart(cartItems);
+      renderCart();
+      showToast(`Added ${name} to cart`);
+    }
+
+    // Background transparency stripper with CORS fallback
+    function processImageTransparency(img) {
+      img.style.mixBlendMode = 'multiply';
+      img.style.opacity = '1';
+    }
+  </script>
+
+  <script>
+    // ── Sync nav profile button with logged-in user ─────────────────────
+    (function() {
+      try {
+        const user = JSON.parse(localStorage.getItem('voltix_current_user') || 'null');
+        const btn = document.getElementById('btn-profile');
+        if (!btn) return;
+        if (user) {
+          const initials = user.name.split(' ').map(function(n){ return n[0]; }).join('').toUpperCase().slice(0,2);
+          btn.innerHTML = '<span style="width:28px;height:28px;border-radius:50%;background:var(--primary);color:white;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;font-family:var(--font-heading);">' + initials + '</span>';
+          btn.onclick = function(){ location.href='account.html'; };
+        } else {
+          btn.onclick = function(){ location.href='login.html'; };
+        }
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>

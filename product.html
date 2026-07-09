@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voltix - Experience Next Generation Technology</title>
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Global Stylesheet Reference -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* PAGE SPECIFIC OVERRIDES & STYLES */
+    .app-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Breadcrumbs styling */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-light);
+      margin: 2rem 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumbs a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--primary);
+    }
+
+    .breadcrumbs .breadcrumb-sep {
+      color: var(--text-light);
+      user-select: none;
+    }
+
+    .breadcrumbs .current {
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    /* Product Detail Section Layout */
+    .product-detail-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 3.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    /* Left: Product Gallery Container */
+    .product-gallery {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .thumbnail-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 75px;
+      flex-shrink: 0;
+    }
+
+    .thumbnail-btn {
+      width: 75px;
+      height: 75px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(0, 0, 0, 0.06);
+      background: var(--white);
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem;
+      transition: all var(--transition-fast);
+    }
+
+    .thumbnail-btn:hover, .thumbnail-btn.active {
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(15, 98, 254, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .thumbnail-btn img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .more-thumbnails {
+      background-color: #f8fafc;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px dashed rgba(0, 0, 0, 0.1);
+    }
+
+    .main-image-container {
+      flex: 1;
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      height: 440px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.01);
+    }
+
+    .main-product-img {
+      max-width: 85%;
+      max-height: 85%;
+      object-fit: contain;
+      transition: transform var(--transition-normal);
+      opacity: 0; /* Fade in treated images */
+    }
+
+    .zoom-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      z-index: 5;
+    }
+
+    .zoom-btn:hover {
+      color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    .zoom-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.25;
+    }
+
+    /* Right: Product Info Container */
+    .product-info-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .product-badge-detail {
+      align-self: flex-start;
+      background-color: rgba(15, 98, 254, 0.07);
+      color: var(--primary);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .product-title-detail {
+      font-family: var(--font-heading);
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+      letter-spacing: -0.75px;
+    }
+
+    .product-rating-sold {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .detail-stars {
+      display: flex;
+      color: #fbbf24;
+      gap: 2px;
+    }
+
+    .detail-stars svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .detail-reviews-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .detail-reviews-link:hover {
+      color: var(--primary);
+    }
+
+    .sold-divider {
+      width: 1px;
+      height: 14px;
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .sold-count {
+      color: var(--text-muted);
+    }
+
+    .price-tier {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin: 0.25rem 0;
+    }
+
+    .price-current-detail {
+      font-family: var(--font-heading);
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .price-original-detail {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      text-decoration: line-through;
+    }
+
+    .discount-percentage {
+      background-color: #fef2f2;
+      color: #ef4444;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    .description-text {
+      font-size: 0.925rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .selector-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      padding-top: 1.25rem;
+    }
+
+    .selector-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .selector-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .color-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+
+    .color-circle.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(15, 98, 254, 0.15);
+    }
+
+    .color-inner {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .capsule-btn {
+      border: 1.5px solid rgba(0, 0, 0, 0.08);
+      background: var(--white);
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .capsule-btn:hover {
+      border-color: var(--text-dark);
+    }
+
+    .capsule-btn.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: rgba(15, 98, 254, 0.03);
+    }
+
+    .qty-selector-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      background: var(--white);
+      overflow: hidden;
+      width: fit-content;
+    }
+
+    .qty-btn {
+      border: none;
+      background: none;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+      color: var(--text-dark);
+    }
+
+    .qty-btn:hover {
+      background-color: var(--border-light);
+    }
+
+    .qty-val {
+      width: 38px;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .action-buttons-wrap {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      padding-top: 1.5rem;
+    }
+
+    .btn-detail-add-to-cart {
+      flex: 1.3;
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 100px;
+      padding: 0.85rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+      box-shadow: 0 4px 15px rgba(15, 98, 254, 0.2);
+    }
+
+    .btn-detail-add-to-cart:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-detail-add-to-cart svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.25;
+    }
+
+    .btn-detail-buy-now {
+      flex: 1;
+      background-color: var(--white);
+      color: var(--text-dark);
+      border: 1.5px solid var(--text-dark);
+      border-radius: 100px;
+      padding: 0.85rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-detail-buy-now:hover {
+      background-color: var(--text-dark);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .secondary-actions-wrap {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .sec-action-link {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: color var(--transition-fast);
+    }
+
+    .sec-action-link:hover {
+      color: var(--primary);
+    }
+
+    .sec-action-link svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* Trust Badges Card Row */
+    .trust-badges-card {
+      background: var(--white);
+      border: 1.5px solid rgba(0, 0, 0, 0.04);
+      border-radius: 24px;
+      padding: 1.5rem 2.25rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.005);
+      margin-bottom: 3.5rem;
+    }
+
+    .trust-badge-col {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .trust-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(15, 98, 254, 0.05);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .trust-icon-box svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .trust-text-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .trust-badge-title {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .trust-badge-desc {
+      font-size: 0.725rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Tabs Block styling */
+    .tabs-container {
+      margin-bottom: 4.5rem;
+    }
+
+    .tabs-header {
+      display: flex;
+      border-bottom: 2px solid var(--border-light);
+      gap: 3.5rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .tab-trigger {
+      background: none;
+      border: none;
+      padding: 0.85rem 0;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .tab-trigger:hover, .tab-trigger.active {
+      color: var(--primary);
+    }
+
+    .tab-trigger::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary);
+      transform: scaleX(0);
+      transition: transform var(--transition-fast);
+    }
+
+    .tab-trigger.active::after {
+      transform: scaleX(1);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* Specs Tab Panels Layout */
+    .specs-panel-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .specs-table tr {
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .specs-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .specs-table td {
+      padding: 0.8rem 0;
+      font-size: 0.9rem;
+    }
+
+    .specs-key {
+      font-weight: 700;
+      color: var(--text-muted);
+      width: 38%;
+    }
+
+    .specs-val {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .specs-promo-card {
+      background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 100%);
+      border-radius: 24px;
+      padding: 2.25rem 2.5rem;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 15px 35px rgba(30, 27, 75, 0.2);
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .specs-promo-card::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+      top: -30px;
+      right: -30px;
+      border-radius: 50%;
+    }
+
+    .specs-promo-badge {
+      background-color: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      align-self: flex-start;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .specs-promo-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .specs-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .specs-feature-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1rem 0.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      text-align: center;
+      transition: all var(--transition-fast);
+    }
+
+    .specs-feature-box:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .specs-feature-box svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      color: #818cf8;
+    }
+
+    .specs-feature-num {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .specs-feature-lbl {
+      font-size: 0.65rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    /* Description Tab styling */
+    .description-tab-panel {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 800px;
+    }
+
+    /* Reviews Tab styling */
+    .reviews-panel-layout {
+      display: grid;
+      grid-template-columns: 1fr 2.1fr;
+      gap: 4.5rem;
+    }
+
+    .review-summary-card {
+      background: var(--white);
+      border: 1.5px solid rgba(0, 0, 0, 0.04);
+      border-radius: 20px;
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.005);
+      height: fit-content;
+    }
+
+    .review-avg-num {
+      font-family: var(--font-heading);
+      font-size: 3.75rem;
+      font-weight: 900;
+      color: var(--text-dark);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .rating-stars-large {
+      display: flex;
+      color: #fbbf24;
+      gap: 4px;
+    }
+
+    .rating-stars-large svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .rating-distribution-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin: 1rem 0;
+    }
+
+    .distribution-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+    }
+
+    .star-count-label {
+      width: 25px;
+      text-align: right;
+      color: var(--text-muted);
+    }
+
+    .bar-bg {
+      flex: 1;
+      height: 6px;
+      background-color: var(--border-light);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background-color: #fbbf24;
+      border-radius: 100px;
+    }
+
+    .percentage-label {
+      width: 32px;
+      text-align: right;
+      color: var(--text-dark);
+    }
+
+    .btn-write-review {
+      width: 100%;
+      background-color: var(--white);
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      border-radius: 100px;
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      margin-top: 0.5rem;
+    }
+
+    .btn-write-review:hover {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    .reviews-list-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .review-item-card {
+      border-bottom: 1.5px solid var(--border-light);
+      padding-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .review-item-card:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .review-user-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .review-user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .review-avatar-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .review-user-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .review-verified-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #10b981;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .review-verified-badge svg {
+      width: 9px;
+      height: 9px;
+      fill: currentColor;
+    }
+
+    .review-date-text {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .review-stars-col {
+      display: flex;
+      color: #fbbf24;
+      gap: 2px;
+    }
+
+    .review-stars-col svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .review-comment {
+      font-size: 0.925rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .review-helpful-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .helpful-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color var(--transition-fast);
+    }
+
+    .helpful-btn:hover {
+      color: var(--primary);
+    }
+
+    .helpful-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.25;
+    }
+
+    .view-all-reviews-link {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: gap var(--transition-fast);
+      margin-top: 0.5rem;
+    }
+
+    .view-all-reviews-link:hover {
+      gap: 0.5rem;
+    }
+
+    /* Q&A Tab Panel styling */
+    .qa-panel-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 800px;
+    }
+
+    .qa-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-bottom: 1.5px solid var(--border-light);
+      padding-bottom: 1.5rem;
+    }
+
+    .qa-item:last-child {
+      border-bottom: none;
+    }
+
+    .qa-question {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .qa-q-badge {
+      background-color: var(--primary);
+      color: var(--white);
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .qa-answer {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.925rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .qa-a-badge {
+      background-color: rgba(15, 98, 254, 0.08);
+      color: var(--primary);
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Related Products Section Slider */
+    .related-section {
+      position: relative;
+      margin-bottom: 4.5rem;
+      border-top: 1.5px dashed rgba(0, 0, 0, 0.06);
+      padding-top: 3.5rem;
+    }
+
+    .related-slider-wrap {
+      position: relative;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.75rem;
+    }
+
+    .related-nav-btn {
+      position: absolute;
+      top: -52px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      cursor: pointer;
+      z-index: 10;
+      transition: all var(--transition-fast);
+    }
+
+    .related-nav-btn:hover {
+      background-color: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    .related-nav-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+
+    .related-nav-btn.prev { right: 48px; }
+    .related-nav-btn.next { right: 8px; }
+
+    /* Recently Viewed overrides */
+    .recently-viewed-section {
+      margin-top: 4.5rem;
+      border-top: 1.5px dashed rgba(0, 0, 0, 0.06);
+      padding-top: 3.5rem;
+      position: relative;
+    }
+
+    .recently-viewed-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.75rem;
+    }
+
+    .recent-card {
+      background-color: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all var(--transition-normal);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .recent-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+      border-color: rgba(15,98,254,0.08);
+    }
+
+    .recent-img-wrap {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+
+    .recent-img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+
+    .recent-title {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+      margin-bottom: 0.35rem;
+    }
+
+    .recent-price {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* Newsletter styling */
+    .newsletter-section {
+      margin-top: 5rem;
+      width: 100%;
+    }
+
+    /* Toast Notification styles */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0b0f19;
+      color: var(--white);
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.08);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .toast svg {
+      width: 20px;
+      height: 20px;
+      stroke: #10b981;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    /* RESPONSIVENESS OVERRIDES */
+    @media (max-width: 1200px) {
+      .product-detail-layout { gap: 2.5rem; }
+      .trust-badges-card { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+
+    @media (max-width: 991px) {
+      .product-detail-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .specs-panel-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .reviews-panel-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .related-grid { grid-template-columns: repeat(3, 1fr); }
+      .recently-viewed-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .product-gallery { flex-direction: column-reverse; }
+      .thumbnail-gallery { flex-direction: row; width: 100%; justify-content: center; }
+      .main-image-container { height: 350px; }
+      .tabs-header { gap: 1.5rem; overflow-x: auto; padding-bottom: 0.25rem; }
+      .tab-trigger { font-size: 0.95rem; white-space: nowrap; }
+      .related-grid { grid-template-columns: repeat(2, 1fr); }
+      .recently-viewed-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .main-image-container { height: 280px; }
+      .product-title-detail { font-size: 1.75rem; }
+      .price-current-detail { font-size: 1.85rem; }
+      .trust-badges-card { grid-template-columns: 1fr; padding: 1.5rem; }
+      .action-buttons-wrap { flex-direction: column; }
+      .related-grid { grid-template-columns: 1fr; }
+      .recently-viewed-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="promo-bar">
+    <div class="promo-content">
+      <span>Free Shipping on orders over ₹4,999! <a href="shop.html" style="color: inherit; text-decoration: underline;">Shop Now</a></span>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#track" style="color: inherit; text-decoration: none;">Track Order</a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="#help" style="color: inherit; text-decoration: none;">Help Center</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Header / Navigation Bar -->
+    <header class="header">
+      <nav class="nav-bar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f62fe" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+            <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)"/>
+          </svg>
+          <span>Voltix</span>
+        </a>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+
+        <!-- Links -->
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="shop.html" class="nav-link">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a href="categories.html" class="nav-link">Categories</a>
+          </li>
+          <li class="nav-item" style="position: relative;">
+            <a href="index.html#flash-sale" class="nav-link">Deals</a>
+            <span class="badge-hot">Hot</span>
+          </li>
+          <li class="nav-item">
+            <a href="index.html#new-arrivals" class="nav-link">New Arrivals</a>
+          </li>
+          <li class="nav-item">
+            <a href="support.html" class="nav-link">Support</a>
+          </li>
+        </ul>
+
+        <!-- Actions -->
+        <div class="nav-actions">
+          <label for="nav-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </label>
+
+          <button class="action-btn" aria-label="Search" onclick="location.href='shop.html?focus=search'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          
+          <button class="action-btn" id="btn-nav-fav" aria-label="Favorites" onclick="location.href='wishlist.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span class="wishlist-count" id="wishlist-counter-badge">0</span>
+          </button>
+          
+          <div class="divider"></div>
+          
+          <button class="action-btn" aria-label="Cart" onclick="location.href='cart.html'" onclick="showToast('Opened shopping cart')">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <span class="cart-count" id="cart-counter-badge">3</span>
+          </button>
+          
+          <button class="action-btn" aria-label="Profile" onclick="location.href='account.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs" id="detail-breadcrumbs">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">&gt;</span>
+      <a href="shop.html">Shop</a>
+      <span class="breadcrumb-sep">&gt;</span>
+      <a href="shop.html" id="breadcrumb-category">Laptops</a>
+      <span class="breadcrumb-sep">&gt;</span>
+      <span class="current" id="breadcrumb-product">MacBook Air M2</span>
+    </div>
+
+    <!-- Product Details Main Layout (Side-by-side) -->
+    <div class="product-detail-layout">
+      
+      <!-- Left: Interactive Gallery -->
+      <div class="product-gallery">
+        <div class="thumbnail-gallery" id="detail-thumbnail-gallery">
+          <!-- Dynamically injected thumbnails -->
+        </div>
+        <div class="main-image-container">
+          <img class="main-product-img" id="detail-main-img" src="assets/laptop.png" alt="Main Product Image">
+          <button class="zoom-btn" title="Zoom image" aria-label="Zoom Image">
+            <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Detailed Product Options -->
+      <div class="product-info-wrap" id="detail-info-wrap">
+        <!-- Dynamically injected product choices -->
+      </div>
+
+    </div>
+
+    <!-- Trust Badges Row -->
+    <div class="trust-badges-card">
+      <div class="trust-badge-col">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="trust-text-box">
+          <span class="trust-badge-title">Free Delivery</span>
+          <span class="trust-badge-desc">Order above ₹4,999</span>
+        </div>
+      </div>
+
+      <div class="trust-badge-col">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="trust-text-box">
+          <span class="trust-badge-title">24 Months Warranty</span>
+          <span class="trust-badge-desc">Official Brand Warranty</span>
+        </div>
+      </div>
+
+      <div class="trust-badge-col">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        </div>
+        <div class="trust-text-box">
+          <span class="trust-badge-title">30 Days Returns</span>
+          <span class="trust-badge-desc">Hassle-free returns</span>
+        </div>
+      </div>
+
+      <div class="trust-badge-col">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="trust-text-box">
+          <span class="trust-badge-title">Secure Payment</span>
+          <span class="trust-badge-desc">100% secure payments</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs Container -->
+    <div class="tabs-container">
+      <div class="tabs-header">
+        <button class="tab-trigger active" onclick="switchTab(event, 'tab-specs')">Specifications</button>
+        <button class="tab-trigger" onclick="switchTab(event, 'tab-desc')">Description</button>
+        <button class="tab-trigger" onclick="switchTab(event, 'tab-reviews')" id="tab-reviews-trigger">Reviews (128)</button>
+        <button class="tab-trigger" onclick="switchTab(event, 'tab-qa')">Q&A</button>
+      </div>
+
+      <!-- Tab: Specifications -->
+      <div class="tab-panel active" id="tab-specs">
+        <div class="specs-panel-layout">
+          <div>
+            <table class="specs-table" id="detail-specs-table">
+              <!-- Dynamically loaded specs table -->
+            </table>
+          </div>
+          <div>
+            <div class="specs-promo-card">
+              <div>
+                <span class="specs-promo-badge">Processor Spec</span>
+                <h3 class="specs-promo-title" id="spec-promo-title">Supercharged by Apple M2 Chip</h3>
+              </div>
+              <div class="specs-features-grid">
+                <div class="specs-feature-box">
+                  <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
+                  <span class="specs-feature-num">8-Core</span>
+                  <span class="specs-feature-lbl">CPU</span>
+                </div>
+                <div class="specs-feature-box">
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polygon points="2 17 12 22 22 17"/><polygon points="2 12 12 17 22 12"/></svg>
+                  <span class="specs-feature-num">Up to 10c</span>
+                  <span class="specs-feature-lbl">GPU</span>
+                </div>
+                <div class="specs-feature-box">
+                  <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v12M6 12h12"/></svg>
+                  <span class="specs-feature-num">16-Core</span>
+                  <span class="specs-feature-lbl">Neural Engine</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Description -->
+      <div class="tab-panel" id="tab-desc">
+        <div class="description-tab-panel">
+          <p>This premium device is designed to provide next-generation performance and sleek ergonomics. Fully optimized for energy efficiency, it delivers stellar battery life alongside robust power to complete heavy tasks without breaking a sweat.</p>
+          <p>Featuring custom component configurations, top-tier audio drivers, ultra-vibrant displays, and highly responsive keyboard keys, it sets a brand new gold standard in computing and multimedia efficiency.</p>
+          <p>Whether you're compiling large codebases, editing high-resolution video streams, sketching graphic masterpieces, or playing demanding game titles, this machine offers the ultimate computing response. Backed by industry-leading warranty support, it is built to serve reliably for years to come.</p>
+        </div>
+      </div>
+
+      <!-- Tab: Reviews -->
+      <div class="tab-panel" id="tab-reviews">
+        <div class="reviews-panel-layout">
+          <div>
+            <div class="review-summary-card">
+              <span class="review-avg-num" id="review-avg-num">4.7</span>
+              <div class="rating-stars-large" id="review-stars-large">
+                <!-- Stars loaded dynamically -->
+              </div>
+              <span class="sold-count" id="review-summary-count">Based on 128 reviews</span>
+              
+              <div class="rating-distribution-list">
+                <div class="distribution-row">
+                  <span class="star-count-label">5★</span>
+                  <div class="bar-bg"><div class="bar-fill" style="width: 89%;"></div></div>
+                  <span class="percentage-label">89%</span>
+                </div>
+                <div class="distribution-row">
+                  <span class="star-count-label">4★</span>
+                  <div class="bar-bg"><div class="bar-fill" style="width: 7%;"></div></div>
+                  <span class="percentage-label">7%</span>
+                </div>
+                <div class="distribution-row">
+                  <span class="star-count-label">3★</span>
+                  <div class="bar-bg"><div class="bar-fill" style="width: 2%;"></div></div>
+                  <span class="percentage-label">2%</span>
+                </div>
+                <div class="distribution-row">
+                  <span class="star-count-label">2★</span>
+                  <div class="bar-bg"><div class="bar-fill" style="width: 1%;"></div></div>
+                  <span class="percentage-label">1%</span>
+                </div>
+                <div class="distribution-row">
+                  <span class="star-count-label">1★</span>
+                  <div class="bar-bg"><div class="bar-fill" style="width: 1%;"></div></div>
+                  <span class="percentage-label">1%</span>
+                </div>
+              </div>
+
+              <button class="btn-write-review" onclick="showToast('Write review modal coming soon!')">Write a Review</button>
+            </div>
+          </div>
+          <div class="reviews-list-col" id="detail-reviews-list">
+            <!-- Review items injected dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Q&A -->
+      <div class="tab-panel" id="tab-qa">
+        <div class="qa-panel-layout">
+          <div class="qa-item">
+            <span class="qa-question"><span class="qa-q-badge">Q</span> Is the memory upgradable on this model?</span>
+            <span class="qa-answer"><span class="qa-a-badge">A</span> No, the RAM is integrated directly on the main system processor board and cannot be upgraded post-purchase. We recommend choosing the 16GB or 24GB configuration if you work with heavy rendering datasets.</span>
+          </div>
+          <div class="qa-item">
+            <span class="qa-question"><span class="qa-q-badge">Q</span> How long does the battery last on a single charge?</span>
+            <span class="qa-answer"><span class="qa-a-badge">A</span> Under normal office workflow (browsing, writing docs, streaming music), it easily lasts 15 to 18 hours. For heavy video editing workloads, you can expect around 6 to 8 hours.</span>
+          </div>
+          <div class="qa-item">
+            <span class="qa-question"><span class="qa-q-badge">Q</span> Does it support dual external monitors?</span>
+            <span class="qa-answer"><span class="qa-a-badge">A</span> The base M2 chip natively supports one external display up to 6K resolution. If you need dual monitor support, you may consider the MacBook Pro models or using active display-link adapter docking stations.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <section class="related-section">
+      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--text-dark); letter-spacing: -0.5px;">Related Products</h2>
+      <div class="related-slider-wrap">
+        <button class="related-nav-btn prev" aria-label="Previous Related Products" onclick="showToast('Showing previous related items')">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="related-nav-btn next" aria-label="Next Related Products" onclick="showToast('Showing next related items')">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="related-grid" id="related-grid">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Recently Viewed Section -->
+    <section class="recently-viewed-section">
+      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--text-dark); letter-spacing: -0.5px;">Recently Viewed</h2>
+      <div class="recently-viewed-grid" id="recently-viewed-grid">
+        <!-- Compact cards drawn dynamically -->
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+      <div class="newsletter-box">
+        <div class="newsletter-left-group">
+          <div class="newsletter-graphic">
+            <img class="newsletter-envelope-img" src="assets/newsletter_envelope.png" alt="Newsletter Envelope">
+          </div>
+          <div class="newsletter-text">
+            <h2 class="newsletter-title">Stay Updated with Latest Tech & Deals!</h2>
+            <p class="newsletter-desc">Subscribe to get exclusive offers, new arrivals and updates straight to your inbox.</p>
+          </div>
+        </div>
+        <div class="newsletter-form-wrap">
+          <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Subscribed successfully!');">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- End App Container -->
+
+  <!-- Complete Footer -->
+  <footer class="footer">
+    <div class="app-container">
+      
+      <div class="footer-top">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)"/>
+            </svg>
+            <span>Voltix</span>
+          </a>
+          <p class="footer-desc">Your one-stop destination for premium electronics, smart devices, and high-fidelity gadgets.</p>
+          <ul class="social-links">
+            <li><a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C9.24.5 7.5 3.44 7.5 7v3.5H4.5v4h3v9H12v-9h3.5l.5-4z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23.95 4.57a10 10 0 0 1-2.82.77 4.96 4.96 0 0 0 2.16-2.72c-.95.55-2 .95-3.12 1.18a4.92 4.92 0 0 0-8.38 4.48 13.98 13.98 0 0 1-10.15-5.15 4.92 4.92 0 0 0 1.52 6.57 4.9 4.9 0 0 1-2.23-.62v.06a4.92 4.92 0 0 0 3.95 4.83 4.9 4.9 0 0 1-2.22.08 4.92 4.92 0 0 0 4.6 3.42A9.9 9.9 0 0 1 0 19.54a13.94 13.94 0 0 0 7.55 2.21c9.14 0 14.3-7.72 14.07-14.88a10 10 0 0 0 2.33-2.3z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></li>
+          </ul>
+        </div>
+
+        <!-- Shop Links -->
+        <div>
+          <h3 class="footer-col-title">Shop</h3>
+          <ul class="footer-menu">
+            <li><a href="shop.html?cat=smartphones" class="footer-link">Smartphones</a></li>
+            <li><a href="shop.html?cat=laptops" class="footer-link">Laptops</a></li>
+            <li><a href="shop.html?cat=audio" class="footer-link">Audio Devices</a></li>
+            <li><a href="shop.html?cat=smartwatches" class="footer-link">Smart Watches</a></li>
+            <li><a href="shop.html?cat=cameras" class="footer-link">Cameras</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div>
+          <h3 class="footer-col-title">Company</h3>
+          <ul class="footer-menu">
+            <li><a href="#about" class="footer-link">About Us</a></li>
+            <li><a href="#careers" class="footer-link">Careers</a></li>
+            <li><a href="#blog" class="footer-link">Blog</a></li>
+            <li><a href="#press" class="footer-link">Press</a></li>
+            <li><a href="#affiliate" class="footer-link">Affiliates</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer Care Links -->
+        <div>
+          <h3 class="footer-col-title">Customer Care</h3>
+          <ul class="footer-menu">
+            <li><a href="support.html" class="footer-link">Contact Us</a></li>
+            <li><a href="#shipping" class="footer-link">Shipping Policy</a></li>
+            <li><a href="#returns" class="footer-link">Return Policy</a></li>
+            <li><a href="#warranty" class="footer-link">Warranty</a></li>
+            <li><a href="support.html" class="footer-link">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Support Links -->
+        <div>
+          <h3 class="footer-col-title">Support</h3>
+          <ul class="footer-menu">
+            <li><a href="account.html" class="footer-link">My Account</a></li>
+            <li><a href="support.html" class="footer-link">Track Order</a></li>
+            <li><a href="wishlist.html" class="footer-link">Wishlist</a></li>
+            <li><a href="#compare" class="footer-link">Compare</a></li>
+            <li><a href="support.html" class="footer-link">Help Center</a></li>
+          </ul>
+        </div>
+
+        <!-- Apps Info -->
+        <div class="footer-apps">
+          <h3 class="footer-col-title">Download App</h3>
+          <a href="#" class="app-download-btn">
+            <svg viewBox="0 0 135 40"><rect width="135" height="40" rx="6" fill="#000"/><text x="38" y="18" fill="#fff" font-family="var(--font-body)" font-size="8">Download on the</text><text x="38" y="30" fill="#fff" font-family="var(--font-heading)" font-weight="700" font-size="12">App Store</text><path d="M22 13.5c-.8.8-1.7.8-2 .5s-.8-1.2-.5-2.2c.3-.9.9-1.5 1.7-1.5s1.2.6 1.2 1.3c0 .8-.6 1.1-1.1 1.3m2.7 7.7c-.5.8-1 1.7-1.8 1.7-.8.1-1-.4-2-.4s-1.2.4-2 .4c-.7 0-1.4-.9-1.9-1.8C16 19.3 15 16 16 14.3c.5-.9 1.4-1.4 2.3-1.4s1.7.6 2.2.6c.5 0 1.5-.7 2.6-.6.4 0 1.8.2 2.6 1.3-.1.1-1.5.9-1.5 2.6 0 2 1.7 2.7 1.8 2.7-.1.4-.7 1.6-1.3 2.7" fill="#fff"/></svg>
+          </a>
+          <a href="#" class="app-download-btn">
+            <svg viewBox="0 0 135 40"><rect width="135" height="40" rx="6" fill="#000"/><text x="38" y="18" fill="#fff" font-family="var(--font-body)" font-size="8">GET IT ON</text><text x="38" y="30" fill="#fff" font-family="var(--font-heading)" font-weight="700" font-size="12">Google Play</text><path d="M16 10l8.5 7.5L16 25V10z" fill="#4caf50"/><path d="M24.5 17.5L16 25l-2.5-2.5 8.5-5z" fill="#ffeb3b"/><path d="M16 10l8.5 7.5-8.5 5-2.5-2.5z" fill="#2196f3"/><path d="M16 10v15l-2.5-2.5V12.5z" fill="#f44336"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Voltix. All Rights Reserved.</span>
+        
+        <!-- Payment Icons -->
+        <ul class="payment-icons">
+          <li class="payment-icon">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#1434CB"/><text x="6" y="16" fill="#fff" font-family="sans-serif" font-weight="bold" font-style="italic" font-size="11">VISA</text></svg>
+          </li>
+          <li class="payment-icon">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#fff"/><circle cx="15" cy="12" r="6" fill="#EB001B" opacity="0.9"/><circle cx="23" cy="12" r="6" fill="#F79E1B" opacity="0.9"/></svg>
+          </li>
+          <li class="payment-icon">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#003087"/><text x="5" y="16" fill="#0079C1" font-family="sans-serif" font-weight="bold" font-size="11">Pay</text><text x="21" y="16" fill="#00457C" font-family="sans-serif" font-weight="bold" font-size="11">Pal</text></svg>
+          </li>
+          <li class="payment-icon">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#000"/><text x="4" y="16" fill="#fff" font-family="sans-serif" font-weight="bold" font-size="10">Pay</text></svg>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+    <span id="toast-text">Added item to cart!</span>
+  </div>
+
+  <script>
+    // 24 Mockup Products database (consistent with shop.html)
+    const products = [
+      { id: 'iphone15promax', name: 'Apple iPhone 15 Pro Max 256GB - Blue Titanium', category: 'smartphones', price: 139900.00, originalPrice: 99920.00, rating: 5, reviews: 128, brand: 'Apple', color: 'blue', storage: '256gb', ram: '8gb', img: 'assets/smartphone.png', badge: '-20%', inStock: true },
+      { id: 'macbookairm2', name: 'MacBook Air M2 Chip 8GB RAM, 256GB SSD', category: 'laptops', price: 89999.00, originalPrice: null, rating: 5, reviews: 96, brand: 'Apple', color: 'silver', storage: '256gb', ram: '8gb', img: 'assets/laptop.png', badge: 'New', inStock: true },
+      { id: 'sonywh1000xm5', name: 'Sony WH-1000XM5 Wireless Headphones', category: 'audio', price: 29990.00, originalPrice: 32720.00, rating: 5, reviews: 88, brand: 'Sony', color: 'black', storage: null, ram: null, img: 'assets/headphones.png', badge: '-15%', inStock: true },
+      { id: 'applewatch9', name: 'Apple Watch Series 9 GPS, 45mm - Midnight', category: 'smartwatches', price: 41900.00, originalPrice: null, rating: 5, reviews: 72, brand: 'Apple', color: 'black', storage: '64gb', ram: null, img: 'assets/smartwatch.png', badge: 'New', inStock: true },
+      { id: 'canoneosr50', name: 'Canon EOS R50 24.2MP Mirrorless Camera', category: 'cameras', price: 62320.00, originalPrice: 69200.00, rating: 4, reviews: 56, brand: 'Canon', color: 'black', storage: null, ram: null, img: 'assets/camera.png', badge: '-10%', inStock: true },
+      { id: 'airpodspro2', name: 'Apple AirPods Pro 2 (2nd Generation)', category: 'audio', price: 24900.00, originalPrice: null, rating: 5, reviews: 110, brand: 'Apple', color: 'white', storage: null, ram: null, img: 'assets/earbuds.png', badge: null, inStock: true },
+      { id: 'asusrogstrix', name: 'ASUS ROG Strix G16 Gaming Laptop', category: 'laptops', price: 103920.00, originalPrice: 127920.00, rating: 4, reviews: 64, brand: 'Asus', color: 'gray', storage: '512gb', ram: '16gb', img: 'assets/laptop.png', badge: '-18%', inStock: true },
+      { id: 'galaxys24ultra', name: 'Samsung Galaxy S24 Ultra 5G, 256GB - Titanium Gray', category: 'smartphones', price: 124900.00, originalPrice: null, rating: 5, reviews: 98, brand: 'Samsung', color: 'gray', storage: '256gb', ram: '12gb', img: 'assets/smartphone.png', badge: 'New', inStock: true },
+      { id: 'dellultrasharp', name: 'Dell UltraSharp 27" 4K USB-C Monitor', category: 'monitors', price: 39999.00, originalPrice: 42320.00, rating: 4, reviews: 42, brand: 'Dell', color: 'silver', storage: null, ram: null, img: 'assets/monitor.png', badge: '-12%', inStock: true },
+      { id: 'jblcharge5', name: 'JBL Charge 5 Portable Bluetooth Speaker', category: 'audio', price: 12999.00, originalPrice: null, rating: 5, reviews: 85, brand: 'JBL', color: 'blue', storage: null, ram: null, img: 'assets/headphones.png', badge: null, inStock: true },
+      { id: 'ipadair5', name: 'Apple iPad Air 5th Gen 10.9-inch, 64GB', category: 'accessories', price: 54900.00, originalPrice: null, rating: 5, reviews: 78, brand: 'Apple', color: 'blue', storage: '64gb', ram: '8gb', img: 'assets/controller.png', badge: 'New', inStock: false },
+      { id: 'ankerpowercore', name: 'Anker PowerCore 20K 20000mAh Power Bank', category: 'accessories', price: 2999.00, originalPrice: 3999.20, rating: 5, reviews: 66, brand: 'Anker', color: 'black', storage: null, ram: null, img: 'assets/controller.png', badge: '-30%', inStock: true },
+      { id: 'googlepixel8pro', name: 'Google Pixel 8 Pro 128GB - Obsidian', category: 'smartphones', price: 63920.00, originalPrice: 79920.00, rating: 5, reviews: 82, brand: 'Google', color: 'black', storage: '128gb', ram: '12gb', img: 'assets/smartphone.png', badge: '-20%', inStock: true },
+      { id: 'oneplus12', name: 'OnePlus 12 5G 256GB - Silky Black', category: 'smartphones', price: 55920.00, originalPrice: 63920.00, rating: 4, reviews: 45, brand: 'OnePlus', color: 'black', storage: '256gb', ram: '16gb', img: 'assets/smartphone.png', badge: '-12%', inStock: true },
+      { id: 'dellxps13', name: 'Dell XPS 13 Evo Laptop Intel Core Ultra 7', category: 'laptops', price: 95920.00, originalPrice: null, rating: 5, reviews: 54, brand: 'Dell', color: 'silver', storage: '512gb', ram: '16gb', img: 'assets/laptop.png', badge: 'New', inStock: true },
+      { id: 'hpspectrex360', name: 'HP Spectre x360 2-in-1 14" Laptop', category: 'laptops', price: 111920.00, originalPrice: 130320.00, rating: 4, reviews: 38, brand: 'HP', color: 'black', storage: '1tb', ram: '16gb', img: 'assets/laptop.png', badge: '-14%', inStock: true },
+      { id: 'galaxywatch6', name: 'Samsung Galaxy Watch 6 Classic 43mm', category: 'smartwatches', price: 26320.00, originalPrice: 31920.00, rating: 4, reviews: 118, brand: 'Samsung', color: 'silver', storage: '16gb', ram: null, img: 'assets/smartwatch.png', badge: '-17%', inStock: true },
+      { id: 'boseqcultra', name: 'Bose QuietComfort Ultra Wireless Headphones', category: 'audio', price: 30320.00, originalPrice: 34320.00, rating: 5, reviews: 142, brand: 'Bose', color: 'black', storage: null, ram: null, img: 'assets/headphones.png', badge: '-11%', inStock: true },
+      { id: 'airpods3', name: 'Apple AirPods (3rd Generation)', category: 'audio', price: 13520.00, originalPrice: null, rating: 4, reviews: 290, brand: 'Apple', color: 'white', storage: null, ram: null, img: 'assets/earbuds.png', badge: null, inStock: true },
+      { id: 'lgultragear34', name: 'LG UltraGear 34" Curved Gaming Monitor', category: 'monitors', price: 71920.00, originalPrice: 87920.00, rating: 5, reviews: 76, brand: 'LG', color: 'black', storage: null, ram: null, img: 'assets/monitor.png', badge: '-18%', inStock: true },
+      { id: 'samsungodysseyg9', name: 'Samsung Odyssey Neo G9 49" Curved Monitor', category: 'monitors', price: 135920.00, originalPrice: null, rating: 5, reviews: 112, brand: 'Samsung', color: 'white', storage: null, ram: null, img: 'assets/monitor.png', badge: 'New', inStock: true },
+      { id: 'sonyalpha7iv', name: 'Sony Alpha 7 IV Full-Frame Mirrorless Camera', category: 'cameras', price: 199920.00, originalPrice: null, rating: 5, reviews: 164, brand: 'Sony', color: 'black', storage: null, ram: null, img: 'assets/camera.png', badge: null, inStock: true },
+      { id: 'logitechmxmaster3s', name: 'Logitech MX Master 3S Wireless Performance Mouse', category: 'accessories', price: 7999.20, originalPrice: null, rating: 5, reviews: 425, brand: 'Logitech', color: 'gray', storage: null, ram: null, img: 'assets/controller.png', badge: null, inStock: true },
+      { id: 'keychronk2', name: 'Keychron K2 Wireless Mechanical Keyboard', category: 'accessories', price: 6399.20, originalPrice: 7199.20, rating: 4, reviews: 184, brand: 'Keychron', color: 'gray', storage: null, ram: null, img: 'assets/controller.png', badge: '-11%', inStock: true }
+    ];
+
+    // Recently Viewed Items
+    const recentlyViewed = [
+      { id: 'iphone15promax', name: 'Apple iPhone 15 Pro Max 256GB - Blue Titanium', price: 139900.00, img: 'assets/smartphone.png' },
+      { id: 'sonywh1000xm5', name: 'Sony WH-1000XM5 Wireless Headphones', price: 29990.00, img: 'assets/headphones.png' },
+      { id: 'dellultrasharp', name: 'Dell UltraSharp 27" 4K USB-C Monitor', price: 39999.00, img: 'assets/monitor.png' },
+      { id: 'applewatch9', name: 'Apple Watch Series 9 GPS, 45mm - Midnight', price: 41900.00, img: 'assets/smartwatch.png' }
+    ];
+
+    // Mock Reviews Database
+    const reviewsDatabase = [
+      { name: 'John D.', rating: 5, date: '2 days ago', comment: 'Amazing performance! Battery life is incredible and the display is stunning. Best laptop I\'ve ever owned.', votes: 12 },
+      { name: 'Sarah M.', rating: 4, date: '1 week ago', comment: 'Super fast and lightweight. Perfect for my daily work and travel.', votes: 8 },
+      { name: 'Alex K.', rating: 5, date: '2 weeks ago', comment: 'Excellent build quality, screen brightness is top notch, and the speaker sound is deep and clear.', votes: 14 }
+    ];
+
+    // Currently active product object
+    let currentProduct = null;
+    let selectedQty = 1;
+    let selectedColor = '';
+    let selectedStorage = '';
+
+    const defaultCartItems = [];
+
+    
+    // Wishlist Shared Helpers
+    function getLocalWishlist() {
+      // No default seeding - users start with empty wishlist after signup
+      try { return JSON.parse(localStorage.getItem('voltix_wishlist') || '[]'); } catch(e) { return []; }
+    }
+    
+    function saveLocalWishlist(wishlist) {
+      localStorage.setItem('voltix_wishlist', JSON.stringify(wishlist));
+      updateWishlistBadge();
+    }
+    
+    function updateWishlistBadge() {
+      const wishlist = getLocalWishlist();
+      const badge = document.getElementById('wishlist-counter-badge');
+      if (badge) badge.textContent = wishlist.length;
+    }
+        
+    function getLocalCart() {
+      // One-time reset to empty cart for the new INR upgrade
+      if (!localStorage.getItem('voltix_cart_reset_inr')) {
+        localStorage.setItem('voltix_cart', JSON.stringify([]));
+        localStorage.setItem('voltix_cart_reset_inr', 'true');
+        return [];
+      }
+      const cartJson = localStorage.getItem('voltix_cart');
+      if (!cartJson) {
+        localStorage.setItem('voltix_cart', JSON.stringify([]));
+        return [];
+      }
+      try {
+        return JSON.parse(cartJson);
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveLocalCart(cart) {
+      localStorage.setItem('voltix_cart', JSON.stringify(cart));
+      updateCartBadge();
+      updateWishlistBadge();
+    }
+
+    function updateCartBadge() {
+      const cart = getLocalCart();
+      const totalCount = cart.reduce((acc, curr) => acc + curr.qty, 0);
+      const badge = document.getElementById('cart-counter-badge');
+      if (badge) badge.textContent = totalCount;
+      document.querySelectorAll('.cart-count').forEach(el => el.textContent = totalCount);
+    }
+
+    function addProductToCart(productId, name, desc, color, storage, price, img, qty = 1) {
+      const cart = getLocalCart();
+      const existing = cart.find(item => item.id === productId && item.color === color && item.storage === storage);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({
+          id: productId,
+          name: name,
+          desc: desc || 'Premium Option Pack',
+          color: color || 'Standard',
+          storage: storage || null,
+          price: price,
+          qty: qty,
+          img: img
+        });
+      }
+      saveLocalCart(cart);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Get Product ID from URL parameters
+      const params = new URLSearchParams(window.location.search);
+      let productId = params.get('id');
+      
+      // Fallback/Default to MacBook Air M2 if product ID is empty or invalid
+      currentProduct = products.find(p => p.id === productId);
+      if (!currentProduct) {
+        currentProduct = products.find(p => p.id === 'macbookairm2') || products[0];
+      }
+
+      // Initialize option variables
+      selectedColor = currentProduct.color || 'black';
+      selectedStorage = currentProduct.storage || '256gb';
+
+      // 2. Render Product Details
+      renderProductInfo();
+      renderGallery();
+      renderSpecs();
+      renderReviews();
+      renderRelated();
+      renderRecentlyViewed();
+      updateCartBadge();
+      updateWishlistBadge();
+
+      // Remove white backgrounds using background removal script
+      const mainImg = document.getElementById('detail-main-img');
+      if (mainImg) {
+        processImageTransparency(mainImg);
+      }
+      
+      const envImg = document.querySelector('.newsletter-envelope-img');
+      if (envImg) {
+        processImageTransparency(envImg);
+      }
+    });
+
+    // Render text values, selection forms, pricing
+    function renderProductInfo() {
+      const wrap = document.getElementById('detail-info-wrap');
+      
+      // Breadcrumbs
+      const catLink = document.getElementById('breadcrumb-category');
+      catLink.textContent = currentProduct.category.charAt(0).toUpperCase() + currentProduct.category.slice(1);
+      catLink.href = `shop.html?cat=${currentProduct.category}`;
+      document.getElementById('breadcrumb-product').textContent = currentProduct.name.split(' - ')[0].split(' (')[0];
+
+      // Badges
+      let badgeHtml = '';
+      if (currentProduct.badge) {
+        badgeHtml = `<span class="product-badge-detail">${currentProduct.badge.toLowerCase() === 'new' ? 'New Arrival' : 'Special Deal'}</span>`;
+      } else {
+        badgeHtml = `<span class="product-badge-detail">Best Seller</span>`;
+      }
+
+      // Star rating stars
+      let starsHtml = '';
+      for (let i = 1; i <= 5; i++) {
+        starsHtml += `<svg viewBox="0 0 24 24" style="${i > currentProduct.rating ? 'opacity: 0.25;' : ''}"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+      }
+
+      // Pricing
+      let originalPriceHtml = '';
+      let discountHtml = '';
+      if (currentProduct.originalPrice) {
+        originalPriceHtml = `<span class="price-original-detail">₹${currentProduct.originalPrice.toFixed(2)}</span>`;
+        const pct = Math.round(((currentProduct.originalPrice - currentProduct.price) / currentProduct.originalPrice) * 100);
+        discountHtml = `<span class="discount-percentage">-${pct}%</span>`;
+      } else if (currentProduct.badge && currentProduct.badge.startsWith('-')) {
+        // Fallback percentage calculation
+        const pctVal = parseInt(currentProduct.badge.replace('-', '').replace('%', ''));
+        const orig = currentProduct.price / (1 - pctVal/100);
+        originalPriceHtml = `<span class="price-original-detail">₹${orig.toFixed(2)}</span>`;
+        discountHtml = `<span class="discount-percentage">${currentProduct.badge}</span>`;
+      }
+
+      // Color Circle selectors (Midnight, Starlight, Space Gray, Silver)
+      const colorsMock = [
+        { name: 'midnight', val: '#1e293b' },
+        { name: 'starlight', val: '#f5e3d7' },
+        { name: 'gray', val: '#64748b' },
+        { name: 'silver', val: '#cbd5e1' },
+        { name: 'white', val: '#ffffff' },
+        { name: 'blue', val: '#3b82f6' }
+      ];
+      
+      let colorsHtml = '';
+      if (currentProduct.color) {
+        colorsHtml = `
+          <div class="selector-block">
+            <span class="selector-label">Color: <span id="color-selection-label" style="text-transform: capitalize; font-weight: 800;">${selectedColor}</span></span>
+            <div class="selector-row">
+        `;
+        colorsMock.forEach(c => {
+          if (c.name === currentProduct.color || c.name === 'midnight' || c.name === 'gray' || c.name === 'silver') {
+            colorsHtml += `
+              <div class="color-circle ${c.name === selectedColor ? 'active' : ''}" data-color="${c.name}" onclick="selectColor(this, '${c.name}')" title="${c.name}">
+                <div class="color-inner" style="background-color: ${c.val};"></div>
+              </div>
+            `;
+          }
+        });
+        colorsHtml += `</div></div>`;
+      }
+
+      // Storage select capsules
+      let storageHtml = '';
+      if (currentProduct.storage) {
+        const list = ['128gb', '256gb', '512gb', '1tb'];
+        storageHtml = `
+          <div class="selector-block">
+            <span class="selector-label">Storage: <span id="storage-selection-label" style="text-transform: uppercase; font-weight: 800;">${selectedStorage}</span></span>
+            <div class="selector-row">
+        `;
+        list.forEach(st => {
+          if (st === currentProduct.storage || st === '256gb' || st === '512gb' || st === '1tb') {
+            storageHtml += `
+              <button class="capsule-btn ${st === selectedStorage ? 'active' : ''}" onclick="selectStorage(this, '${st}')">${st.toUpperCase()}</button>
+            `;
+          }
+        });
+        storageHtml += `</div></div>`;
+      }
+
+      // RAM select capsules
+      let ramHtml = '';
+      if (currentProduct.ram) {
+        ramHtml = `
+          <div class="selector-block">
+            <span class="selector-label">Memory (RAM): <span style="text-transform: uppercase; font-weight: 800;">${currentProduct.ram}</span></span>
+            <div class="selector-row">
+              <button class="capsule-btn active">${currentProduct.ram.toUpperCase()}</button>
+              <button class="capsule-btn" onclick="showToast('RAM selection is limited to stock configurations')">16GB</button>
+            </div>
+          </div>
+        `;
+      }
+
+      wrap.innerHTML = `
+        ${badgeHtml}
+        <h1 class="product-title-detail">${currentProduct.name}</h1>
+        
+        <div class="product-rating-sold">
+          <div class="detail-stars">
+            ${starsHtml}
+          </div>
+          <a href="#tab-reviews" class="detail-reviews-link" onclick="document.getElementById('tab-reviews-trigger').click(); scrollIntoTabs();">${currentProduct.rating.toFixed(1)} (${currentProduct.reviews} Reviews)</a>
+          <span class="sold-divider"></span>
+          <span class="sold-count">256 sold this month</span>
+        </div>
+
+        <div class="price-tier">
+          <span class="price-current-detail">₹${currentProduct.price.toFixed(2)}</span>
+          ${originalPriceHtml}
+          ${discountHtml}
+        </div>
+
+        <p class="description-text">
+          Experience extreme computing response with our top line ${currentProduct.brand} build. Specially optimized components deliver incredibly reliable workloads, stunning contrast view, and all day battery life.
+        </p>
+
+        <!-- Custom Options selectors -->
+        ${colorsHtml}
+        ${storageHtml}
+        ${ramHtml}
+
+        <!-- Quantity & Buy Options -->
+        <div class="selector-block" style="border-top: none; padding-top: 0.5rem;">
+          <span class="selector-label">Quantity:</span>
+          <div class="qty-selector-wrap">
+            <div class="qty-selector">
+              <button class="qty-btn" onclick="changeQty(-1)">-</button>
+              <span class="qty-val" id="qty-val">1</span>
+              <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call to Action Buttons -->
+        <div class="action-buttons-wrap">
+          <button class="btn-detail-add-to-cart" onclick="addToCartTrigger()">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Add to Cart
+          </button>
+          <button class="btn-detail-buy-now" onclick="showToast('Redirecting to checkout page...')">Buy Now</button>
+        </div>
+
+        <!-- Wishlist secondary options -->
+        <div class="secondary-actions-wrap">
+          <span class="sec-action-link" onclick="toggleWishlistProduct(currentProduct.id, currentProduct.name)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Add to Wishlist
+          </span>
+          <span class="sec-action-link" onclick="showToast('Added to comparison deck')">
+            <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 17l4 4-4 4M21 5H9M3 19h12"/></svg>
+            Compare
+          </span>
+        </div>
+      `;
+    }
+
+    // Render Thumbnail vertical gallery
+    function renderGallery() {
+      const gallery = document.getElementById('detail-thumbnail-gallery');
+      gallery.innerHTML = '';
+
+      // Standard mockup thumbnails (4 items) using primary product image
+      for (let i = 0; i < 4; i++) {
+        const btn = document.createElement('button');
+        btn.className = `thumbnail-btn ${i === 0 ? 'active' : ''}`;
+        btn.innerHTML = `<img src="${currentProduct.img}" alt="Thumbnail ${i+1}">`;
+        
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.thumbnail-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          // Switch main image with fade animation
+          const mainImg = document.getElementById('detail-main-img');
+          mainImg.style.opacity = '0';
+          setTimeout(() => {
+            mainImg.src = currentProduct.img;
+            processImageTransparency(mainImg);
+          }, 150);
+        });
+        gallery.appendChild(btn);
+      }
+
+      // Add a '+2 More' block to match user mockup exactly
+      const moreBtn = document.createElement('div');
+      moreBtn.className = 'thumbnail-btn more-thumbnails';
+      moreBtn.textContent = '+2 More';
+      moreBtn.onclick = () => showToast('Additional images loaded');
+      gallery.appendChild(moreBtn);
+    }
+
+    // Render Specs tab values
+    function renderSpecs() {
+      const table = document.getElementById('detail-specs-table');
+      const specsList = [
+        { key: 'Brand', val: currentProduct.brand },
+        { key: 'Model', val: currentProduct.name.split(' - ')[0] },
+        { key: 'Display Size', val: currentProduct.category === 'laptops' ? '13.6-inch Liquid Retina' : currentProduct.category === 'monitors' ? '27-inch IPS' : 'Standard View' },
+        { key: 'Processor', val: currentProduct.brand + ' Core Engine' },
+        { key: 'Memory (RAM)', val: currentProduct.ram ? currentProduct.ram.toUpperCase() : '8GB Unified' },
+        { key: 'Storage Type', val: currentProduct.storage ? currentProduct.storage.toUpperCase() + ' Solid State' : '256GB SSD' },
+        { key: 'Availability', val: currentProduct.inStock ? 'In Stock (Ships in 24h)' : 'Out of Stock' },
+        { key: 'Primary Color', val: selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1) }
+      ];
+
+      table.innerHTML = '';
+      specsList.forEach(item => {
+        table.innerHTML += `
+          <tr>
+            <td class="specs-key">${item.key}</td>
+            <td class="specs-val">${item.val}</td>
+          </tr>
+        `;
+      });
+
+      // Update Spec card title
+      document.getElementById('spec-promo-title').textContent = `Supercharged by ${currentProduct.brand} technology`;
+    }
+
+    // Render Reviews tab comments list
+    function renderReviews() {
+      const countLabel = document.getElementById('review-summary-count');
+      countLabel.textContent = `Based on ${currentProduct.reviews} reviews`;
+      
+      const avgLabel = document.getElementById('review-avg-num');
+      avgLabel.textContent = currentProduct.rating.toFixed(1);
+
+      // Large rating summary stars
+      const largeStars = document.getElementById('review-stars-large');
+      largeStars.innerHTML = '';
+      for (let i = 1; i <= 5; i++) {
+        largeStars.innerHTML += `<svg viewBox="0 0 24 24" style="${i > currentProduct.rating ? 'opacity: 0.25;' : ''}"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+      }
+
+      // Review items list
+      const list = document.getElementById('detail-reviews-list');
+      list.innerHTML = '';
+      
+      reviewsDatabase.forEach((rev, idx) => {
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+          starsHtml += `<svg viewBox="0 0 24 24" style="${i > rev.rating ? 'opacity: 0.25;' : ''}"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+        }
+
+        // Mock avatar index
+        const avatarIdx = idx + 1;
+
+        list.innerHTML += `
+          <div class="review-item-card">
+            <div class="review-user-row">
+              <div class="review-user-info">
+                <div class="review-avatar-img" style="background: linear-gradient(135deg, #a855f7 0%, #0f62fe 100%); width: 44px; height: 44px; border-radius: 50%;"></div>
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <span class="review-user-name">${rev.name}</span>
+                  <span class="review-verified-badge">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    Verified Buyer
+                  </span>
+                </div>
+              </div>
+              <span class="review-date-text">${rev.date}</span>
+            </div>
+            
+            <div class="review-stars-col">
+              ${starsHtml}
+            </div>
+            
+            <p class="review-comment">${rev.comment}</p>
+            
+            <div class="review-helpful-row">
+              <span>Was this review helpful?</span>
+              <button class="helpful-btn" onclick="helpfulVote(this)">
+                <svg viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                Helpful (${rev.votes})
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      // View all reviews link
+      list.innerHTML += `
+        <a href="#all-reviews" class="view-all-reviews-link" onclick="event.preventDefault(); showToast('Loading additional reviews...')">View All Reviews &rarr;</a>
+      `;
+    }
+
+    // Render Related Products (same category)
+    function renderRelated() {
+      const grid = document.getElementById('related-grid');
+      grid.innerHTML = '';
+
+      // Get up to 5 products in the same category
+      let related = products.filter(p => p.category === currentProduct.category && p.id !== currentProduct.id).slice(0, 5);
+      
+      // If we don't have enough, pull in random accessories/laptops
+      if (related.length < 5) {
+        const fallbacks = products.filter(p => p.id !== currentProduct.id && !related.includes(p));
+        related = [...related, ...fallbacks].slice(0, 5);
+      }
+
+      related.forEach(p => {
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+          starsHtml += `<svg viewBox="0 0 24 24" style="${i > p.rating ? 'opacity: 0.3;' : ''}"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+        }
+
+        let badgeHtml = '';
+        if (p.badge) {
+          const isNew = p.badge.toLowerCase() === 'new';
+          badgeHtml = `<span class="product-badge ${isNew ? 'badge-new-tag' : 'badge-discount-tag'}" style="top: 10px; left: 10px;">${p.badge}</span>`;
+        }
+
+        const card = document.createElement('a');
+        card.href = `product.html?id=${p.id}`;
+        card.className = 'recent-card';
+        card.innerHTML = `
+          ${badgeHtml}
+          <div class="recent-img-wrap">
+            <img class="recent-img" src="${p.img}" alt="${p.name}">
+          </div>
+          <span class="recent-title">${p.name.split(' - ')[0].slice(0, 42)}...</span>
+          <div class="product-rating" style="display: flex; gap: 2px; color: #fbbf24; margin-bottom: 0.5rem;">
+            ${starsHtml}
+          </div>
+          <span class="recent-price">₹${p.price.toFixed(2)}</span>
+        `;
+        grid.appendChild(card);
+        processImageTransparency(card.querySelector('.recent-img'));
+      });
+    }
+
+    // Render recently viewed items in deck
+    function renderRecentlyViewed() {
+      const grid = document.getElementById('recently-viewed-grid');
+      grid.innerHTML = '';
+
+      // Get recently viewed list from array
+      const list = recentlyViewed.filter(p => p.id !== currentProduct.id).slice(0, 5);
+      list.forEach(p => {
+        const card = document.createElement('a');
+        card.href = `product.html?id=${p.id}`;
+        card.className = 'recent-card';
+        card.innerHTML = `
+          <div class="recent-img-wrap">
+            <img class="recent-img" src="${p.img}" alt="${p.name}">
+          </div>
+          <span class="recent-title">${p.name.split(' - ')[0]}</span>
+          <span class="recent-price">₹${p.price.toFixed(2)}</span>
+        `;
+        grid.appendChild(card);
+        processImageTransparency(card.querySelector('.recent-img'));
+      });
+    }
+
+    // Tabs navigation switcher
+    function switchTab(e, panelId) {
+      document.querySelectorAll('.tab-trigger').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+
+      e.target.classList.add('active');
+      document.getElementById(panelId).classList.add('active');
+    }
+
+    // Option selections
+    function selectColor(el, color) {
+      document.querySelectorAll('.color-circle').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      selectedColor = color;
+      document.getElementById('color-selection-label').textContent = color;
+      showToast(`Selected color: ${color}`);
+      renderSpecs(); // update spec table
+    }
+
+    function selectStorage(el, storage) {
+      document.querySelectorAll('.capsule-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      selectedStorage = storage;
+      document.getElementById('storage-selection-label').textContent = storage;
+      showToast(`Selected storage configuration: ${storage.toUpperCase()}`);
+      renderSpecs(); // update spec table
+    }
+
+    // Qty triggers
+    function toggleWishlistProduct(id, name) {
+      const wishlist = getLocalWishlist();
+      const idx = wishlist.indexOf(id);
+      if (idx > -1) {
+        wishlist.splice(idx, 1);
+        saveLocalWishlist(wishlist);
+        showToast(`Removed ${name} from wishlist`);
+      } else {
+        wishlist.push(id);
+        saveLocalWishlist(wishlist);
+        showToast(`Added ${name} to wishlist!`);
+      }
+    }
+
+    function changeQty(diff) {
+      selectedQty += diff;
+      if (selectedQty < 1) selectedQty = 1;
+      document.getElementById('qty-val').textContent = selectedQty;
+    }
+
+    // Trigger cart actions
+    function addToCartTrigger() {
+      addProductToCart(currentProduct.id, currentProduct.name, currentProduct.category, selectedColor, selectedStorage, currentProduct.price, currentProduct.img, selectedQty);
+      showToast(`Added ${selectedQty} item(s) to Cart! Redirecting...`);
+      setTimeout(() => {
+        location.href = 'cart.html';
+      }, 1000);
+    }
+
+    // Helpful review voter
+    function helpfulVote(btn) {
+      btn.style.color = '#0f62fe';
+      btn.disabled = true;
+      showToast('Thank you for voting!');
+    }
+
+    // Scroll to tab block helper
+    function scrollIntoTabs() {
+      const tabHeader = document.querySelector('.tabs-header');
+      window.scrollTo({
+        top: tabHeader.getBoundingClientRect().top + window.scrollY - 100,
+        behavior: 'smooth'
+      });
+    }
+
+    // Show toast message
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.textContent = msg;
+      toast.classList.add('active');
+      
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3000);
+    }
+
+    // Image transparency processor with local protocol fallback
+    function processImageTransparency(img) {
+      img.style.mixBlendMode = 'multiply';
+      img.style.opacity = '1';
+    }
+  </script>
+
+  <script>
+    // ── Sync nav profile button with logged-in user ─────────────────────
+    (function() {
+      try {
+        const user = JSON.parse(localStorage.getItem('voltix_current_user') || 'null');
+        const btn = document.getElementById('btn-profile');
+        if (!btn) return;
+        if (user) {
+          const initials = user.name.split(' ').map(function(n){ return n[0]; }).join('').toUpperCase().slice(0,2);
+          btn.innerHTML = '<span style="width:28px;height:28px;border-radius:50%;background:var(--primary);color:white;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;font-family:var(--font-heading);">' + initials + '</span>';
+          btn.onclick = function(){ location.href='account.html'; };
+        } else {
+          btn.onclick = function(){ location.href='login.html'; };
+        }
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voltix - Experience Next Generation Technology</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Experience Next Generation Technology with Voltix. Explore the latest electronics, premium smart devices, laptops, headphones, smartphones, and innovative tech built for the future.">
+  <link rel="stylesheet" href="style.css?v=1.7">
+</head>
+
+<body>
+
+  <!-- Promo Announcement Bar -->
+  <div class="promo-bar">
+    <button class="promo-nav-btn promo-prev" aria-label="Previous Promo">
+      <svg viewBox="0 0 24 24">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
+    <div class="promo-content">
+      <span>Free Shipping on orders over ₹99!</span>
+      <a href="shop.html" id="promo-link">Shop Now</a>
+    </div>
+    <button class="promo-nav-btn promo-next" aria-label="Next Promo">
+      <svg viewBox="0 0 24 24">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Header / Navigation Bar -->
+    <header class="header">
+      <nav class="nav-bar">
+        <!-- Logo -->
+        <a href="#" class="logo" id="logo-home">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f62fe" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+            <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)" />
+          </svg>
+          <span>Voltix</span>
+        </a>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+
+        <!-- Links -->
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active" id="nav-home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="shop.html" class="nav-link" id="nav-shop">
+              <span>Shop</span>
+              <svg viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="categories.html" class="nav-link" id="nav-categories">
+              <span>Categories</span>
+              <svg viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+          </li>
+          <li class="nav-item" style="position: relative;">
+            <a href="index.html#flash-sale" class="nav-link" id="nav-deals">Deals</a>
+            <span class="badge-hot">Hot</span>
+          </li>
+          <li class="nav-item">
+            <a href="index.html#new-arrivals" class="nav-link" id="nav-arrivals">New Arrivals</a>
+          </li>
+          <li class="nav-item">
+            <a href="support.html" class="nav-link" id="nav-support">
+              <span>Support</span>
+              <svg viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Actions -->
+        <div class="nav-actions">
+          <label for="nav-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+            <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              style="display: none;">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </label>
+
+          <button class="action-btn" id="btn-search" aria-label="Search">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </button>
+
+          <button class="action-btn" id="btn-nav-fav" aria-label="Favorites" onclick="location.href='wishlist.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+            <span class="wishlist-count" id="wishlist-counter-badge">0</span>
+          </button>
+
+          <div class="divider"></div>
+
+          <button class="action-btn" id="btn-cart" aria-label="Cart" onclick="location.href='cart.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+            </svg>
+            <span class="cart-count" id="cart-counter-badge">0</span>
+          </button>
+
+          <button class="action-btn" id="btn-profile" aria-label="Profile" onclick="location.href='account.html'">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Hero Section -->
+    <main class="hero">
+
+      <!-- Hero Left: Text Content -->
+      <section class="hero-content">
+        <div class="tag-new">
+          <svg viewBox="0 0 24 24" style="width: 12px; height: 12px; fill: var(--primary);">
+            <path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" />
+          </svg>
+          <span>New Arrival</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span>Experience</span>
+          <span>Next Generation</span>
+          <span class="gradient-text">Technology</span>
+        </h1>
+
+        <p class="hero-desc">
+          Explore the latest electronics, smart devices and innovative tech built for the future.
+        </p>
+
+        <div class="hero-actions">
+          <a href="shop.html" class="btn btn-primary" id="hero-btn-shop">
+            <span>Shop Now</span>
+            <svg viewBox="0 0 24 24">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a href="#flash-sale" class="btn btn-secondary" id="hero-btn-deals">
+            <span>Explore Deals</span>
+            <svg viewBox="0 0 24 24"
+              style="width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; margin-left: 4px;">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Interactive Inline Features row -->
+        <div class="hero-features-inline">
+          <div class="hero-feature-inline-item">
+            <span class="hero-feature-inline-icon blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 11l2 2 4-4" />
+              </svg>
+            </span>
+            <div class="hero-feature-inline-text">
+              <span class="hero-feature-inline-title">100%</span>
+              <span class="hero-feature-inline-desc">Secure Shopping</span>
+            </div>
+          </div>
+
+          <div class="hero-feature-inline-item">
+            <span class="hero-feature-inline-icon purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="1" y="3" width="15" height="13" rx="2" ry="2" />
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                <circle cx="5.5" cy="18.5" r="2.5" />
+                <circle cx="18.5" cy="18.5" r="2.5" />
+              </svg>
+            </span>
+            <div class="hero-feature-inline-text">
+              <span class="hero-feature-inline-title">Free</span>
+              <span class="hero-feature-inline-desc">Fast Delivery</span>
+            </div>
+          </div>
+
+          <div class="hero-feature-inline-item">
+            <span class="hero-feature-inline-icon blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
+                <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3" />
+              </svg>
+            </span>
+            <div class="hero-feature-inline-text">
+              <span class="hero-feature-inline-title">24/7</span>
+              <span class="hero-feature-inline-desc">Customer Support</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hero Right: Podium & Floating Products -->
+      <section class="hero-visual">
+        <div class="neon-ring-outer"></div>
+        <div class="neon-ring-inner"></div>
+
+        <!-- Twinkling Sparkles -->
+        <svg class="sparkle sparkle-1" viewBox="0 0 24 24">
+          <path d="M12 2L14.25 9.75L22 12L14.25 14.25L12 22L9.75 14.25L2 12L9.75 9.75L12 2Z" />
+        </svg>
+        <svg class="sparkle sparkle-2" viewBox="0 0 24 24">
+          <path d="M12 2L14.25 9.75L22 12L14.25 14.25L12 22L9.75 14.25L2 12L9.75 9.75L12 2Z" />
+        </svg>
+        <svg class="sparkle sparkle-3" viewBox="0 0 24 24">
+          <path d="M12 2L14.25 9.75L22 12L14.25 14.25L12 22L9.75 14.25L2 12L9.75 9.75L12 2Z" />
+        </svg>
+        <svg class="sparkle sparkle-4" viewBox="0 0 24 24">
+          <path d="M12 2L14.25 9.75L22 12L14.25 14.25L12 22L9.75 14.25L2 12L9.75 9.75L12 2Z" />
+        </svg>
+
+        <!-- Discount Tag -->
+        <div class="discount-tag">
+          <span class="up-to">UP TO</span>
+          <span class="percent">70%</span>
+          <span class="off">OFF</span>
+        </div>
+
+        <!-- Interactive 3D Podium -->
+        <div class="podium-container">
+          <div class="podium-bottom-side"></div>
+          <div class="podium-bottom-top"></div>
+          <div class="podium-top-side"></div>
+          <div class="podium-top-top"></div>
+        </div>
+
+        <!-- Layered Floating Products -->
+        <img class="floating-product product-laptop" src="assets/laptop.png" alt="Premium Laptop" id="img-laptop">
+        <img class="floating-product product-phone" src="assets/smartphone.png" alt="Light Blue Smartphone"
+          id="img-phone">
+        <img class="floating-product product-watch" src="assets/smartwatch.png" alt="White Smart Watch" id="img-watch">
+        <img class="floating-product product-earbuds" src="assets/earbuds.png" alt="White Wireless Earbuds"
+          id="img-earbuds">
+        <img class="floating-product product-headphones" src="assets/headphones.png" alt="Silver Over-Ear Headphones"
+          id="img-headphones">
+      </section>
+
+    </main>
+
+    <!-- Hero Bottom Highlights Banner -->
+    <div class="hero-highlights-banner">
+
+      <div class="highlight-item">
+        <span class="highlight-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <polyline points="9 11 12 14 22 4" />
+          </svg>
+        </span>
+        <div class="highlight-text">
+          <span class="highlight-title">Top Brands</span>
+          <span class="highlight-desc">Original Products</span>
+        </div>
+      </div>
+
+      <div class="highlight-item">
+        <span class="highlight-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+        </span>
+        <div class="highlight-text">
+          <span class="highlight-title">Best Prices</span>
+          <span class="highlight-desc">Guaranteed</span>
+        </div>
+      </div>
+
+      <div class="highlight-item">
+        <span class="highlight-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="23 4 23 10 17 10" />
+            <polyline points="1 20 1 14 7 14" />
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+          </svg>
+        </span>
+        <div class="highlight-text">
+          <span class="highlight-title">Easy Returns</span>
+          <span class="highlight-desc">Hassle Free</span>
+        </div>
+      </div>
+
+      <div class="highlight-item">
+        <span class="highlight-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+        </span>
+        <div class="highlight-text">
+          <span class="highlight-title">Satisfaction</span>
+          <span class="highlight-desc">Guaranteed</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. Shop by Category Section -->
+    <section class="categories-section" id="categories">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Categories</span>
+          <h2 class="section-title">Shop by Category</h2>
+        </div>
+        <a href="shop.html" class="section-link">
+          <span>View All Categories</span>
+          <svg viewBox="0 0 24 24"
+            style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="categories-grid">
+        <!-- Category items -->
+        <a href="shop.html?cat=smartphones" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" />
+              <line x1="12" y1="18" x2="12.01" y2="18" stroke-linecap="round" />
+            </svg>
+          </div>
+          <span class="category-title">Smartphones</span>
+        </a>
+
+        <a href="shop.html?cat=laptops" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="4" width="20" height="12" rx="2" stroke="currentColor" />
+              <line x1="2" y1="20" x2="22" y2="20" stroke="currentColor" />
+              <line x1="12" y1="16" x2="12" y2="20" stroke="currentColor" />
+            </svg>
+          </div>
+          <span class="category-title">Laptops</span>
+        </a>
+
+        <a href="shop.html?cat=smartwatches" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="7" stroke="currentColor" />
+              <rect x="9" y="1" width="6" height="4" stroke="currentColor" />
+              <rect x="9" y="19" width="6" height="4" stroke="currentColor" />
+            </svg>
+          </div>
+          <span class="category-title">Smart Watches</span>
+        </a>
+
+        <a href="shop.html?cat=audio" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6" stroke="currentColor" />
+              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" stroke="currentColor" />
+              <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3" stroke="currentColor" />
+            </svg>
+          </div>
+          <span class="category-title">Audio</span>
+        </a>
+
+        <a href="shop.html?cat=monitors" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="13" rx="2" stroke="currentColor" />
+              <line x1="12" y1="16" x2="12" y2="21" stroke="currentColor" />
+              <line x1="7" y1="21" x2="17" y2="21" stroke="currentColor" />
+            </svg>
+          </div>
+          <span class="category-title">Monitors</span>
+        </a>
+
+        <a href="shop.html?cat=accessories" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" />
+              <line x1="7" y1="15" x2="7.01" y2="15" stroke-linecap="round" />
+              <line x1="12" y1="15" x2="12.01" y2="15" stroke-linecap="round" />
+              <line x1="17" y1="15" x2="17.01" y2="15" stroke-linecap="round" />
+              <line x1="7" y1="18" x2="17" y2="18" stroke="currentColor" />
+            </svg>
+          </div>
+          <span class="category-title">Accessories</span>
+        </a>
+
+        <a href="shop.html?cat=cameras" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                stroke="currentColor" />
+              <circle cx="12" cy="13" r="4" stroke="currentColor" />
+            </svg>
+          </div>
+          <span class="category-title">Cameras</span>
+        </a>
+
+        <a href="shop.html?cat=gaming" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="6" width="20" height="12" rx="3" stroke="currentColor" />
+              <line x1="6" y1="12" x2="10" y2="12" stroke="currentColor" />
+              <line x1="8" y1="10" x2="8" y2="14" stroke="currentColor" />
+              <circle cx="15.5" cy="12" r="1" fill="currentColor" />
+              <circle cx="18" cy="12" r="1" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="category-title">Gaming</span>
+        </a>
+
+        <a href="shop.html" class="category-card">
+          <div class="category-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" />
+              <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" />
+              <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" />
+              <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" />
+            </svg>
+          </div>
+          <span class="category-title">More</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. Flash Sale Section -->
+    <section class="flash-sale" id="flash-sale">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Flash Sale</span>
+          <h2 class="section-title">Limited time offer</h2>
+        </div>
+        <a href="shop.html" class="section-link">
+          <span>View All Deals</span>
+          <svg viewBox="0 0 24 24"
+            style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="flash-sale-grid">
+        <!-- Countdown Card (Left) -->
+        <div class="countdown-card">
+          <div class="countdown-card-title">Sale Ends In</div>
+
+          <div class="countdown-timer-wrap">
+            <div class="timer-digits-grid">
+              <div class="timer-box">
+                <span class="timer-num" id="timer-hours">08</span>
+                <span class="timer-lbl">Hours</span>
+              </div>
+              <div class="timer-box">
+                <span class="timer-num" id="timer-minutes">12</span>
+                <span class="timer-lbl">Mins</span>
+              </div>
+              <div class="timer-box">
+                <span class="timer-num" id="timer-seconds">35</span>
+                <span class="timer-lbl">Secs</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="shop.html" class="btn-shop">
+            <span>Shop Now</span>
+            <svg viewBox="0 0 24 24">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Carousel (Right - 5 cards) -->
+        <div class="products-carousel-grid">
+
+          <!-- Product 1 -->
+          <div class="product-card">
+            <span class="product-badge badge-discount-tag">-30%</span>
+            <div class="product-img-wrapper">
+              <img class="product-card-img" src="assets/earbuds.png" alt="First Airpods V2">
+              <div class="product-actions-overlay">
+                <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                    <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                  </svg></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <a href="product.html?id=earbuds" class="product-card-title">First Airpods V2</a>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <span class="rating-count">(281)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="price-current">₹29.19</span>
+                <span class="price-original">₹49.99</span>
+              </div>
+              <!-- Stock limit -->
+              <div class="product-stock-status">
+                <div class="stock-status-lbls">
+                  <span>Sold: 67%</span>
+                  <span>Available: 12</span>
+                </div>
+                <div class="stock-bar-container">
+                  <div class="stock-bar-fill" style="width: 67%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <span class="product-badge badge-discount-tag">-20%</span>
+            <div class="product-img-wrapper">
+              <img class="product-card-img" src="assets/smartwatch.png" alt="Rolex Smartwatch Pro">
+              <div class="product-actions-overlay">
+                <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                    <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                  </svg></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <a href="product.html?id=watch" class="product-card-title">Rolex Smartwatch Pro</a>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <span class="rating-count">(340)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="price-current">₹48.99</span>
+                <span class="price-original">₹65.00</span>
+              </div>
+              <div class="product-stock-status">
+                <div class="stock-status-lbls">
+                  <span>Sold: 42%</span>
+                  <span>Available: 24</span>
+                </div>
+                <div class="stock-bar-container">
+                  <div class="stock-bar-fill" style="width: 42%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <span class="product-badge badge-discount-tag">-25%</span>
+            <div class="product-img-wrapper">
+              <img class="product-card-img" src="assets/headphones.png" alt="Sony WH-CH720N">
+              <div class="product-actions-overlay">
+                <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                    <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                  </svg></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <a href="product.html?id=headphones" class="product-card-title">Sony WH-CH720N</a>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <span class="rating-count">(180)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="price-current">₹39.99</span>
+                <span class="price-original">₹49.99</span>
+              </div>
+              <div class="product-stock-status">
+                <div class="stock-status-lbls">
+                  <span>Sold: 88%</span>
+                  <span>Available: 4</span>
+                </div>
+                <div class="stock-bar-container">
+                  <div class="stock-bar-fill" style="width: 88%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <span class="product-badge badge-discount-tag">-15%</span>
+            <div class="product-img-wrapper">
+              <img class="product-card-img" src="assets/smartphone.png" alt="iPhone 15">
+              <div class="product-actions-overlay">
+                <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                    <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                  </svg></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <a href="product.html?id=phone" class="product-card-title">iPhone 15</a>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <span class="rating-count">(1024)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="price-current">₹689.99</span>
+                <span class="price-original">₹799.99</span>
+              </div>
+              <div class="product-stock-status">
+                <div class="stock-status-lbls">
+                  <span>Sold: 15%</span>
+                  <span>Available: 85</span>
+                </div>
+                <div class="stock-bar-container">
+                  <div class="stock-bar-fill" style="width: 15%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card">
+            <span class="product-badge badge-discount-tag">-20%</span>
+            <div class="product-img-wrapper">
+              <img class="product-card-img" src="assets/laptop.png" alt="MacBook Air M2">
+              <div class="product-actions-overlay">
+                <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg></button>
+                <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                    <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                  </svg></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <a href="product.html?id=laptop" class="product-card-title">MacBook Air M2</a>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <span class="rating-count">(912)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="price-current">₹1039.99</span>
+                <span class="price-original">₹1299.99</span>
+              </div>
+              <div class="product-stock-status">
+                <div class="stock-status-lbls">
+                  <span>Sold: 72%</span>
+                  <span>Available: 18</span>
+                </div>
+                <div class="stock-bar-container">
+                  <div class="stock-bar-fill" style="width: 72%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Featured Products Section -->
+    <section class="featured-section" id="shop">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Discover</span>
+          <h2 class="section-title">Featured Products</h2>
+        </div>
+        <a href="shop.html" class="section-link">
+          <span>View All Products</span>
+          <svg viewBox="0 0 24 24"
+            style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="products-grid-5">
+
+        <!-- Featured Product 1 -->
+        <div class="product-card">
+          <span class="product-badge badge-new-tag">New</span>
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/smartphone.png" alt="Samsung Galaxy S24 Ultra">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=galaxys24ultra" class="product-card-title">Samsung Galaxy S24 Ultra</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(102)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹1,24,900.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Product 2 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/laptop.png" alt="Dell XPS 15 Plus">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=dellultrasharp" class="product-card-title">Dell XPS 15 Plus</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(215)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹1,19,900.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Product 3 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/smartwatch.png" alt="Apple Watch Series 9">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=applewatch9" class="product-card-title">Apple Watch Series 9</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(320)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹41,900.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Product 4 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/headphones.png" alt="Sony WH-1000XM5">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=sonywh1000xm5" class="product-card-title">Sony WH-1000XM5</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(320)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹63,920.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Product 5 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/camera.png" alt="Canon EOS R50">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=canoneosr50" class="product-card-title">Canon EOS R50</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(176)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹62,320.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. Top Brands Section -->
+    <section class="brands-section">
+      <div class="brands-slider">
+        <!-- Brand Apple -->
+        <div class="brand-logo-card brand-apple">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.22.67-2.94 1.5-.64.73-1.2 1.87-1.05 2.99 1.11.09 2.25-.56 2.98-1.43z" />
+          </svg>
+        </div>
+        <!-- Brand Samsung -->
+        <div class="brand-logo-card brand-samsung">
+          <svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg"><text x="0" y="18"
+              font-family="var(--font-heading)" font-weight="800" font-size="18"
+              letter-spacing="-1">SAMSUNG</text></svg>
+        </div>
+        <!-- Brand Sony -->
+        <div class="brand-logo-card brand-sony">
+          <svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg"><text x="0" y="18"
+              font-family="var(--font-heading)" font-weight="900" font-size="20" letter-spacing="1">SONY</text></svg>
+        </div>
+        <!-- Brand Dell -->
+        <div class="brand-logo-card brand-dell">
+          <svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg"><text x="0" y="18"
+              font-family="var(--font-heading)" font-weight="800" font-size="18" letter-spacing="-0.5">DELL</text></svg>
+        </div>
+        <!-- Brand HP -->
+        <div class="brand-logo-card brand-hp">
+          <svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg"><text x="15" y="18"
+              font-family="var(--font-heading)" font-weight="800" font-size="22" letter-spacing="2">hp</text></svg>
+        </div>
+        <!-- Brand Asus -->
+        <div class="brand-logo-card brand-asus">
+          <svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg"><text x="0" y="18"
+              font-family="var(--font-heading)" font-weight="800" font-size="18" font-style="italic"
+              letter-spacing="0">ASUS</text></svg>
+        </div>
+        <!-- Brand Lenovo -->
+        <div class="brand-logo-card brand-lenovo">
+          <svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg"><text x="0" y="18"
+              font-family="var(--font-heading)" font-weight="700" font-size="18">lenovo</text></svg>
+        </div>
+        <!-- Brand Logitech -->
+        <div class="brand-logo-card brand-logitech">
+          <svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg"><text x="0" y="18" font-family="var(--font-body)"
+              font-weight="700" font-size="16" letter-spacing="-0.5">logitech</text></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Mega Tech Sale Banner Section -->
+    <section class="mega-banner-section">
+      <div class="mega-banner">
+        <div class="mega-banner-content">
+          <span class="mega-banner-subtitle">Mega Tech Sale</span>
+          <h2 class="mega-banner-title">UP TO 70% OFF</h2>
+          <p class="mega-banner-desc">Big savings on top tech, premium accessories and new electronics. Don't miss out!
+          </p>
+          <a href="shop.html" class="btn btn-secondary btn-shop"
+            style="background-color: var(--white); color: var(--text-dark);">Shop Now &rarr;</a>
+        </div>
+        <div class="mega-banner-visual">
+          <div class="mega-banner-circle"></div>
+          <!-- A composite image showing headphones and smartphone -->
+          <img class="banner-img" src="assets/headphones.png" alt="Mega Sale Devices"
+            style="width: 200px; transform: rotate(-10deg); position: absolute; left: 10%;">
+          <img class="banner-img" src="assets/smartphone.png" alt="Mega Sale Smartphone"
+            style="width: 140px; transform: rotate(15deg); position: absolute; right: 15%; top: 15%; z-index: 3;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Best Sellers Section -->
+    <section class="bestsellers-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Best Sellers</span>
+          <h2 class="section-title">Most Popular Items</h2>
+        </div>
+        <a href="shop.html" class="section-link">
+          <span>View All Best Sellers</span>
+          <svg viewBox="0 0 24 24"
+            style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="products-grid-6">
+
+        <!-- Product 1 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/controller.png" alt="Logitech MX Master 3S">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=logitechmxmaster3s" class="product-card-title">Logitech MX Master 3S Mouse</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(104)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹7,999.20</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/earbuds.png" alt="Apple AirPods Pro 2">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=airpodspro2" class="product-card-title">Apple AirPods Pro 2</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(1140)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹24,900.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/monitor.png" alt="ASUS ROG Swift 34">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=lgultragear34" class="product-card-title">LG UltraGear 34" Curved Gaming
+              Monitor</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(98)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹71,920.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/laptop.png" alt="Razer Blade 16">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=asusrogstrix" class="product-card-title">ASUS ROG Strix G16 Gaming Laptop</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(340)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹1,03,920.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/camera.png" alt="Sony Alpha 7 IV">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=sonyalpha7iv" class="product-card-title">Sony Alpha 7 IV Professional Camera</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(810)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹1,99,920.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/headphones.png" alt="Bose QuietComfort Ultra">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=boseqcultra" class="product-card-title">Bose QuietComfort Ultra</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(324)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹30,320.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. New Arrivals Section -->
+    <section class="newarrivals-section" id="new-arrivals">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Fresh Drop</span>
+          <h2 class="section-title">New Arrivals</h2>
+        </div>
+        <a href="shop.html" class="section-link">
+          <span>View All New Arrivals</span>
+          <svg viewBox="0 0 24 24"
+            style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="products-grid-6">
+
+        <!-- Product 1 -->
+        <div class="product-card">
+          <span class="product-badge badge-new-tag">New</span>
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/smartphone.png" alt="Google Pixel 8 Pro">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=googlepixel8pro" class="product-card-title">Google Pixel 8 Pro 128GB</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(94)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹63,920.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+          <span class="product-badge badge-new-tag">New</span>
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/laptop.png" alt="Samsung Galaxy Book 4 Pro">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=macbookairm2" class="product-card-title">Apple MacBook Air M2 Chip</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(45)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹89,999.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+          <span class="product-badge badge-new-tag">New</span>
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/earbuds.png" alt="OnePlus Buds 3">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=airpods3" class="product-card-title">Apple AirPods (3rd Generation)</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(102)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹13,520.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card">
+          <span class="product-badge badge-new-tag">New</span>
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/controller.png" alt="DJI Neo Drone">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=keychronk2" class="product-card-title">Keychron K2 Wireless Keyboard</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24" style="opacity: 0.3;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(88)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹6,399.20</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card">
+          <span class="product-badge badge-new-tag">New</span>
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/monitor.png" alt="Samsung Odyssey OLED G8">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=samsungodysseyg9" class="product-card-title">Samsung Odyssey Neo G9 49" Curved
+              Monitor</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(112)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹1,35,920.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card">
+          <span class="product-badge badge-new-tag">New</span>
+          <div class="product-img-wrapper">
+            <img class="product-card-img" src="assets/laptop.png" alt="Lenovo Legion Pro 7i">
+            <div class="product-actions-overlay">
+              <button class="btn-action-circle" aria-label="Add to Cart"><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Favorites"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button>
+              <button class="btn-action-circle" aria-label="Compare"><svg viewBox="0 0 24 24">
+                  <path d="M16 3h5v5M8 21H3v-5M21 3L14 10M3 21l7-7" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=hpspectrex360" class="product-card-title">HP Spectre x360 2-in-1 14" Laptop</a>
+            <div class="product-rating">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span class="rating-count">(165)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="price-current">₹1,11,920.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 10. Testimonials Section -->
+    <section class="testimonials-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Reviews</span>
+          <h2 class="section-title">What Customers Say</h2>
+        </div>
+        <a href="#reviews" class="section-link">
+          <span>View All Reviews</span>
+          <svg viewBox="0 0 24 24"
+            style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <!-- Card 1 -->
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+          </div>
+          <p class="testimonial-text">
+            &quot;Amazing shopping experience! Fast delivery and original products. Voltix is now my go-to store for all
+            tech needs.&quot;
+          </p>
+          <div class="testimonial-user">
+            <!-- User initial fallback avatar (styled CSS) -->
+            <div
+              style="width: 48px; height: 48px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-heading);">
+              JB</div>
+            <div class="user-meta">
+              <span class="user-name">John B.</span>
+              <span class="user-badge">
+                <svg viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+                <span>Verified Buyer</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+          </div>
+          <p class="testimonial-text">
+            &quot;Great customer support, and easy returns. The product quality is top-notch. Highly recommended!&quot;
+          </p>
+          <div class="testimonial-user">
+            <div
+              style="width: 48px; height: 48px; border-radius: 50%; background-color: #a855f7; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-heading);">
+              SM</div>
+            <div class="user-meta">
+              <span class="user-name">Sarah M.</span>
+              <span class="user-badge">
+                <svg viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+                <span>Verified Buyer</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+          </div>
+          <p class="testimonial-text">
+            &quot;Best prices and genuine products. Love the design and user experience of this website. Keep it up
+            Voltix!&quot;
+          </p>
+          <div class="testimonial-user">
+            <div
+              style="width: 48px; height: 48px; border-radius: 50%; background-color: #f43f5e; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-heading);">
+              MR</div>
+            <div class="user-meta">
+              <span class="user-name">Michael R.</span>
+              <span class="user-badge">
+                <svg viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+                <span>Verified Buyer</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 11. Latest Tech Blog Section -->
+    <section class="blog-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-subtitle">Read Articles</span>
+          <h2 class="section-title">Latest Tech Blog</h2>
+        </div>
+        <a href="#blog" class="section-link">
+          <span>View All Articles</span>
+          <svg viewBox="0 0 24 24"
+            style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="blog-grid">
+
+        <!-- Blog 1 -->
+        <a href="#blog-post" class="blog-card">
+          <div class="blog-img-wrapper">
+            <img class="blog-thumbnail" src="assets/blog_laptops.png" alt="Top 10 Best Laptops in 2026">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>May 20, 2026</span>
+              <span>&bull;</span>
+              <span>5 Min Read</span>
+            </div>
+            <h3 class="blog-card-title">Top 10 Best Laptops in 2026</h3>
+          </div>
+        </a>
+
+        <!-- Blog 2 -->
+        <a href="#blog-post" class="blog-card">
+          <div class="blog-img-wrapper">
+            <img class="blog-thumbnail" src="assets/blog_smartwatches.png" alt="How to Choose the Right Smartwatch">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>May 18, 2026</span>
+              <span>&bull;</span>
+              <span>6 Min Read</span>
+            </div>
+            <h3 class="blog-card-title">How to Choose the Right Smartwatch</h3>
+          </div>
+        </a>
+
+        <!-- Blog 3 -->
+        <a href="#blog-post" class="blog-card">
+          <div class="blog-img-wrapper">
+            <img class="blog-thumbnail" src="assets/blog_earbuds.png" alt="Best Wireless Earbuds Under ₹100">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>May 15, 2026</span>
+              <span>&bull;</span>
+              <span>8 Min Read</span>
+            </div>
+            <h3 class="blog-card-title">Best Wireless Earbuds Under ₹100</h3>
+          </div>
+        </a>
+
+        <!-- Blog 4 -->
+        <a href="#blog-post" class="blog-card">
+          <div class="blog-img-wrapper">
+            <img class="blog-thumbnail" src="assets/blog_gamingsetup.png" alt="Ultimate Gaming Setup Guide 2026">
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>May 12, 2026</span>
+              <span>&bull;</span>
+              <span>7 Min Read</span>
+            </div>
+            <h3 class="blog-card-title">Ultimate Gaming Setup Guide 2026</h3>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 12. Newsletter Section -->
+    <section class="newsletter-section">
+      <div class="newsletter-box">
+        <div class="newsletter-left-group">
+          <div class="newsletter-graphic">
+            <img class="newsletter-envelope-img" src="assets/newsletter_envelope.png" alt="Newsletter Envelope">
+          </div>
+          <div class="newsletter-text">
+            <h2 class="newsletter-title">Stay Updated with Latest Tech & Deals!</h2>
+            <p class="newsletter-desc">Subscribe to get exclusive offers, new arrivals and updates straight to your
+              inbox.</p>
+          </div>
+        </div>
+        <div class="newsletter-form-wrap">
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- End App Container -->
+
+  <!-- 13. Complete Footer -->
+  <footer class="footer">
+    <div class="app-container">
+
+      <div class="footer-top">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3H8.5L12 14.5L15.5 3H21L14.5 21H9.5L3 3Z" fill="url(#logo-grad)" />
+            </svg>
+            <span>Voltix</span>
+          </a>
+          <p class="footer-desc">Your one-stop destination for premium electronics, smart devices, and high-fidelity
+            gadgets.</p>
+          <ul class="social-links">
+            <li><a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C9.24.5 7.5 3.44 7.5 7v3.5H4.5v4h3v9H12v-9h3.5l.5-4z" />
+                </svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="Twitter"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M23.95 4.57a10 10 0 0 1-2.82.77 4.96 4.96 0 0 0 2.16-2.72c-.95.55-2 .95-3.12 1.18a4.92 4.92 0 0 0-8.38 4.48 13.98 13.98 0 0 1-10.15-5.15 4.92 4.92 0 0 0 1.52 6.57 4.9 4.9 0 0 1-2.23-.62v.06a4.92 4.92 0 0 0 3.95 4.83 4.9 4.9 0 0 1-2.22.08 4.92 4.92 0 0 0 4.6 3.42A9.9 9.9 0 0 1 0 19.54a13.94 13.94 0 0 0 7.55 2.21c9.14 0 14.3-7.72 14.07-14.88a10 10 0 0 0 2.33-2.3z" />
+                </svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                </svg></a></li>
+            <li><a href="#" class="social-btn" aria-label="YouTube"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg></a></li>
+          </ul>
+        </div>
+
+        <!-- Shop Links -->
+        <div>
+          <h3 class="footer-col-title">Shop</h3>
+          <ul class="footer-menu">
+            <li><a href="#shop?cat=smartphones" class="footer-link">Smartphones</a></li>
+            <li><a href="#shop?cat=laptops" class="footer-link">Laptops</a></li>
+            <li><a href="#shop?cat=audio" class="footer-link">Audio</a></li>
+            <li><a href="#shop?cat=smartwatches" class="footer-link">Smart Watches</a></li>
+            <li><a href="#shop?cat=accessories" class="footer-link">Accessories</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div>
+          <h3 class="footer-col-title">Company</h3>
+          <ul class="footer-menu">
+            <li><a href="#about" class="footer-link">About Us</a></li>
+            <li><a href="#careers" class="footer-link">Careers</a></li>
+            <li><a href="#blog" class="footer-link">Blog</a></li>
+            <li><a href="#press" class="footer-link">Press</a></li>
+            <li><a href="#affiliate" class="footer-link">Affiliates</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer Care Links -->
+        <div>
+          <h3 class="footer-col-title">Customer Care</h3>
+          <ul class="footer-menu">
+            <li><a href="support.html" class="footer-link">Contact Us</a></li>
+            <li><a href="#shipping" class="footer-link">Shipping Policy</a></li>
+            <li><a href="#returns" class="footer-link">Return Policy</a></li>
+            <li><a href="#warranty" class="footer-link">Warranty</a></li>
+            <li><a href="support.html" class="footer-link">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Support Links -->
+        <div>
+          <h3 class="footer-col-title">Support</h3>
+          <ul class="footer-menu">
+            <li><a href="account.html" class="footer-link">My Account</a></li>
+            <li><a href="support.html" class="footer-link">Track Order</a></li>
+            <li><a href="wishlist.html" class="footer-link">Wishlist</a></li>
+            <li><a href="#compare" class="footer-link">Compare</a></li>
+            <li><a href="support.html" class="footer-link">Help Center</a></li>
+          </ul>
+        </div>
+
+        <!-- Apps Info -->
+        <div class="footer-apps">
+          <h3 class="footer-col-title">Download App</h3>
+          <a href="#" class="app-download-btn">
+            <!-- Vector App Store Button -->
+            <svg viewBox="0 0 135 40" style="width: 135px; height: 40px;">
+              <rect width="135" height="40" rx="6" fill="#000" /><text x="38" y="18" fill="#fff"
+                font-family="var(--font-body)" font-size="8">Download on the</text><text x="38" y="30" fill="#fff"
+                font-family="var(--font-heading)" font-weight="700" font-size="12">App Store</text>
+              <path
+                d="M22 13.5c-.8.8-1.7.8-2 .5s-.8-1.2-.5-2.2c.3-.9.9-1.5 1.7-1.5s1.2.6 1.2 1.3c0 .8-.6 1.1-1.1 1.3m2.7 7.7c-.5.8-1 1.7-1.8 1.7-.8.1-1-.4-2-.4s-1.2.4-2 .4c-.7 0-1.4-.9-1.9-1.8C16 19.3 15 16 16 14.3c.5-.9 1.4-1.4 2.3-1.4s1.7.6 2.2.6c.5 0 1.5-.7 2.6-.6.4 0 1.8.2 2.6 1.3-.1.1-1.5.9-1.5 2.6 0 2 1.7 2.7 1.8 2.7-.1.4-.7 1.6-1.3 2.7"
+                fill="#fff" />
+            </svg>
+          </a>
+          <a href="#" class="app-download-btn">
+            <!-- Vector Google Play Button -->
+            <svg viewBox="0 0 135 40" style="width: 135px; height: 40px;">
+              <rect width="135" height="40" rx="6" fill="#000" /><text x="38" y="18" fill="#fff"
+                font-family="var(--font-body)" font-size="8">GET IT ON</text><text x="38" y="30" fill="#fff"
+                font-family="var(--font-heading)" font-weight="700" font-size="12">Google Play</text>
+              <path d="M16 10l8.5 7.5L16 25V10z" fill="#4caf50" />
+              <path d="M24.5 17.5L16 25l-2.5-2.5 8.5-5z" fill="#ffeb3b" />
+              <path d="M16 10l8.5 7.5-8.5 5-2.5-2.5z" fill="#2196f3" />
+              <path d="M16 10v15l-2.5-2.5V12.5z" fill="#f44336" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Voltix. All Rights Reserved.</span>
+
+        <!-- Payment Icons -->
+        <ul class="payment-icons">
+          <li class="payment-icon">
+            <!-- Visa SVG -->
+            <svg viewBox="0 0 38 24">
+              <rect width="38" height="24" rx="3" fill="#1434CB" /><text x="6" y="16" fill="#fff"
+                font-family="sans-serif" font-weight="bold" font-style="italic" font-size="11">VISA</text>
+            </svg>
+          </li>
+          <li class="payment-icon">
+            <!-- Mastercard SVG -->
+            <svg viewBox="0 0 38 24">
+              <rect width="38" height="24" rx="3" fill="#fff" />
+              <circle cx="15" cy="12" r="6" fill="#EB001B" opacity="0.9" />
+              <circle cx="23" cy="12" r="6" fill="#F79E1B" opacity="0.9" />
+            </svg>
+          </li>
+          <li class="payment-icon">
+            <!-- Paypal SVG -->
+            <svg viewBox="0 0 38 24">
+              <rect width="38" height="24" rx="3" fill="#003087" /><text x="5" y="16" fill="#0079C1"
+                font-family="sans-serif" font-weight="bold" font-size="11">Pay</text><text x="21" y="16" fill="#00457C"
+                font-family="sans-serif" font-weight="bold" font-size="11">Pal</text>
+            </svg>
+          </li>
+          <li class="payment-icon">
+            <!-- Apple Pay SVG -->
+            <svg viewBox="0 0 38 24">
+              <rect width="38" height="24" rx="3" fill="#000" /><text x="4" y="16" fill="#fff" font-family="sans-serif"
+                font-weight="bold" font-size="10">Pay</text>
+            </svg>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toast Notification
+  <div class="toast" id="toast">
+    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+    <span id="toast-text">Added item to cart!</span>
+  </div> -->
+
+  <!-- Floating Back to Top Button
+  <button class="back-to-top" id="btn-back-to-top" aria-label="Back to Top">
+    <svg viewBox="0 0 24 24">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button> -->
+
+  <!-- JavaScript logic: Countdown timer, Back to Top, Image Transparency -->
+  <script>
+    const defaultCartItems = [];
+
+
+    // Wishlist Shared Helpers
+    function getLocalWishlist() {
+      // No default seeding — users start with an empty wishlist after signup
+      try { return JSON.parse(localStorage.getItem('voltix_wishlist') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalWishlist(wishlist) {
+      localStorage.setItem('voltix_wishlist', JSON.stringify(wishlist));
+      updateWishlistBadge();
+    }
+
+    function updateWishlistBadge() {
+      const wishlist = getLocalWishlist();
+      const badge = document.getElementById('wishlist-counter-badge');
+      if (badge) badge.textContent = wishlist.length;
+    }
+
+    function getLocalCart() {
+      // One-time reset to empty cart for the new INR upgrade
+      if (!localStorage.getItem('voltix_cart_reset_inr')) {
+        localStorage.setItem('voltix_cart', JSON.stringify([]));
+        localStorage.setItem('voltix_cart_reset_inr', 'true');
+        return [];
+      }
+      try { return JSON.parse(localStorage.getItem('voltix_cart') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalCart(cart) {
+      localStorage.setItem('voltix_cart', JSON.stringify(cart));
+      updateCartBadge();
+      updateWishlistBadge();
+    }
+
+    function updateCartBadge() {
+      const cart = getLocalCart();
+      const totalCount = cart.reduce((acc, curr) => acc + curr.qty, 0);
+      const badge = document.getElementById('cart-counter-badge');
+      if (badge) badge.textContent = totalCount;
+      document.querySelectorAll('.cart-count').forEach(el => el.textContent = totalCount);
+    }
+
+    function addProductToCart(productId, name, desc, color, storage, price, img, qty = 1) {
+      const cart = getLocalCart();
+      const existing = cart.find(item => item.id === productId && item.color === color && item.storage === storage);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({
+          id: productId,
+          name: name,
+          desc: desc || 'Premium Option Pack',
+          color: color || 'Standard',
+          storage: storage || null,
+          price: price,
+          qty: qty,
+          img: img
+        });
+      }
+      saveLocalCart(cart);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      if (text) text.textContent = msg;
+      if (toast) {
+        toast.classList.add('active');
+        setTimeout(() => {
+          toast.classList.remove('active');
+        }, 3000);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Initialize Active Countdown Timer (08h 12m 35s initial value)
+      let totalSeconds = (8 * 3600) + (12 * 60) + 35;
+
+      const hoursEl = document.getElementById('timer-hours');
+      const minutesEl = document.getElementById('timer-minutes');
+      const secondsEl = document.getElementById('timer-seconds');
+
+      function updateTimer() {
+        if (totalSeconds <= 0) {
+          totalSeconds = (8 * 3600) + (12 * 60) + 35; // loop timer for visual representation
+        }
+        totalSeconds--;
+
+        const h = Math.floor(totalSeconds / 3600);
+        const m = Math.floor((totalSeconds % 3600) / 60);
+        const s = totalSeconds % 60;
+
+        if (hoursEl) hoursEl.textContent = String(h).padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = String(m).padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = String(s).padStart(2, '0');
+      }
+      setInterval(updateTimer, 1000);
+
+      // 2. Back to Top Button Visibility and Scroll Trigger
+      const backToTopBtn = document.getElementById('btn-back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+          backToTopBtn.classList.add('active');
+        } else {
+          backToTopBtn.classList.remove('active');
+        }
+      });
+
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // 3. Select all images that need transparent background treatment
+      const imagesToProcess = document.querySelectorAll('.floating-product, .product-card-img, .banner-img, .newsletter-envelope-img');
+      imagesToProcess.forEach(img => {
+        if (!img) return;
+        processImageTransparency(img);
+      });
+
+      // 4. Dynamic cart & favorites listeners for product cards on the homepage
+      document.querySelectorAll('.product-card').forEach(card => {
+        const titleLink = card.querySelector('.product-card-title');
+        const addBtn = card.querySelector('[aria-label="Add to Cart"]');
+        const favBtn = card.querySelector('[aria-label="Favorites"]');
+
+        if (titleLink) {
+          const hrefAttr = titleLink.getAttribute('href');
+          if (hrefAttr && hrefAttr.includes('?id=')) {
+            const id = hrefAttr.split('?id=')[1];
+            const title = titleLink.textContent.trim();
+            const img = card.querySelector('.product-card-img').getAttribute('src');
+
+            if (addBtn) {
+              addBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const priceText = card.querySelector('.price-current').textContent.replace(/[^\d\.]/g, '').trim();
+                const price = parseFloat(priceText) || 0.0;
+                addProductToCart(id, title, 'Electronics', 'Standard', null, price, img, 1);
+                showToast(`Added ${title} to cart!`);
+              });
+            }
+
+            if (favBtn) {
+              // Highlight heart icon if it's already liked
+              const wishlist = getLocalWishlist();
+              if (wishlist.includes(id)) {
+                favBtn.classList.add('liked');
+                favBtn.style.color = 'var(--primary)';
+                favBtn.querySelector('svg').style.fill = 'var(--primary)';
+              }
+
+              favBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const wishList = getLocalWishlist();
+                const idx = wishList.indexOf(id);
+                if (idx > -1) {
+                  wishList.splice(idx, 1);
+                  favBtn.classList.remove('liked');
+                  favBtn.style.color = '';
+                  favBtn.querySelector('svg').style.fill = 'none';
+                  showToast(`Removed ${title} from wishlist`);
+                } else {
+                  wishList.push(id);
+                  favBtn.classList.add('liked');
+                  favBtn.style.color = 'var(--primary)';
+                  favBtn.querySelector('svg').style.fill = 'var(--primary)';
+                  showToast(`Added ${title} to wishlist!`);
+                }
+                saveLocalWishlist(wishList);
+              });
+            }
+          }
+        }
+      });
+      // Background Transparency processor wrapper
+      document.querySelectorAll('.product-card-img').forEach(img => {
+        if (img.complete) { processImageTransparency(img); } else { img.onload = function () { processImageTransparency(img); }; }
+      });
+
+      // ── Premium Transitions & Scroll-Reveal Observer ───────────────────
+      // Add staggered animation classes programmatically
+      document.querySelectorAll('.categories-grid .category-card, .products-carousel-grid .product-card, .products-grid-5 .product-card, .products-grid-6 .product-card, .blog-grid .blog-card').forEach(el => {
+        el.classList.add('staggered-item');
+      });
+
+      // Add scroll reveal classes programmatically
+      document.querySelectorAll('.categories-section, .flash-sale, .new-arrivals, .recommended-section, .testimonials-section, .blog-section, .newsletter-section').forEach(el => {
+        el.classList.add('reveal-on-scroll');
+      });
+
+      // Initialize IntersectionObserver for scroll-reveal
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
+
+      // Badge bounce animation controller
+      function triggerBadgeBounce(badgeId) {
+        const badge = document.getElementById(badgeId);
+        if (!badge) return;
+        badge.classList.remove('badge-pulse');
+        void badge.offsetWidth; // trigger reflow
+        badge.classList.add('badge-pulse');
+      }
+
+      // Intercept wishlist/cart changes to trigger bounce animation
+      const originalSaveLocalCart = saveLocalCart;
+      saveLocalCart = function (cart) {
+        originalSaveLocalCart(cart);
+        triggerBadgeBounce('cart-counter-badge');
+      };
+
+      const originalSaveLocalWishlist = saveLocalWishlist;
+      saveLocalWishlist = function (wishlist) {
+        originalSaveLocalWishlist(wishlist);
+        triggerBadgeBounce('wishlist-counter-badge');
+      };
+
+      // Trigger badge pulse once on load
+      setTimeout(() => {
+        triggerBadgeBounce('cart-counter-badge');
+        triggerBadgeBounce('wishlist-counter-badge');
+      }, 500);
+    });
+
+    // Background Transparency flood-fill canvas processor with CSS blend-mode fallback
+    function processImageTransparency(img) {
+      img.style.mixBlendMode = 'multiply';
+      img.style.opacity = '1';
+    }
+  </script>
+
+  <script>
+    // ── Sync nav profile button with logged-in user ─────────────────────
+    (function () {
+      try {
+        const user = JSON.parse(localStorage.getItem('voltix_current_user') || 'null');
+        const btn = document.getElementById('btn-profile');
+        if (!btn) return;
+        if (user) {
+          const initials = user.name.split(' ').map(function (n) { return n[0]; }).join('').toUpperCase().slice(0, 2);
+          btn.innerHTML = '<span style="width:28px;height:28px;border-radius:50%;background:var(--primary);color:white;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;font-family:var(--font-heading);">' + initials + '</span>';
+          btn.onclick = function () { location.href = 'account.html'; };
+        } else {
+          btn.onclick = function () { location.href = 'login.html'; };
+        }
+      } catch (e) { }
+    })();
+  </script>
+</body>
+
+</html>
