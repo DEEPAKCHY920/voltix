@@ -5544,6 +5544,11 @@ body::after {
     font-weight: 500;
   }
 
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   body {
     padding-bottom: 75px;
   }
@@ -5624,6 +5629,14 @@ body::after {
   }
 
   #btn-search {
+    display: none !important;
+  }
+
+  #btn-profile {
+    display: none !important;
+  }
+
+  .nav-actions .divider {
     display: none !important;
   }
 
